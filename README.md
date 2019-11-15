@@ -386,7 +386,7 @@ PREFIX=wDi_luck_2015
 ```{bash, eval = F}
 while read SRR
 do
-	echo ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -U "$READS_DIR"/"$PREFIX"/$SRR"_1.subset.fastq --no-spliced-alignment -X 1000 | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
+	echo -e ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -U "$READS_DIR"/"$PREFIX"/$SRR"_1.subset.fastq --no-spliced-alignment -X 1000 | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
 done < "$SRR_ID_LIST"
 ```
 
@@ -426,8 +426,80 @@ PREFIX=wBm_chung_2019
 
 #### Commands:
 ```{bash, eval = F}
-while read srr
+while read SRR
 do
-	echo ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -1 "$READS_DIR"/"$PREFIX"/"$SRR"_1.subset.fastq  -2 "$READS_DIR"/"$PREFIX"/"$SRR"_2.subset.fastq --no-spliced-alignment -X 1000 | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
+	echo -e ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -1 "$READS_DIR"/"$PREFIX"/"$SRR"_1.subset.fastq  -2 "$READS_DIR"/"$PREFIX"/"$SRR"_2.subset.fastq --no-spliced-alignment -X 1000 | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
+done < "$SRR_ID_LIST"
+```
+
+## Sort BAM files (2019-06-01)
+
+#### Input Sets:
+```{bash, eval = F}
+THREADS=4
+
+## wOo Darby 2012
+BAM_DIR="$READS_DIR"/wOo_darby_2012/bam
+
+## wMel Darby 2014
+BAM_DIR="$READS_DIR"/wMel_darby_2014/bam
+
+## wDi Luck 2014
+BAM_DIR="$READS_DIR"/wDi_luck_2014/bam
+
+## wDi Luck 2015
+BAM_DIR="$READS_DIR"/wDi_luck_2015/bam
+
+## wMel Gutzwiller 2015
+BAM_DIR="$READS_DIR"/wMel_gutzwiller_2015/bam
+
+## wBm Grote 2017
+BAM_DIR="$READS_DIR"/wBm_grote_2017/bam
+
+## wBm Chung 2019
+BAM_DIR="$READS_DIR"/wBm_chung_2019/bam
+```
+
+#### Commands:
+```{bash, eval = F}
+while read SRR
+do
+	echo -e ""$SAMTOOLS_BIN_DIR"/samtools sort -@ "$THREADS" -o "$BAM_DIR"/"$SRR".sortedbyposition.bam "$BAM_DIR"/"$SRR".bam" | qsub -q threaded.q -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=2G -N samtools -wd "$BAM_DIR"
+done < "$SRR_ID_LIST"
+```
+
+## Index BAM files (2019-06-01)
+
+#### Input Sets:
+```{bash, eval = F}
+THREADS=4
+
+## wOo Darby 2012
+BAM_DIR="$READS_DIR"/wOo_darby_2012/bam
+
+## wMel Darby 2014
+BAM_DIR="$READS_DIR"/wMel_darby_2014/bam
+
+## wDi Luck 2014
+BAM_DIR="$READS_DIR"/wDi_luck_2014/bam
+
+## wDi Luck 2015
+BAM_DIR="$READS_DIR"/wDi_luck_2015/bam
+
+## wMel Gutzwiller 2015
+BAM_DIR="$READS_DIR"/wMel_gutzwiller_2015/bam
+
+## wBm Grote 2017
+BAM_DIR="$READS_DIR"/wBm_grote_2017/bam
+
+## wBm Chung 2019
+BAM_DIR="$READS_DIR"/wBm_chung_2019/bam
+```
+
+#### Commands:
+```{bash, eval = F}
+while read SRR
+do
+	echo -e ""$SAMTOOLS_BIN_DIR"/samtools index -@ "$THREADS" "$BAM_DIR"/"$SRR".sortedbyposition.bam" | qsub -q threaded.q -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=2G -N samtools -wd "$BAM_DIR"
 done < "$SRR_ID_LIST"
 ```
