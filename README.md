@@ -16,6 +16,9 @@ For rerunning analyses, all paths in this section must be set by the user.
 ## Software <a name="setpaths_software"></a>
 
 ```{bash, eval = F}
+JULIA_BIN_DIR=
+
+FADU_BIN_DIR=/home/mattchung/scripts/FADU
 HISAT2_BIN_DIR=/usr/local/packages/hisat2-2.1.0
 SAMTOOLS_BIN_DIR=/usr/local/packages/samtools-1.9/bin
 SEQTK_BIN_DIR=/usr/local/packages/seqtk-1.2/bin
@@ -285,9 +288,7 @@ CONTIG=NC_006833.1
 ```{bash, eval = F}
 while read SRR
 do
-
 	"#SAMTOOLS_BIN_DIR"/samtools view "$BAM_DIR"/"SRR".bam | grep "$PREFIX" | awk '{print $1}' | sort -n | uniq > "$BAM_DIR"/"SRR".target_reads.list
-
 done < "$SRR_ID_LIST"
 ```
 
@@ -314,9 +315,7 @@ OUTPUT_DIR="$READS_DIR"/wDi_luck_2015
 ```{bash, eval = F}
 while read SRR
 do
-
 	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_1.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_1.subset.fastq | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
-
 done < "$SRR_ID_LIST"
 ```
 
@@ -502,4 +501,63 @@ while read SRR
 do
 	echo -e ""$SAMTOOLS_BIN_DIR"/samtools index -@ "$THREADS" "$BAM_DIR"/"$SRR".sortedbyposition.bam" | qsub -q threaded.q -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=2G -N samtools -wd "$BAM_DIR"
 done < "$SRR_ID_LIST"
+```
+
+## Quantify Wolbachia genes (2019-06-01)
+
+#### Input Sets:
+```{bash, eval = F}
+FEAT_TYPE="CDS"
+ATTR_TYPE="ID"
+
+## wOo Darby 2012
+BAM_DIR="$READS_DIR"/wOo_darby_2012/bam
+GFF3="$REFERENCES_DIR"/wOo.gff
+STRANDED="no"
+OUTPUT_DIR="$READS_DIR"/wOo_darby_2012/fadu
+
+## wMel Darby 2014
+BAM_DIR="$READS_DIR"/wMel_darby_2014/bam
+GFF3="$REFERENCES_DIR"/wMel.gff
+STRANDED="yes"
+OUTPUT_DIR="$READS_DIR"/wMel_darby_2014/fadu
+
+## wDi Luck 2014
+BAM_DIR="$READS_DIR"/wDi_luck_2014/bam
+GFF3="$REFERENCES_DIR"/wDi.gff
+STRANDED="no"
+OUTPUT_DIR="$READS_DIR"/wDi_luck_2014/fadu
+
+## wDi Luck 2015
+BAM_DIR="$READS_DIR"/wDi_luck_2015/bam
+GFF3="$REFERENCES_DIR"/wDi.gff
+STRANDED="no"
+OUTPUT_DIR="$READS_DIR"/wDi_luck_2015/fadu
+
+## wMel Gutzwiller 2015
+BAM_DIR="$READS_DIR"/wMel_gutzwiller_2015/bam
+GFF3="$REFERENCES_DIR"/wMel.gff
+STRANDED="reverse"
+OUTPUT_DIR="$READS_DIR"/wMel_gutzwiller_2015/fadu
+
+## wBm Grote 2017
+BAM_DIR="$READS_DIR"/wBm_grote_2017/bam
+GFF3="$REFERENCES_DIR"/wBm.gff
+STRANDED="no"
+OUTPUT_DIR="$READS_DIR"/wBm_grote_2017/fadu
+
+## wBm Chung 2019
+BAM_DIR="$READS_DIR"/wBm_chung_2019/bam
+GFF3="$REFERENCES_DIR"/wBm.gff
+STRANDED="reverse"
+OUTPUT_DIR="$READS_DIR"/wBm_chung_2019/fadu
+```
+
+#### Commands:
+```{bash, eval = F}
+for BAM in $(find "$BAM_DIR" -name "*sortedbyposition.bam")
+do
+
+echo -e "export JULIA_DEPOT_PATH='/home/mattchung/.julia/'\n/usr/local/bin/julia /home/mattchung/scripts/FADU/fadu.jl -g "$gff3" -b "$bam" -o "$output_dir" -s "$stranded_type" -f "$feat_type" -a "$attr_type"" | qsub -P jdhotopp-lab -l mem_free=5G -N fadu -wd "$output_dir"
+done
 ```
