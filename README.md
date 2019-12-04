@@ -1210,3 +1210,5 @@ for(i in 1:length(counts.list)){
   grid.arrange(sample.legend)
 }
 ```
+
+![Image description](/images/sizekey.png)
