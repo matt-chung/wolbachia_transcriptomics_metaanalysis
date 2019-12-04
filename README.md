@@ -582,6 +582,28 @@ do
 done
 ```
 
+## Convert GFF to a mapping table (2019-06-07) <a name="bashanalysis_gff2map"></a>
+
+#### Input Sets:
+```{bash, eval = F}
+## wBm
+GFF3="$REFERENCES_DIR"/wBm.gff
+
+## wDi
+GFF3="$REFERENCES_DIR"/wDi.gff
+
+## wMel
+GFF3="$REFERENCES_DIR"/wMel.gff
+
+## wOo
+GFF3="$REFERENCES_DIR"/wOo.gff
+```
+
+#### Commands:
+```{bash, eval = F}
+"$R_BIN_DIR"/Rscript "$SCRIPTS_DIR"/gff3_to_map.R "$GFF_PATH"
+```
+
 ## Create nucleotide coding sequence fasta files (2019-06-07) <a name="bashanalysis_createcdsfasta"></a>
 
 #### Input Sets:
@@ -615,7 +637,7 @@ GFF3="$REFERENCES_DIR"/wOo.gff
 
 #### Input Sets:
 ```{bash, eval = F}
-SEQ_TYPE="n"
+SEQ_TYPE=n
 THREADS=4
 
 ## wBm
@@ -640,11 +662,124 @@ GFF3="$REFERENCES_DIR"/wOo.gff
 echo -e "export LD_LIBRARY_PATH="$PYTHON_LIB_PATH":"$LD_LIBRARY_PATH"\n"$INTERPROSCAN_BIN_DIR"/interproscan.sh -i "$CDS_FNA" -f tsv -o "$CDS_FNA".interproscan.tsv --seqtype "$SEQ_TYPE" --goterms --iprlookup" | qsub -P jdhotopp-lab -q threaded.q  -pe thread "$THREADS" -l mem_free=20G -N interproscan -wd "$(dirname "$CDS_FNA")"
 ```
 
-
-## Convert InterProScan output to geneinfo file (2019-06-07) <a name="bashanalysis_iprscan2geneinfo"></a>
-
-
 # Transcriptomics meta-analysis <a name="ranalysis"></a>
+
+## Create counts and TPM tables <a name="ranalysis_counts"></a>
+
+### Set R inputs <a name="ranalysis_setinputs"></a>
+
+R inputs from bash should be:
+
+SAMPLE_MAP.PATH = "$INPUTS_DIR"/study_sample_map.tsv.txt
+RAW_COUNTS.DIR = "$WORKING_DIR"/fadu
+OUTPUT.DIR = "$WORKING_DIR"
+
+```{R}
+SAMPLE_MAP.PATH  <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
+RAW_COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/fadu/"
+OUTPUT.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
+```
+
+### View sessionInfo <a name="ranalysis_sessioninfo"></a>
+
+```{R, eval = T}
+sessionInfo()
+```
+
+### Combine count files into a single table for each study <a name="ranalysis_counts_maketable"></a>
+
+```{R}
+sample_map <- read.delim(SAMPLE_MAP.PATH,header = T,sep = "\t")
+counts.files <- list.files(RAW_COUNTS.DIR,
+                           full.names = T,
+                           pattern=".*counts.txt")
+
+counts.list <- list(wOo_darby_2012="",
+                    wMel_darby_2014="",
+                    wDi_luck_2014="",
+                    wDi_luck_2015="",
+                    wMel_gutzwiller_2015="",
+                    wBm_grote_2017="",
+                    wBm_chung_2019="")
+
+
+for(i in 1:length(counts.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i],]
+  samples <- unique(sample_map.subset$sample_identifier)
+  
+  genes <- read.delim(grep(sample_map.subset$sra_id[i],counts.files,value = T),header = T)[,1]
+  counts.list[[i]] <- as.data.frame(matrix(0,
+                                           nrow = length(genes),
+                                           ncol = length(samples)))
+  rownames(counts.list[[i]]) <- genes
+  colnames(counts.list[[i]]) <- samples
+                                    
+  for(j in 1:ncol(counts.list[[i]])){
+    srr <- sample_map.subset$sra_id[sample_map.subset$sample_identifier == colnames(counts.list[[i]])[j]]
+    while(length(srr) > 0){
+      raw_counts.file <- read.delim(paste0(RAW_COUNTS.DIR,"/",srr[1],".sortedbyposition.counts.txt"),
+                                    header = T)
+      raw_counts.file <- raw_counts.file[match(rownames(counts.list[[i]]),raw_counts.file[,1]),]
+      counts.list[[i]][,j] <- counts.list[[i]][,j] + raw_counts.file$counts
+      
+      srr <- srr[-1]
+    }
+  }
+  write.table(counts.list[[i]],
+              paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_counts.tsv"),
+              row.names = T,
+              col.names = T,
+              quote = F,
+              sep = "\t")
+}
+```
+
+## Convert InterProScan output to geneinfo file (2019-06-07) <a name="ranalysis_iprscan2geneinfo"></a>
+
+#### Input Sets:
+```{bash, eval = F}
+SEQ_TYPE=n
+THREADS=4
+
+## wBm
+INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wBm.cds.fna.interproscan.tsv
+COUNTS="$WORKING_DIR"/wBm_chung_2019_counts.tsv
+
+## wDi
+INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wDi.cds.fna.interproscan.tsv
+COUNTS="$REFERENCES_DIR"/wDi_luck_2015_counts.tsv
+
+## wMel
+INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wMel.cds.fna.interproscan.tsv
+COUNTS="$REFERENCES_DIR"/wMel_darby_2014_counts.tsv
+
+## wOo
+INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wOo.cds.fna.interproscan.tsv
+COUNTS="$REFERENCES_DIR"/wOo_darby_2012_counts.tsv
+```
+
+#### Commands:
+```{bash, eval = F}
+"$R_BIN_DIR"/Rscript "$SCRIPTS_DIR"/interproscan2geneinfo.R "$INTERPROSCAN_OUTPUT" "$COUNTS"
+```
+
+## Differential expression and WGCNA analyses (2019-06-07) <a name="ranalysis_iprscan2geneinfo"></a>
+
+### Set R inputs <a name="ranalysis_setinputs"></a>
+
+R inputs from bash should be:
+
+SAMPLE_MAP.PATH = "$INPUTS_DIR"/study_sample_map.tsv.txt
+RAW_COUNTS.DIR = "$WORKING_DIR"/fadu
+GFF3MAP.DIR = "$REFERENCES_DIR"
+OUTPUT.DIR = "$WORKING_DIR"
+
+```{R}
+SAMPLE_MAP.PATH  <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
+COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
+GFF3MAP.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/references"
+OUTPUT.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
+```
 
 ## Load R packages and view sessionInfo <a name="ranalysis_sessioninfo"></a>
 ```{R, eval = T}
@@ -856,32 +991,125 @@ functionaltermenrichment <- function(genes, geneinfo){
 }
 ```
 
-## Set R inputs <a name="ranalysis_setinputs"></a>
 
-R inputs from bash should be:
+### Exclude non-protein-coding genes from counts table <a name="ranalysis_counts_maketable"></a>
 
-RAW_COUNTS.DIR = "$WORKING_DIR"/fadu
-GFF3MAP.DIR = "$REFERENCES_DIR"
+```{R, eval = T}
+for(i in 1:length(counts.list)){
+  species <- substr(names(counts.list)[i],1,regexpr("_",names(counts.list[i]))-1)
+  if(species != "wDi"){
+    map <- read.delim(paste0(GFF3MAP.DIR,"/",species,".gff.map"),
+                      header = T,
+                      sep = "\t")
+    map <- map[map$gene_biotype == "protein_coding" & !is.na(map$gene_biotype),]
+    map$ID <- gsub(".*[|]cds","cds",map$ID)
+    counts.list[[i]] <- counts.list[[i]][rownames(counts.list[[i]]) %in% map$ID,]
+  }
+}
+```
+### Exclude genes without Agilent SureSelect probes from counts table in Chung et al 2019 study <a name="ranalysis_counts_removenoprobegenes"></a>
 
-```{R}
-RAW_COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/fadu/"
-GFF3MAP.DIR <- 
+```{R, eval = T}
+exclude.genes <- c("cds28","cds31","cds63","cds64","cds74","cds99","cds118","cds127","cds135","cds168","cds169","cds170","cds171","cds185","cds240","cds245","cds246","cds307","cds309","cds321","cds322","cds324","cds328","cds354","cds359","cds360","cds363","cds371","cds372","cds380","cds426","cds427","cds431","cds444","cds452","cds453","cds466","cds490","cds491","cds492","cds493","cds500","cds543","cds573","cds581","cds607","cds608","cds614","cds622","cds635","cds636","cds638","cds643","cds657","cds658","cds733","cds734","cds737","cds746","cds750","cds774","cds775","cds784","cds785","cds787","cds805","cds816","cds817","cds822","cds828","cds851","cds853","cds870","cds871","cds872","cds874","cds886","cds909","cds910","cds932","cds957","cds963","cds965","cds978","cds979")
 
-
-maps.dir <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/maps/"
-sample_map.path <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
-geneinfo.dir <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/interproscan"
-gff3map.dir <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/references"
-output.dir="Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
-
-
-srr2wolbachiamappedreads.path <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/srr_wolbachiamappedreads.tsv"
+counts.list$wBm_chung_2019 <- counts.list$wBm_chung_2019[!(rownames(counts.list$wBm_chung_2019) %in% exclude.genes),]
 ```
 
-## Create counts and TPM tables <a name="ranalysis_counts"></a>
+## Print the number of reads mapping to protein-coding genes for each sample in each study <a name="ranalysis_counts_colsum"></a>
+```{R, eval = T}
+for(i in 1:length(counts.list)){
+  print(names(counts.list)[i])
+  print(colSums(counts.list[[i]]))
+}
+```
 
-### Combine count files into a single table for each study <a name="ranalysis_counts_maketable"></a>
+```{R, eval = F}
+[1] "wOo_darby_2012"
+  darby_woo_adultmale_a   darby_woo_adultmale_b darby_woo_adultfemale_a darby_woo_adultfemale_b 
+               26067.08                83692.20               146642.65                80723.69 
+[1] "wMel_darby_2014"
+  darby_wmel_doxy_a   darby_wmel_doxy_b   darby_wmel_doxy_c darby_wmel_nodoxy_c darby_wmel_nodoxy_a darby_wmel_nodoxy_b 
+          120344.75            72768.46            73974.65            64291.14            42960.91            82329.35 
+[1] "wDi_luck_2014"
+         luck_wdi_L3_a          luck_wdi_L4_a   luck_wdi_adultmale_a luck_wdi_adultfemale_a          luck_wdi_MF_a 
+                495.32                1238.56                3788.02               12840.55               27118.30 
+[1] "wDi_luck_2015"
+ luck_wdi_adultfemale_bodywall_a  luck_wdi_adultfemale_bodywall_b      luck_wdi_adultfemale_head_a      luck_wdi_adultfemale_head_b 
+                         6691.13                          8436.58                          4045.55                          6019.27 
+luck_wdi_adultfemale_intestine_a luck_wdi_adultfemale_intestine_b    luck_wdi_adultfemale_uterus_a    luck_wdi_adultfemale_uterus_b 
+                           14.34                            11.18                          1785.09                           188.19 
+   luck_wdi_adultmale_bodywall_a    luck_wdi_adultmale_bodywall_b   luck_wdi_adultmale_intestine_a      luck_wdi_adultmale_testis_a 
+                        14444.09                         10506.72                            36.70                            13.34 
+[1] "wMel_gutzwiller_2015"
+                 gutzwiller_wmel_embryo0to2hr_a                  gutzwiller_wmel_embryo0to2hr_b                  gutzwiller_wmel_embryo2to4hr_a 
+                                      114790.66                                        85945.65                                       110702.61 
+                 gutzwiller_wmel_embryo2to4hr_b                gutzwiller_wmel_embryo10to12hr_a                gutzwiller_wmel_embryo10to12hr_b 
+                                       53392.96                                       188273.14                                       134967.66 
+               gutzwiller_wmel_embryo12to14hr_a                gutzwiller_wmel_embryo12to14hr_b                gutzwiller_wmel_embryo18to20hr_a 
+                                      137773.04                                        40542.10                                       177066.53 
+               gutzwiller_wmel_embryo18to20hr_b                gutzwiller_wmel_embryo22to24hr_a                gutzwiller_wmel_embryo22to24hr_b 
+                                      148100.78                                       192603.87                                        18862.07 
+                           gutzwiller_wmel_L1_a                            gutzwiller_wmel_L1_b                            gutzwiller_wmel_L2_a 
+                                      153643.74                                       128799.29                                        65018.60 
+                           gutzwiller_wmel_L2_b               gutzwiller_wmel_L3_12hrpostmolt_a               gutzwiller_wmel_L3_12hrpostmolt_b 
+                                       55155.07                                        72087.91                                        45411.64 
+        gutzwiller_wmel_L3_darkbluegutPS_1to2_a         gutzwiller_wmel_L3_darkbluegutPS_1to2_b        gutzwiller_wmel_L3_lightbluegutPS_3to6_a 
+                                      122280.34                                        90161.56                                       152077.10 
+       gutzwiller_wmel_L3_lightbluegutPS_3to6_b            gutzwiller_wmel_L3_cleargutPS_7to9_a            gutzwiller_wmel_L3_cleargutPS_7to9_b 
+                                      112893.91                                       241950.76                                        76163.54 
+                          gutzwiller_wmel_WPP_a                           gutzwiller_wmel_WPP_b             gutzwiller_wmel_pupae_12hrpostWPP_a 
+                                      178456.20                                       115149.63                                       162560.29 
+            gutzwiller_wmel_pupae_12hrpostWPP_b             gutzwiller_wmel_pupae_24hrpostWPP_a             gutzwiller_wmel_pupae_24hrpostWPP_b 
+                                       92488.90                                       112776.08                                        48500.17 
+           gutzwiller_wmel_pupae_2dayspostWPP_a            gutzwiller_wmel_pupae_2dayspostWPP_b            gutzwiller_wmel_pupae_3dayspostWPP_a 
+                                      106883.82                                        60639.46                                       203627.16 
+           gutzwiller_wmel_pupae_3dayspostWPP_b            gutzwiller_wmel_pupae_4dayspostWPP_a            gutzwiller_wmel_pupae_4dayspostWPP_b 
+                                       76254.69                                       105137.01                                        95285.08 
+ gutzwiller_wmel_adultfemale_1dayposteclosion_a  gutzwiller_wmel_adultfemale_1dayposteclosion_b  gutzwiller_wmel_adultfemale_5dayposteclosion_a 
+                                      254985.87                                       140491.93                                       221664.24 
+ gutzwiller_wmel_adultfemale_5dayposteclosion_b  gutzwiller_wmel_adultfemale_5dayposteclosion_c  gutzwiller_wmel_adultfemale_5dayposteclosion_d 
+                                      111503.67                                       103197.92                                       180473.06 
+ gutzwiller_wmel_adultfemale_5dayposteclosion_f gutzwiller_wmel_adultfemale_30dayposteclosion_a gutzwiller_wmel_adultfemale_30dayposteclosion_b 
+                                      195493.19                                       341687.94                                       244695.15 
+   gutzwiller_wmel_adultmale_1dayposteclosion_a    gutzwiller_wmel_adultmale_1dayposteclosion_b    gutzwiller_wmel_adultmale_5dayposteclosion_a 
+                                      225874.52                                       137847.49                                       417013.04 
+   gutzwiller_wmel_adultmale_5dayposteclosion_b    gutzwiller_wmel_adultmale_5dayposteclosion_c    gutzwiller_wmel_adultmale_5dayposteclosion_d 
+                                      136930.51                                       328285.55                                       222262.97 
+   gutzwiller_wmel_adultmale_5dayposteclosion_i    gutzwiller_wmel_adultmale_5dayposteclosion_j   gutzwiller_wmel_adultmale_30dayposteclosion_a 
+                                       88320.71                                        93761.47                                       325975.98 
+  gutzwiller_wmel_adultmale_30dayposteclosion_b 
+                                      321449.11 
+[1] "wBm_grote_2017"
+                  grote_wbm_L4_a                   grote_wbm_L4_b   grote_wbm_30dpi_immaturemale_a   grote_wbm_30dpi_immaturemale_b 
+                        22374.59                          6178.84                         12843.80                          9650.02 
+grote_wbm_30dpi_immaturefemale_a grote_wbm_30dpi_immaturefemale_b   grote_wbm_42dpi_immaturemale_a   grote_wbm_42dpi_immaturemale_b 
+                         9080.46                         14064.82                         13019.66                          8636.27 
+grote_wbm_42dpi_immaturefemale_a grote_wbm_42dpi_immaturefemale_b     grote_wbm_120dpi_adultmale_a     grote_wbm_120dpi_adultmale_b 
+                         6721.62                         13460.39                         16643.58                          8373.13 
+  grote_wbm_120dpi_adultfemale_a   grote_wbm_120dpi_adultfemale_b 
+                        31289.42                         19151.90 
+[1] "wBm_chung_2019"
+               chung_wbm_vector18hpi_a                chung_wbm_vector18hpi_b                 chung_wbm_vector4dpi_a 
+                             481351.25                              625028.83                              240693.73 
+                chung_wbm_vector4dpi_b                 chung_wbm_vector8dpi_a                 chung_wbm_vector8dpi_b 
+                             777934.24                             3218498.46                             3987678.06 
+                chung_wbm_mammal1dpi_a                 chung_wbm_mammal1dpi_b                 chung_wbm_mammal2dpi_a 
+                             159809.14                              103367.39                               53272.07 
+                chung_wbm_mammal2dpi_b                 chung_wbm_mammal3dpi_a                 chung_wbm_mammal3dpi_b 
+                             123961.25                              109225.39                              122560.27 
+                chung_wbm_mammal4dpi_a                 chung_wbm_mammal4dpi_b                 chung_wbm_mammal8dpi_a 
+                             120910.97                              121522.47                              284943.40 
+                chung_wbm_mammal8dpi_b   chung_wbm_mammal20dpi_immaturemale_a   chung_wbm_mammal20dpi_immaturemale_b 
+                             221120.86                              108117.16                               78688.09 
+chung_wbm_mammal24dpi_immaturefemale_a chung_wbm_mammal24dpi_immaturefemale_b                  chung_wbm_adultmale_a 
+                           35276890.78                              192206.48                               23790.09 
+                 chung_wbm_adultmale_b                chung_wbm_adultfemale_a                chung_wbm_adultfemale_b 
+                              43446.49                            18840207.11                               10561.16 
+               chung_wbm_adultfemale_c                chung_wbm_adultfemale_d                     chung_wbm_embryo_a 
+                              13947.67                            24661817.10                                8525.69 
+                    chung_wbm_embryo_b                 chung_wbm_immatureMF_a                 chung_wbm_immatureMF_b 
+                              14704.98                               65069.68                               57976.58 
+                  chung_wbm_matureMF_a                   chung_wbm_matureMF_b 
+                              46554.09                               51856.71 
 
-### Remove non-protein-coding genes from counts table <a name="ranalysis_counts_removenonproteincoding"></a>
-
-### Remove non-protein-coding genes from counts table <a name="ranalysis_counts_removenonproteincoding"></a>
+```
