@@ -49,6 +49,7 @@
 			2. [Size keys](#ranalysis_de_keys_size)
 			3. [Heatmap log2TPM key](#ranalysis_de_keys_hm1)
 			4. [Heatmap z-score log2TPM key](#ranalysis_de_keys_hm2)
+		6. [Assess if samples have been sequenced to saturation using saturation curves](#ranalysis_de_keys_saturation)
 
 # Set software and directory paths <a name="setpaths"></a>
 
@@ -1183,7 +1184,7 @@ for(i in 1:length(tpm.list)){
 
 ### Create keys <a name="ranalysis_de_keys"></a>
 
-#### Sample key <a name="ranalysis_de_keys_samples"></a>
+#### Sample keys <a name="ranalysis_de_keys_samples"></a>
 ```{R,fig.height=2,fig.width=10}
 for(i in 1:length(counts.list)){
   sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
@@ -1215,25 +1216,25 @@ for(i in 1:length(counts.list)){
 }
 ```
 
-##### wOo, Darby et al 2012 <a name="ranalysis_de_keys_sample_darby2012"></a>
+##### wOo, Darby et al 2012
 ![Image description](/images/wOo_darby_2012_samplekey.png)
 
-##### wMel, Darby et al 2014 <a name="ranalysis_de_keys_sample_darby2014"></a>
+##### wMel, Darby et al 2014
 ![Image description](/images/wMel_darby_2014_samplekey.png)
 
-##### wDi, Luck et al 2014 <a name="ranalysis_de_keys_sample_luck2014"></a>
+##### wDi, Luck et al 2014
 ![Image description](/images/wDi_luck_2014_samplekey.png)
 
-##### wDi, Luck et al 2015 <a name="ranalysis_de_keys_sample_luck2015"></a>
+##### wDi, Luck et al 2015
 ![Image description](/images/wDi_luck_2015_samplekey.png)
 
-##### wMel, Gutzwiller et al 2015 <a name="ranalysis_de_keys_sample_gutzwiller2015"></a>
+##### wMel, Gutzwiller et al 2015
 ![Image description](/images/wMel_gutzwiller_2015_samplekey.png)
 
-##### wBm, Grote et al 2017 <a name="ranalysis_de_keys_sample_grote2017"></a>
+##### wBm, Grote et al 2017
 ![Image description](/images/wBm_grote_2017_samplekey.png)
 
-##### wBm, Chung et al 2019 <a name="ranalysis_de_keys_sample_chung2019"></a>
+##### wBm, Chung et al 2019
 ![Image description](/images/wBm_chung_2019_samplekey.png)
 
 #### Size key  <a name="ranalysis_de_keys_size"></a>
@@ -1332,3 +1333,95 @@ dev.off()
 grid.arrange(heat.legend)
 ```
 ![Image description](/images/hmcolor2key.png)
+
+### Assess if samples have been sequenced to saturation using saturation curves <a name="ranalysis_de_keys_saturation"></a>
+```{R, fig.height = 5, fig.width = 5}
+for(i in 1:length(tpm.list)){
+  rarefy.counts <- ceiling(counts.list[[i]])
+  rarefy.counts <- rarefy.counts[,colSums(rarefy.counts) != 0,]
+  
+  sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
+  
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+
+  raremax <- round(min(rowSums(t(rarefy.counts))[rowSums(t(rarefy.counts)) != 0]),0)
+  srare <- rarefy(t(rarefy.counts),raremax)
+  raremax <- ifelse(raremax < 10, 10, raremax)
+  
+  rarefy.raw.df <- rarecurve(t(rarefy.counts), step = round(raremax/10,0), sample = raremax)
+  
+  rarefy.df <- as.data.frame(matrix(nrow = 0,
+                                    ncol = 5))
+  rarefy.points.df <- rarefy.df
+  for(j in 1:length(rarefy.raw.df)){
+    steps <- as.numeric(gsub("N","",names(rarefy.raw.df[[j]])))
+    detected_genes <- as.numeric(rarefy.raw.df[[j]])
+    rarefy.df <- as.data.frame(rbind(rarefy.df,
+                                     cbind(as.numeric(steps),
+                                           as.numeric(detected_genes),
+                                           as.character(groups[j,1]),
+                                           as.character(groups[j,2]),
+                                           groups[j,3])))
+    rarefy.points.df <- as.data.frame(rbind(rarefy.points.df,
+                                     cbind(as.numeric(max(steps)),
+                                           as.numeric(max(detected_genes)),
+                                           as.character(groups[j,1]),
+                                           as.character(groups[j,2]),
+                                           groups[j,3])))
+    
+  }
+  rarefy.plot <- ggplot()+
+    geom_line(mapping=aes(x=as.numeric(as.character(rarefy.df[,1])), y=as.numeric(as.character(rarefy.df[,2])),group=rarefy.df[,3],color=rarefy.df[,4]))+
+    #geom_point(mapping=aes(x=as.numeric(as.character(rarefy.df[,1])), y=as.numeric(as.character(rarefy.df[,2])),group=rarefy.df[,3],color=rarefy.df[,4]))+
+    geom_point(mapping=aes(x=as.numeric(as.character(rarefy.points.df[,1])), y=as.numeric(as.character(rarefy.points.df[,2])),group=rarefy.points.df[,3],color=rarefy.points.df[,4]),size = 3)+
+    guides(colour = F,shape = F)+
+    scale_color_manual(values = levels(groups[,3]))+
+    labs(x="reads mapping to protein-coding genes", y="genes detected", color = "Sample")+
+    #coord_cartesian(xlim=c(0,100000))+
+    theme_bw()
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_rarefaction.pdf"),
+      height=5,
+      width=5)
+  print(rarefy.plot)
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_rarefaction.png"),
+      height=5,
+      width=5,
+      units = "in",res=300)
+  print(rarefy.plot)
+  dev.off()
+  
+  print(rarefy.plot)
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_rarefaction.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_rarefaction.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_rarefaction.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_rarefaction.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_rarefaction.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_rarefaction.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_rarefaction.png)
