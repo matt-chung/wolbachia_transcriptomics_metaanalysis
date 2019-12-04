@@ -3,11 +3,28 @@
 # Table of Contents
 
 
-1. [Set software, input, and output paths](#)
-
-
-1. [Download, align, and quantify Wolbachia sequencing data](#)
-	1. Create directories
+1. [Set software, input, and output directory paths](#setpaths)
+	1. [Software](#setpaths_software)
+	2. [Directories](#setpaths_directories)
+2. [Download, align, and quantify Wolbachia sequencing data](#bashanalysis)
+	1. [Create directories](#bashanalysis_createdirectories)
+	2. [Download reference files and create combined references](#bashanalysis_getreferences)
+	3. [Download FASTQ files](#bashanalysis_getfastq)
+		1. [SRA Datasets](#bashanalysis_getfastq_sra)
+		2. [Luck et al 2015 Dataset](#bashanalysis_getfastq_luck2015)
+	4. [Align FASTQ files to combined host and Wolbachia reference while allowing for splicing](#bashanalysis_align)
+		1. [Single-End FASTQs](#bashanalysis_align_se)
+		2. [Paired-End FASTQs](#bashanalysis_align_pe)
+	5. [Create a list of Wolbachia-mapping reads in all BAM files](#bashanalysis_wolbachiareads)
+	6. [Create subsets of all FASTQ files that contain only Wolbachia-mapping reads](#bashanalysis_subsetfastq)
+		1. [Single-End FASTQs](#bashanalysis_subsetfastq_se)
+		2. [Paired-End FASTQs](#bashanalysis_subsetfastq_pe)
+	7. [Align FASTQ files containing only Wolbachia-mapping reads to combined host and Wolbachia reference while disallowing splicing](#bashanalysis_realign)
+		1. [Single-End FASTQs](#bashanalysis_realign_se)
+		2. [Paired-End FASTQs](#bashanalysis_realign_pe)
+	8. [Sort BAM files](#bashanalysis_realign_sortbam)
+	9. [Index BAM files](#bashanalysis_indexbam)
+	10. [Quantify Wolbachia genes](#bashanalysis_quant)
 
 # Set software and directory paths <a name="setpaths"></a>
 
@@ -16,7 +33,9 @@ For rerunning analyses, all paths in this section must be set by the user.
 ## Software <a name="setpaths_software"></a>
 
 ```{bash, eval = F}
-JULIA_BIN_DIR=
+JULIA_DEPOT_PATH=/home/mattchung/.julia
+
+JULIA_BIN_DIR=/usr/local/bin
 
 FADU_BIN_DIR=/home/mattchung/scripts/FADU
 HISAT2_BIN_DIR=/usr/local/packages/hisat2-2.1.0
@@ -34,9 +53,9 @@ REFERENCES_DIR=/local/aberdeen2rw/julie/Matt_dir/wolbachia_metatranscriptome_ana
 WORKING_DIR=
 ```
 
-# Download, align, and quantify Wolbachia sequencing data
+# Download, align, and quantify Wolbachia sequencing data <a name="bashanalysis"></a>
 
-## Create directories (2019-05-30)
+## Create directories (2019-05-30) <a name="bashanalysis_createdirectories"></a>
 ```{bash, eval = F}
 mkdir -p "$REFERENCES_DIR"
 
@@ -49,7 +68,7 @@ mkdir -p "$READS_DIR"/wBm_grote_2017/bam
 mkdir -p "$READS_DIR"/wBm_chung_2019/bam
 ```
 
-## Download reference files and create combined references (2019-05-30)
+## Download reference files and create combined references (2019-05-30) <a name="bashanalysis_getreferences"></a>
 
 The gff reference for wDi must be downloaded from this link: http://rast.nmpdr.org/rast.cgi?page=JobDetails&job=53659 (login:guest, password:guest). All subsequent code will make use of this wDi.gff at this path: "$REFERENCES_DIR"/wDi.gff
 
@@ -96,11 +115,11 @@ wget -O "$REFERENCES_DIR"/wOo.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/
 gunzip "$REFERENCES_DIR"/wOo.gff.gz
 ```
 
-## Download FASTQ files (2019-05-30)
+## Download FASTQ files (2019-05-30) <a name="bashanalysis_getfastq"></a>
 
 All FASTQ files from 6 of the studies were downloaded from the SRA. Because the Wolbachia reads were not included in the FASTQ files uploaded for the Luck 2015 study, NEB uploaded them onto the IGS FTP site (ftp://nsflgt@ftp.igs.umaryland.edu; password: drosophila) for download to this directory: "$READS_DIR"/wDi_luck_2015
 
-### SRA Datasets
+### SRA Datasets <a name="bashanalysis_getfastq_sra"></a>
 #### Input Sets:
 ```{bash, eval = F}
 ## wOo Darby 2012
@@ -140,7 +159,7 @@ qsub -P jdhotopp-lab -l mem_free=2G -N fastq_dump -wd "$OUTPUT_DIR" -b y "$SRATO
 done < "$SRR_ID_LIST"
 ```
 
-### Luck et al 2015 Dataset
+### Luck et al 2015 Dataset <a name="bashanalysis_getfastq_luck2015"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -165,9 +184,9 @@ zcat "$READS_DIR"/wDi_luck_2015/Galaxy11-[Di_Male_Body_Wall_2] (1).fastq.zip > "
 zcat "$READS_DIR"/wDi_luck_2015/Galaxy12-[Di_Male_Intestine] (1).fastq.zip > "$READS_DIR"/wDi_luck_2015/SRR1974184.fastq
 ```
 
-## Align FASTQ files to combined host and Wolbachia reference while allowing for splicing (2019-05-30)
+## Align FASTQ files to combined host and Wolbachia reference while allowing for splicing (2019-05-30)  <a name="bashanalysis_align"></a>
 
-### Single-End FASTQs
+### Single-End FASTQs <a name="bashanalysis_align_se"></a>
 #### Input Sets:
 ```{bash, eval = F}
 THREADS=4
@@ -202,7 +221,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-### Paired-End FASTQs
+### Paired-End FASTQs <a name="bashanalysis_align_pe"></a>
 #### Input Sets:
 ```{bash, eval = F}
 THREADS=4
@@ -244,7 +263,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-## Create a list of Wolbachia-mapping reads in all BAM files (2019-05-30)
+## Create a list of Wolbachia-mapping reads in all BAM files (2019-05-30) <a name="bashanalysis_wolbachiareads"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -292,9 +311,9 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-## Create subsets of all FASTQ files that contain only Wolbachia-mapping reads (2019-05-30)
+## Create subsets of all FASTQ files that contain only Wolbachia-mapping reads (2019-05-30) <a name="bashanalysis_subsetfastq"></a>
 
-### Single-End FASTQs
+### Single-End FASTQs <a name="bashanalysis_subsetfastq_se"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -319,7 +338,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-### Paired-End FASTQs
+### Paired-End FASTQs <a name="bashanalysis_subsetfastq_pe"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -335,7 +354,7 @@ OUTPUT_DIR="$READS_DIR"/wMel_gutzwiller_2015
 SRR_ID_LIST="$INPUTS_DIR"/wBm_grote_2017_srr.list
 OUTPUT_DIR="$READS_DIR"/wBm_grote_2017
 
-## wBm Chung 2019BAM_DIR=="$READS_DIR"/wBm_chung_2019/bam
+## wBm Chung 2019
 SRR_ID_LIST="$INPUTS_DIR"/wBm_chung_2019_srr.list
 OUTPUT_DIR="$READS_DIR"/wBm_chung_2019
 ```
@@ -345,16 +364,16 @@ OUTPUT_DIR="$READS_DIR"/wBm_chung_2019
 while read SRR
 do
 
-	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_1.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_1.subset.fastq | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
+	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_1.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_1.subset.fastq" | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
 
-	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_2.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_2.subset.fastq | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
+	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_2.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_2.subset.fastq" | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
 
 done < "$SRR_ID_LIST"
 ```
 
-## Align FASTQ files containing only Wolbachia-mapping reads to combined host and Wolbachia reference while disallowing splicing (2019-06-01)
+## Align FASTQ files containing only Wolbachia-mapping reads to combined host and Wolbachia reference while disallowing splicing (2019-06-01) <a name="bashanalysis_realign"></a>
 
-### Single-End FASTQs
+### Single-End FASTQs <a name="bashanalysis_realign_se"></a>
 #### Input Sets:
 ```{bash, eval = F}
 THREADS=4
@@ -389,7 +408,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-### Paired-End FASTQs
+### Paired-End FASTQs <a name="bashanalysis_realign_pe"></a>
 #### Input Sets:
 ```{bash, eval = F}
 THREADS=4
@@ -431,7 +450,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-## Sort BAM files (2019-06-01)
+## Sort BAM files (2019-06-01) <a name="bashanalysis_sortbam"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -467,7 +486,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-## Index BAM files (2019-06-01)
+## Index BAM files (2019-06-01) <a name="bashanalysis_indexbam"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -503,7 +522,7 @@ do
 done < "$SRR_ID_LIST"
 ```
 
-## Quantify Wolbachia genes (2019-06-01)
+## Quantify Wolbachia genes (2019-06-01) <a name="bashanalysis_quant"></a>
 
 #### Input Sets:
 ```{bash, eval = F}
@@ -558,6 +577,6 @@ OUTPUT_DIR="$READS_DIR"/wBm_chung_2019/fadu
 for BAM in $(find "$BAM_DIR" -name "*sortedbyposition.bam")
 do
 
-echo -e "export JULIA_DEPOT_PATH='/home/mattchung/.julia/'\n/usr/local/bin/julia /home/mattchung/scripts/FADU/fadu.jl -g "$gff3" -b "$bam" -o "$output_dir" -s "$stranded_type" -f "$feat_type" -a "$attr_type"" | qsub -P jdhotopp-lab -l mem_free=5G -N fadu -wd "$output_dir"
+echo -e "export JULIA_DEPOT_PATH="$JULIA_DEPOT_PATH"'\n"$JULIA_BIN_DIR"/julia "$FADU_BIN_DIR"/fadu.jl -g "$GFF3" -b "$BAM" -o "$OUTPUT_DIR" -s "$STRANDED" -f "$FEAT_TYPE" -a "$ATTR_TYPE"" | qsub -P jdhotopp-lab -l mem_free=5G -N fadu -wd "$OUTPUT_DIR"
 done
 ```
