@@ -1424,4 +1424,4 @@ for(i in 1:length(tpm.list)){
 ![Image description](/images/wBm_grote_2017_rarefaction.png)
 
 ##### wBm, Chung et al 2019
-![Image description](/images/wBm_chung_2019_rarefaction.png)
+![Image description](/images/wBm_chung_2019_rarefaction.png =200x200)
