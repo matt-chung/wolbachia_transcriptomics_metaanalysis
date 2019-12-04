@@ -92,7 +92,7 @@ gunzip "$REFERENCES_DIR"/wOo.fna.gz
 gunzip "$REFERENCES_DIR"/oochengi.fna.gz
 cat "$REFERENCES_DIR"/wOo.fna "$REFERENCES_DIR"/oochengi.fna > "$REFERENCES_DIR"/wOo_oochengi_combined.fna
 
-wget -O "$REFERENCES_DIR"/wOol.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/306/885/GCF_000306885.1_ASM30688v1/GCF_000306885.1_ASM30688v1_genomic.gff.gz
+wget -O "$REFERENCES_DIR"/wOo.gff.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/306/885/GCF_000306885.1_ASM30688v1/GCF_000306885.1_ASM30688v1_genomic.gff.gz
 gunzip "$REFERENCES_DIR"/wOo.gff.gz
 ```
 
