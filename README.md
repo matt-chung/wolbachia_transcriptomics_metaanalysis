@@ -25,8 +25,26 @@
 	8. [Sort BAM files](#bashanalysis_realign_sortbam)
 	9. [Index BAM files](#bashanalysis_indexbam)
 	10. [Quantify Wolbachia genes](#bashanalysis_quant)
-	11. [Assign InterPro descriptions and GO terms for Wolbachia transcripts]
+	11. [Convert GFF to a mapping table](#bashanalysis_gff2map)
+	12. [Create nucleotide coding sequence fasta files](#bashanalysis_createcdsfasta)
+	13. [Identify InterPro descriptions and GO terms for Wolbachia transcripts](#bashanalysis_interproscan)
 3. [Transcriptomics meta-analysis](#ranalysis)
+	1. [Create counts table](#ranalysis_counts)
+		1. [Set R inputs](#ranalysis_counts_setinputs)
+		2. [View sessionInfo](#ranalysis_counts_sessioninfo)
+		3. [Combine count files into a single table for each study](#ranalysis_counts_maketable)
+	2. [Convert InterProScan output to geneinfo file](#ranalysis_iprscan2geneinfo)
+	3. [Differential expression and WGCNA analyses](#ranalysis_de)
+		1. [Set R inputs](#ranalysis_de_setinputs)
+		2. [Load R packages and view sessionInfo](#ranalysis_de_sessioninfo)
+		3. [Load R functions](#ranalysis_de_loadfunctions)
+		4. [Process counts files and calculate TPM values](#ranalysis_de_counts_readcounts)
+			1. [Read counts table into a list](#ranalysis_de_counts_readcounts)
+			2. [Exclude non-protein-coding genes from counts table](#ranalysis_de_counts_removenonproteingenes)
+			3. [Exclude genes without Agilent SureSelect probes from counts table in Chung et al 2019 study](#ranalysis_counts_de_removenoprobegenes)
+			4. [Print the number of reads mapping to protein-coding genes for each sample in each study](#ranalysis_counts_de_countscolsum)
+
+
 
 # Set software and directory paths <a name="setpaths"></a>
 
@@ -664,15 +682,15 @@ echo -e "export LD_LIBRARY_PATH="$PYTHON_LIB_PATH":"$LD_LIBRARY_PATH"\n"$INTERPR
 
 # Transcriptomics meta-analysis <a name="ranalysis"></a>
 
-## Create counts and TPM tables <a name="ranalysis_counts"></a>
+## Create counts table <a name="ranalysis_counts"></a>
 
 ### Set R inputs <a name="ranalysis_setinputs"></a>
 
 R inputs from bash should be:
 
-SAMPLE_MAP.PATH = "$INPUTS_DIR"/study_sample_map.tsv.txt
-RAW_COUNTS.DIR = "$WORKING_DIR"/fadu
-OUTPUT.DIR = "$WORKING_DIR"
+SAMPLE_MAP.PATH = "$INPUTS_DIR"/study_sample_map.tsv.txt  
+RAW_COUNTS.DIR = "$WORKING_DIR"/fadu  
+OUTPUT.DIR = "$WORKING_DIR"  
 
 ```{R}
 SAMPLE_MAP.PATH  <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
@@ -765,23 +783,25 @@ COUNTS="$REFERENCES_DIR"/wOo_darby_2012_counts.tsv
 
 ## Differential expression and WGCNA analyses (2019-06-07) <a name="ranalysis_iprscan2geneinfo"></a>
 
-### Set R inputs <a name="ranalysis_setinputs"></a>
+### Set R inputs <a name="ranalysis_de_setinputs"></a>
 
 R inputs from bash should be:
 
-SAMPLE_MAP.PATH = "$INPUTS_DIR"/study_sample_map.tsv.txt
-RAW_COUNTS.DIR = "$WORKING_DIR"/fadu
-GFF3MAP.DIR = "$REFERENCES_DIR"
-OUTPUT.DIR = "$WORKING_DIR"
+SAMPLE_MAP.PATH = "$INPUTS_DIR"/study_sample_map.tsv.txt  
+COUNTS.DIR = "$WORKING_DIR"  
+RAW_COUNTS.DIR = "$WORKING_DIR"/fadu  
+GFF3MAP.DIR = "$REFERENCES_DIR"  
+OUTPUT.DIR = "$WORKING_DIR"  
 
 ```{R}
 SAMPLE_MAP.PATH  <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
 COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
 GFF3MAP.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/references"
+RAW_COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/fadu"
 OUTPUT.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
 ```
 
-## Load R packages and view sessionInfo <a name="ranalysis_sessioninfo"></a>
+### Load R packages and view sessionInfo <a name="ranalysis_de_sessioninfo"></a>
 ```{R, eval = T}
 library(cowplot)
 library(edgeR)
@@ -842,7 +862,7 @@ loaded via a namespace (and not attached):
 [103] viridisLite_0.3.0
 ```
 
-## Load R functions <a name="ranalysis_loadfunctions"></a>
+### Load R functions <a name="ranalysis_de_loadfunctions"></a>
 ```{R, eval = T}
 g_legend<-function(a.gplot){ 
   tmp <- ggplot_gtable(ggplot_build(a.gplot)) 
@@ -990,9 +1010,26 @@ functionaltermenrichment <- function(genes, geneinfo){
   return(terms.df)
 }
 ```
+### Process counts files and calculate TPM values  <a name="ranalysis_de_counts_readcounts"></a>
+#### Read counts table into a list <a name="ranalysis_de_counts_readcounts"></a>
 
+```{R, eval = T}
+sample_map <- read.delim(SAMPLE_MAP.PATH)
 
-### Exclude non-protein-coding genes from counts table <a name="ranalysis_counts_maketable"></a>
+counts.list <- list(wOo_darby_2012="",
+                    wMel_darby_2014="",
+                    wDi_luck_2014="",
+                    wDi_luck_2015="",
+                    wMel_gutzwiller_2015="",
+                    wBm_grote_2017="",
+                    wBm_chung_2019="")
+for(i in 1:length(counts.list)){
+  counts.list[[i]] <- read.delim(paste0(COUNTS.DIR,"/",names(counts.list)[i],"_counts.tsv"),
+                                 row.names = 1)
+}
+```
+
+#### Exclude non-protein-coding genes from counts table <a name="ranalysis_de_counts_removenonproteingenes"></a>
 
 ```{R, eval = T}
 for(i in 1:length(counts.list)){
@@ -1007,7 +1044,7 @@ for(i in 1:length(counts.list)){
   }
 }
 ```
-### Exclude genes without Agilent SureSelect probes from counts table in Chung et al 2019 study <a name="ranalysis_counts_removenoprobegenes"></a>
+#### Exclude genes without Agilent SureSelect probes from counts table in Chung et al 2019 study <a name="ranalysis_de_counts_removenoprobegenes"></a>
 
 ```{R, eval = T}
 exclude.genes <- c("cds28","cds31","cds63","cds64","cds74","cds99","cds118","cds127","cds135","cds168","cds169","cds170","cds171","cds185","cds240","cds245","cds246","cds307","cds309","cds321","cds322","cds324","cds328","cds354","cds359","cds360","cds363","cds371","cds372","cds380","cds426","cds427","cds431","cds444","cds452","cds453","cds466","cds490","cds491","cds492","cds493","cds500","cds543","cds573","cds581","cds607","cds608","cds614","cds622","cds635","cds636","cds638","cds643","cds657","cds658","cds733","cds734","cds737","cds746","cds750","cds774","cds775","cds784","cds785","cds787","cds805","cds816","cds817","cds822","cds828","cds851","cds853","cds870","cds871","cds872","cds874","cds886","cds909","cds910","cds932","cds957","cds963","cds965","cds978","cds979")
@@ -1015,7 +1052,7 @@ exclude.genes <- c("cds28","cds31","cds63","cds64","cds74","cds99","cds118","cds
 counts.list$wBm_chung_2019 <- counts.list$wBm_chung_2019[!(rownames(counts.list$wBm_chung_2019) %in% exclude.genes),]
 ```
 
-## Print the number of reads mapping to protein-coding genes for each sample in each study <a name="ranalysis_counts_colsum"></a>
+#### Print the number of reads mapping to protein-coding genes for each sample in each study <a name="ranalysis_de_counts_countscolsum"></a>
 ```{R, eval = T}
 for(i in 1:length(counts.list)){
   print(names(counts.list)[i])
@@ -1112,4 +1149,64 @@ chung_wbm_mammal24dpi_immaturefemale_a chung_wbm_mammal24dpi_immaturefemale_b   
                   chung_wbm_matureMF_a                   chung_wbm_matureMF_b 
                               46554.09                               51856.71 
 
+```
+
+### Create TPM table <a name="ranalysis_de_tpm"></a>
+
+```{R, eval = T}
+tpm.list <- counts.list
+
+for(i in 1:length(tpm.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
+  srr <- sample_map.subset$sra_id[sample_map.subset$sample_identifier == colnames(counts.list[[i]])[1]]
+  raw_counts.file <- read.delim(paste0(RAW_COUNTS.DIR,"/",srr[1],".sortedbyposition.counts.txt"),
+                                      header = T)
+  genelength <- raw_counts.file$uniq_len[match(rownames(tpm.list[[i]]),raw_counts.file$featureID)]
+  
+  for(j in 1:ncol(tpm.list[[i]])){
+    tpm.list[[i]][,j] <- tpm.list[[i]][,j]/genelength
+    tpm.list[[i]][,j] <- tpm.list[[i]][,j]/(sum(tpm.list[[i]][,j])/1000000)
+  }
+  
+  write.table(tpm.list[[i]],
+            paste0(OUTPUT.DIR,"/",names(tpm.list)[i],"_tpm.tsv"),
+            row.names = T,
+            col.names = T,
+            quote = F,
+            sep = "\t")
+}
+```
+
+### Create keys and legends
+
+#### Sample key
+```{R,fig.height=2,fig.width=10}
+for(i in 1:length(counts.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  legend.plot <- ggplot()+
+    geom_point(aes(x=groups[,2], y=seq(1,length(groups[,2]),1), color = groups[,2]), show.legend = T, size = 2)+
+    scale_color_manual(values = as.character(unique(groups[,3])))+
+    guides(colour = guide_legend(title = "Samples", title.position = "top", nrow = 6))+
+    theme_bw()+
+    theme(legend.position="top",legend.title.align=0.5)
+  
+  sample.legend <- g_legend(legend.plot)
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_samplekey.pdf"),
+      height=2,
+      width=10)
+  grid.arrange(sample.legend)
+  dev.off()
+  
+  grid.arrange(sample.legend)
+}
 ```
