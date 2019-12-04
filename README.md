@@ -41,10 +41,14 @@
 		4. [Process counts files and calculate TPM values](#ranalysis_de_counts_readcounts)
 			1. [Read counts table into a list](#ranalysis_de_counts_readcounts)
 			2. [Exclude non-protein-coding genes from counts table](#ranalysis_de_counts_removenonproteingenes)
-			3. [Exclude genes without Agilent SureSelect probes from counts table in Chung et al 2019 study](#ranalysis_counts_de_removenoprobegenes)
-			4. [Print the number of reads mapping to protein-coding genes for each sample in each study](#ranalysis_counts_de_countscolsum)
-
-
+			3. [Exclude genes without Agilent SureSelect probes from counts table in Chung et al 2019 study](#ranalysis_de_counts_removenoprobegenes)
+			4. [Print the number of reads mapping to protein-coding genes for each sample in each study](#ranalysis_de_counts_countscolsum)
+			5. [Create TPM table](#ranalysis_de_counts_tpm)
+		5. [Create keys](#ranalysis_de_keys)
+			1. [Sample keys](#ranalysis_de_keys_samples)
+			2. [Size keys](#ranalysis_de_keys_size)
+			3. [Heatmap log2TPM key](#ranalysis_de_keys_hm1)
+			4. [Heatmap z-score log2TPM key](#ranalysis_de_keys_hm2)
 
 # Set software and directory paths <a name="setpaths"></a>
 
@@ -1151,7 +1155,7 @@ chung_wbm_mammal24dpi_immaturefemale_a chung_wbm_mammal24dpi_immaturefemale_b   
 
 ```
 
-### Create TPM table <a name="ranalysis_de_counts_tpm"></a>
+#### Create TPM table <a name="ranalysis_de_counts_tpm"></a>
 
 ```{R, eval = T}
 tpm.list <- counts.list
@@ -1177,9 +1181,9 @@ for(i in 1:length(tpm.list)){
 }
 ```
 
-### Creates keys <a name="ranalysis_de_keys"></a>
+### Create keys <a name="ranalysis_de_keys"></a>
 
-#### Sample key <a name="ranalysis_de_keys_sample"></a>
+#### Sample key <a name="ranalysis_de_keys_samples"></a>
 ```{R,fig.height=2,fig.width=10}
 for(i in 1:length(counts.list)){
   sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
@@ -1268,7 +1272,7 @@ grid.arrange(size.legend)
 ```
 ![Image description](/images/sizekey.png)
 
-#### Heatmap log2TPM legend
+#### Heatmap log2TPM key <a name="ranalysis_de_keys_hm1"></a>
 ```{R,fig.height=2,fig.width=7}
 hmcol1 <- colorRampPalette(c("#FFFFFF","#FDE0D2","#FABAA1","#F69274", "#F16B4E","#EF3D2D","#590A16","#A51E23","#650C16"))(20)
 hmcol2 <- colorRampPalette(c("navyblue","white","firebrick3"))(12)
@@ -1300,7 +1304,7 @@ grid.arrange(sample.legend)
 ```
 ![Image description](/images/hmcolor1key.png)
 
-#### Heatmap z-score log2TPM legend
+#### Heatmap z-score log2TPM key <a name="ranalysis_de_keys_hm2"></a>
 ```{R,fig.height=2,fig.width=7}
 hmcolor2.plot <- ggplot() + 
   geom_raster(aes(x=seq(-3,3,0.5), y=seq(-3,3,0.5), fill = seq(-3,3,0.5)))+
