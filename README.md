@@ -1151,7 +1151,7 @@ chung_wbm_mammal24dpi_immaturefemale_a chung_wbm_mammal24dpi_immaturefemale_b   
 
 ```
 
-### Create TPM table <a name="ranalysis_de_tpm"></a>
+### Create TPM table <a name="ranalysis_de_counts_tpm"></a>
 
 ```{R, eval = T}
 tpm.list <- counts.list
@@ -1177,9 +1177,9 @@ for(i in 1:length(tpm.list)){
 }
 ```
 
-### Create keys and legends
+### Creates keys <a name="ranalysis_de_keys"></a>
 
-#### Sample key
+#### Sample key <a name="ranalysis_de_keys_sample"></a>
 ```{R,fig.height=2,fig.width=10}
 for(i in 1:length(counts.list)){
   sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
@@ -1211,4 +1211,120 @@ for(i in 1:length(counts.list)){
 }
 ```
 
+##### wOo, Darby et al 2012 <a name="ranalysis_de_keys_sample_darby2012"></a>
+![Image description](/images/wOo_darby_2012_samplekey.png)
+
+##### wMel, Darby et al 2014 <a name="ranalysis_de_keys_sample_darby2014"></a>
+![Image description](/images/wMel_darby_2014_samplekey.png)
+
+##### wDi, Luck et al 2014 <a name="ranalysis_de_keys_sample_luck2014"></a>
+![Image description](/images/wDi_luck_2014_samplekey.png)
+
+##### wDi, Luck et al 2015 <a name="ranalysis_de_keys_sample_luck2015"></a>
+![Image description](/images/wDi_luck_2015_samplekey.png)
+
+##### wMel, Gutzwiller et al 2015 <a name="ranalysis_de_keys_sample_gutzwiller2015"></a>
+![Image description](/images/wMel_gutzwiller_2015_samplekey.png)
+
+##### wBm, Grote et al 2017 <a name="ranalysis_de_keys_sample_grote2017"></a>
+![Image description](/images/wBm_grote_2017_samplekey.png)
+
+##### wBm, Chung et al 2019 <a name="ranalysis_de_keys_sample_chung2019"></a>
+![Image description](/images/wBm_chung_2019_samplekey.png)
+
+#### Size key  <a name="ranalysis_de_keys_size"></a>
+```{R,fig.height=2,fig.width=10}
+max_lib_sizes <- c()
+min_lib_sizes <- c()
+for(i in 1:length(counts.list)){
+  max_lib_sizes <- c(max_lib_sizes,max(colSums(counts.list[[i]])))
+  min_lib_sizes <- c(min_lib_sizes,min(colSums(counts.list[[i]])))
+}
+size_limits <- c(1,10^ceiling(log10(max(max_lib_sizes))))
+size_breaks <- lseq(10^floor(log10(min(min_lib_sizes))),10^ceiling(log10(max(max_lib_sizes))),8)
+size.plot <- ggplot()+
+  geom_point(aes(x=seq(1,length(colSums(counts.list[[i]]))), y=colSums(counts.list[[i]]),size=colSums(counts.list[[i]])))+
+  scale_size_continuous(limits=size_limits,breaks=size_breaks ,trans = "log")+
+  guides(size = guide_legend(title = "Reads Mapping to Wolbachia Genes", title.position = "top", nrow = 2))+
+  theme_bw()+
+  theme(legend.position="top",legend.title.align=0.5)
+  
+size.legend <- g_legend(size.plot)
+
+pdf(paste0(OUTPUT.DIR,"/sizekey.pdf"),
+    height=2,
+    width=10)
+grid.arrange(size.legend)
+dev.off()
+
+png(paste0(OUTPUT.DIR,"/sizekey.png"),
+    height=2,
+    width=10,
+    units = "in",res=300)
+grid.arrange(size.legend)
+dev.off()
+
+grid.arrange(size.legend)
+```
 ![Image description](/images/sizekey.png)
+
+#### Heatmap log2TPM legend
+```{R,fig.height=2,fig.width=7}
+hmcol1 <- colorRampPalette(c("#FFFFFF","#FDE0D2","#FABAA1","#F69274", "#F16B4E","#EF3D2D","#590A16","#A51E23","#650C16"))(20)
+hmcol2 <- colorRampPalette(c("navyblue","white","firebrick3"))(12)
+
+hmcolor1.plot <- ggplot() + 
+  geom_raster(aes(x=seq(0,10,0.5), y=seq(0,10,0.5), fill = seq(0,10,0.5)))+
+  scale_fill_gradientn(name = "log2TPM",
+                       colours=hmcol1,
+                       breaks=c(0,5,10))+
+  theme(legend.position="bottom")+
+  guides(fill = guide_colorbar(title.position = "top"))
+
+sample.legend <- g_legend(hmcolor1.plot)
+
+pdf(paste0(OUTPUT.DIR,"/hmcolor1key.pdf"),
+    height=2,
+    width=7)
+grid.arrange(sample.legend)
+dev.off()
+
+png(paste0(OUTPUT.DIR,"/hmcolor1key.png"),
+    height=2,
+    width=7,
+    units = "in",res=300)
+grid.arrange(sample.legend)
+dev.off()
+
+grid.arrange(sample.legend)
+```
+![Image description](/images/hmcolor1key.png)
+
+#### Heatmap z-score log2TPM legend
+```{R,fig.height=2,fig.width=7}
+hmcolor2.plot <- ggplot() + 
+  geom_raster(aes(x=seq(-3,3,0.5), y=seq(-3,3,0.5), fill = seq(-3,3,0.5)))+
+  scale_fill_gradientn(name = "z-score of log2TPM",
+                       colours=hmcol2,
+                       breaks=c(-3,0,3))+
+  theme(legend.position="bottom")+
+  guides(fill = guide_colorbar(title.position = "top"))
+
+heat.legend <- g_legend(hmcolor2.plot)
+
+pdf(paste0(OUTPUT.DIR,"/hmcolor2key.pdf"),
+    height=2,
+    width=7)
+grid.arrange(heat.legend)
+dev.off()
+
+png(paste0(OUTPUT.DIR,"/hmcolor2key.png"),
+    height=2,
+    width=7,
+    units = "in",res=300)
+grid.arrange(heat.legend)
+dev.off()
+
+grid.arrange(heat.legend)
+```
+![Image description](/images/hmcolor2key.png)
