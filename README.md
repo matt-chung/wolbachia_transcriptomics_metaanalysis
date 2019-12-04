@@ -25,6 +25,8 @@
 	8. [Sort BAM files](#bashanalysis_realign_sortbam)
 	9. [Index BAM files](#bashanalysis_indexbam)
 	10. [Quantify Wolbachia genes](#bashanalysis_quant)
+	11. [Assign InterPro descriptions and GO terms for Wolbachia transcripts]
+3. [Transcriptomics meta-analysis](#ranalysis)
 
 # Set software and directory paths <a name="setpaths"></a>
 
@@ -34,11 +36,14 @@ For rerunning analyses, all paths in this section must be set by the user.
 
 ```{bash, eval = F}
 JULIA_DEPOT_PATH=/home/mattchung/.julia
+PYTHON_LIB_PATH=/usr/local/packages/python-3.5/lib
 
 JULIA_BIN_DIR=/usr/local/bin
+PYTHON_BIN_DIR=/usr/local/bin
 
 FADU_BIN_DIR=/home/mattchung/scripts/FADU
 HISAT2_BIN_DIR=/usr/local/packages/hisat2-2.1.0
+INTERPROSCAN_BIN_DIR=/local/aberdeen2rw/julie/Matt_dir/packages/interproscan-5.34-73.0
 SAMTOOLS_BIN_DIR=/usr/local/packages/samtools-1.9/bin
 SEQTK_BIN_DIR=/usr/local/packages/seqtk-1.2/bin
 SRATOOLKIT_BIN_DIR=/usr/local/packages/sratoolkit-2.9.0/bin
@@ -48,9 +53,10 @@ SRATOOLKIT_BIN_DIR=/usr/local/packages/sratoolkit-2.9.0/bin
 
 ```{bash, eval = F}
 INPUTS_DIR=
+SCRIPTS_DIR=/home/mattchung/scripts
 READS_DIR=/local/aberdeen2rw/julie/Matt_dir/wolbachia_metatranscriptome_analysis/
 REFERENCES_DIR=/local/aberdeen2rw/julie/Matt_dir/wolbachia_metatranscriptome_analysis/references/
-WORKING_DIR=
+WORKING_DIR=/local/projects-t3/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/
 ```
 
 # Download, align, and quantify Wolbachia sequencing data <a name="bashanalysis"></a>
@@ -217,7 +223,7 @@ PREFIX=wDi_luck_2015
 ```{bash, eval = F}
 while read SRR
 do
-	echo ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -U "$READS_DIR"/"$PREFIX"/$SRR"_1.fastq | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
+	echo ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -U "$READS_DIR"/"$PREFIX"/"$SRR"_1.fastq | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
 done < "$SRR_ID_LIST"
 ```
 
@@ -297,7 +303,7 @@ BAM_DIR="$READS_DIR"/wBm_grote_2017/bam
 SRR_ID_LIST="$INPUTS_DIR"/wBm_grote_2017_srr.list
 CONTIG=NC_006833.1
 
-## wBm Chung 2019BAM_DIR=="$READS_DIR"/wBm_chung_2019/bam
+## wBm Chung 2019
 BAM_DIR="$READS_DIR"/wBm_chung_2019/bam
 SRR_ID_LIST="$INPUTS_DIR"/wBm_chung_2019_srr.list
 CONTIG=NC_006833.1
@@ -334,7 +340,7 @@ OUTPUT_DIR="$READS_DIR"/wDi_luck_2015
 ```{bash, eval = F}
 while read SRR
 do
-	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_1.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_1.subset.fastq | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
+	echo -e ""$SEQTK_BIN_DIR"/seqtk subseq "$OUTPUT_DIR"/"$SRR"_1.fastq "$OUTPUT_DIR"/"$SRR".target_reads.list > "$OUTPUT_DIR"/"$SRR"_1.subset.fastq" | qsub -P jdhotopp-lab -l mem_free=2G -N seqtk -wd "$OUTPUT_DIR"
 done < "$SRR_ID_LIST"
 ```
 
@@ -404,7 +410,7 @@ PREFIX=wDi_luck_2015
 ```{bash, eval = F}
 while read SRR
 do
-	echo -e ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -U "$READS_DIR"/"$PREFIX"/$SRR"_1.subset.fastq --no-spliced-alignment -X 1000 | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
+	echo -e ""$HISAT2_BIN_DIR"/hisat2 -p "$THREADS" -x "$REF_FNA" "$STRANDEDNESS" -U "$READS_DIR"/"$PREFIX"/"$SRR"_1.subset.fastq --no-spliced-alignment -X 1000 | "$SAMTOOLS_BIN_DIR"/samtools view -bhSo "$OUTPUT_DIR"/"$SRR".bam -" | qsub -q threaded.q  -pe thread "$THREADS" -P jdhotopp-lab -l mem_free=20G -N hisat2 -wd "$OUTPUT_DIR"
 done < "$SRR_ID_LIST"
 ```
 
@@ -533,50 +539,349 @@ ATTR_TYPE="ID"
 BAM_DIR="$READS_DIR"/wOo_darby_2012/bam
 GFF3="$REFERENCES_DIR"/wOo.gff
 STRANDED="no"
-OUTPUT_DIR="$READS_DIR"/wOo_darby_2012/fadu
 
 ## wMel Darby 2014
 BAM_DIR="$READS_DIR"/wMel_darby_2014/bam
 GFF3="$REFERENCES_DIR"/wMel.gff
 STRANDED="yes"
-OUTPUT_DIR="$READS_DIR"/wMel_darby_2014/fadu
 
 ## wDi Luck 2014
 BAM_DIR="$READS_DIR"/wDi_luck_2014/bam
 GFF3="$REFERENCES_DIR"/wDi.gff
 STRANDED="no"
-OUTPUT_DIR="$READS_DIR"/wDi_luck_2014/fadu
 
 ## wDi Luck 2015
 BAM_DIR="$READS_DIR"/wDi_luck_2015/bam
 GFF3="$REFERENCES_DIR"/wDi.gff
 STRANDED="no"
-OUTPUT_DIR="$READS_DIR"/wDi_luck_2015/fadu
 
 ## wMel Gutzwiller 2015
 BAM_DIR="$READS_DIR"/wMel_gutzwiller_2015/bam
 GFF3="$REFERENCES_DIR"/wMel.gff
 STRANDED="reverse"
-OUTPUT_DIR="$READS_DIR"/wMel_gutzwiller_2015/fadu
 
 ## wBm Grote 2017
 BAM_DIR="$READS_DIR"/wBm_grote_2017/bam
 GFF3="$REFERENCES_DIR"/wBm.gff
 STRANDED="no"
-OUTPUT_DIR="$READS_DIR"/wBm_grote_2017/fadu
 
 ## wBm Chung 2019
 BAM_DIR="$READS_DIR"/wBm_chung_2019/bam
 GFF3="$REFERENCES_DIR"/wBm.gff
 STRANDED="reverse"
-OUTPUT_DIR="$READS_DIR"/wBm_chung_2019/fadu
 ```
 
 #### Commands:
 ```{bash, eval = F}
+mkdir -p "$WORKING_DIR"/fadu
 for BAM in $(find "$BAM_DIR" -name "*sortedbyposition.bam")
 do
 
-echo -e "export JULIA_DEPOT_PATH="$JULIA_DEPOT_PATH"'\n"$JULIA_BIN_DIR"/julia "$FADU_BIN_DIR"/fadu.jl -g "$GFF3" -b "$BAM" -o "$OUTPUT_DIR" -s "$STRANDED" -f "$FEAT_TYPE" -a "$ATTR_TYPE"" | qsub -P jdhotopp-lab -l mem_free=5G -N fadu -wd "$OUTPUT_DIR"
+	echo -e "export JULIA_DEPOT_PATH="$JULIA_DEPOT_PATH"\n"$JULIA_BIN_DIR"/julia "$FADU_BIN_DIR"/fadu.jl -g "$GFF3" -b "$BAM" -o "$WORKING_DIR"/fadu -s "$STRANDED" -f "$FEAT_TYPE" -a "$ATTR_TYPE"" | qsub -P jdhotopp-lab -l mem_free=5G -N fadu -wd "$WORKING_DIR"/fadu
+
 done
 ```
+
+## Create nucleotide coding sequence fasta files (2019-06-07) <a name="bashanalysis_createcdsfasta"></a>
+
+#### Input Sets:
+```{bash, eval = F}
+FEAT_TYPE="CDS"
+ATTR_TYPE="ID"
+
+## wBm
+FNA="$REFERENCES_DIR"/wBm.fna
+GFF3="$REFERENCES_DIR"/wBm.gff
+
+## wDi
+FNA="$REFERENCES_DIR"/wDi.fna
+GFF3="$REFERENCES_DIR"/wDi.gff
+
+## wMel
+FNA="$REFERENCES_DIR"/wMel.fna
+GFF3="$REFERENCES_DIR"/wMel.gff
+
+## wOo
+FNA="$REFERENCES_DIR"/wOo.fna
+GFF3="$REFERENCES_DIR"/wOo.gff
+```
+
+#### Commands:
+```{bash, eval = F}
+"$SCRIPTS_DIR"/createnuccdsfasta.sh -n "$FNA" -g "$GFF3" -f "$FEAT_TYPE" -i "$ATTR_TYPE" > "$(echo -e "$FNA" | sed "s/[.]fna$/.cds.fna/g")"
+```
+
+## Identify InterPro descriptions and GO terms for Wolbachia transcripts (2019-06-07) <a name="bashanalysis_interproscan"></a>
+
+#### Input Sets:
+```{bash, eval = F}
+SEQ_TYPE="n"
+THREADS=4
+
+## wBm
+CDS_FNA="$REFERENCES_DIR"/wBm.cds.fna
+GFF3="$REFERENCES_DIR"/wBm.gff
+
+## wDi
+CDS_FNA="$REFERENCES_DIR"/wDi.cds.fna
+GFF3="$REFERENCES_DIR"/wDi.gff
+
+## wMel
+CDS_FNA="$REFERENCES_DIR"/wMel.cds.fna
+GFF3="$REFERENCES_DIR"/wMel.gff
+
+## wOo
+CDS_FNA="$REFERENCES_DIR"/wOo.cds.fna
+GFF3="$REFERENCES_DIR"/wOo.gff
+```
+
+#### Commands:
+```{bash, eval = F}
+echo -e "export LD_LIBRARY_PATH="$PYTHON_LIB_PATH":"$LD_LIBRARY_PATH"\n"$INTERPROSCAN_BIN_DIR"/interproscan.sh -i "$CDS_FNA" -f tsv -o "$CDS_FNA".interproscan.tsv --seqtype "$SEQ_TYPE" --goterms --iprlookup" | qsub -P jdhotopp-lab -q threaded.q  -pe thread "$THREADS" -l mem_free=20G -N interproscan -wd "$(dirname "$CDS_FNA")"
+```
+
+
+## Convert InterProScan output to geneinfo file (2019-06-07) <a name="bashanalysis_iprscan2geneinfo"></a>
+
+
+# Transcriptomics meta-analysis <a name="ranalysis"></a>
+
+## Load R packages and view sessionInfo <a name="ranalysis_sessioninfo"></a>
+```{R, eval = T}
+library(cowplot)
+library(edgeR)
+library(emdbook)
+library(FactoMineR)
+library(dendextend)
+library(ggdendro)
+library(ggplot2)
+library(gplots)
+library(gridExtra)
+library(gtools)
+library(pvclust)
+library(reshape2)
+library(vegan)
+library(WGCNA)
+
+sessionInfo()
+```
+
+```{R, eval = F}
+R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 7 x64 (build 7601) Service Pack 1
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United States.1252  LC_CTYPE=English_United States.1252    LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                           LC_TIME=English_United States.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] WGCNA_1.66            fastcluster_1.1.25    dynamicTreeCut_1.63-1 vegan_2.5-4           lattice_0.20-35       permute_0.9-4        
+ [7] reshape2_1.4.3        pvclust_2.0-0         gtools_3.8.1          gridExtra_2.3         gplots_3.0.1.1        ggdendro_0.1-20      
+[13] dendextend_1.9.0      FactoMineR_1.41       emdbook_1.3.11        edgeR_3.24.3          limma_3.38.3          cowplot_0.9.4        
+[19] ggplot2_3.2.1        
+
+loaded via a namespace (and not attached):
+  [1] colorspace_1.4-1      class_7.3-14          modeltools_0.2-22     mclust_5.4.3          htmlTable_1.13.1      base64enc_0.1-3      
+  [7] rstudioapi_0.10       flexmix_2.3-15        bit64_0.9-7           AnnotationDbi_1.44.0  mvtnorm_1.0-10        codetools_0.2-15     
+ [13] splines_3.5.1         leaps_3.0             doParallel_1.0.14     impute_1.56.0         robustbase_0.93-4     knitr_1.22           
+ [19] Formula_1.2-3         cluster_2.0.7-1       kernlab_0.9-27        GO.db_3.7.0           rrcov_1.4-7           compiler_3.5.1       
+ [25] backports_1.1.3       assertthat_0.2.1      Matrix_1.2-14         lazyeval_0.2.2        acepack_1.4.1         htmltools_0.3.6      
+ [31] tools_3.5.1           coda_0.19-2           gtable_0.3.0          glue_1.3.1            dplyr_0.8.3           Rcpp_1.0.1           
+ [37] bbmle_1.0.20          Biobase_2.42.0        trimcluster_0.1-2.1   gdata_2.18.0          preprocessCore_1.44.0 nlme_3.1-137         
+ [43] iterators_1.0.10      fpc_2.1-11.1          xfun_0.6              stringr_1.4.0         DEoptimR_1.0-8        MASS_7.3-50          
+ [49] scales_1.0.0          parallel_3.5.1        RColorBrewer_1.1-2    yaml_2.2.0            memoise_1.1.0         rpart_4.1-13         
+ [55] latticeExtra_0.6-28   stringi_1.4.3         RSQLite_2.1.1         S4Vectors_0.20.1      pcaPP_1.9-73          foreach_1.4.4        
+ [61] checkmate_1.9.1       caTools_1.17.1.2      BiocGenerics_0.28.0   rlang_0.4.0           pkgconfig_2.0.2       prabclus_2.2-7       
+ [67] bitops_1.0-6          matrixStats_0.54.0    purrr_0.3.2           htmlwidgets_1.3       bit_1.1-14            tidyselect_0.2.5     
+ [73] robust_0.4-18         plyr_1.8.4            magrittr_1.5          R6_2.4.0              IRanges_2.16.0        Hmisc_4.2-0          
+ [79] fit.models_0.5-14     DBI_1.0.0             pillar_1.3.1          whisker_0.3-2         foreign_0.8-70        withr_2.1.2          
+ [85] mgcv_1.8-24           survival_2.42-3       scatterplot3d_0.3-41  nnet_7.3-12           tibble_2.1.1          crayon_1.3.4         
+ [91] KernSmooth_2.23-15    viridis_0.5.1         locfit_1.5-9.1        grid_3.5.1            data.table_1.12.2     blob_1.1.1           
+ [97] digest_0.6.18         diptest_0.75-7        flashClust_1.01-2     numDeriv_2016.8-1     stats4_3.5.1          munsell_0.5.0        
+[103] viridisLite_0.3.0
+```
+
+## Load R functions <a name="ranalysis_loadfunctions"></a>
+```{R, eval = T}
+g_legend<-function(a.gplot){ 
+  tmp <- ggplot_gtable(ggplot_build(a.gplot)) 
+  leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box") 
+  legend <- tmp$grobs[[leg]] 
+  return(legend)
+} 
+
+get_dendro_structure <- function(result){
+  structure <- hang.dendrogram(as.dendrogram(result$hclust))
+  structure <- capture.output(str(structure))
+  structure <- structure[grepl("leaf", structure)]
+  structure <- as.numeric(as.character(substr(structure, regexpr("h=", structure ) + 3, regexpr("  )", structure))))
+  return(structure)
+}
+get_dendro_data <- function(result){
+  dendro.data <- dendro_data(result$hclust)
+  dendro.data <- dendro.data$segments[which(dendro.data$segments$y == dendro.data$segments$yend),]
+  for(i in 1:nrow(dendro.data)){
+    dendro.data$minx[i] <- min(c(dendro.data$x[i], dendro.data$xend[i]))
+  }
+  dendro.data <- dendro.data[order(as.numeric(as.character(dendro.data$y)), as.numeric(as.character(dendro.data$minx))),]
+  return(dendro.data)
+}
+get_dendro_bootstraps <- function(dendro_data){
+  bootstrap.positions <- as.data.frame(matrix(nrow = length(dendro_data$y[duplicated(dendro_data$y)]),
+                                              ncol = 2))
+  for(i in 1:length(dendro_data$y[duplicated(dendro_data$y)])){
+    dendro_data.subset <- dendro_data[which(dendro_data$y == dendro_data$y[duplicated(dendro_data$y)][i]),]
+    bootstrap.positions[i,1] <- unique(dendro_data.subset$x)
+    bootstrap.positions[i,2] <- unique(dendro_data.subset$y)
+  }
+  return(bootstrap.positions)
+}
+get_heatmap_separators <- function(vector){
+  sep <- c()
+  for(i in 2:length(unique(vector))){
+    sep[length(sep) + 1] <- min(which(vector == unique(vector)[i])) - 1
+  }
+  return(sep)
+}
+formalize_study_names <- function(vector){
+  vector <- gsub("wOo_darby_2012", "Darby et al., 2012",vector)
+  vector <- gsub("wMel_darby_2014", "Darby et al., 2014",vector)
+  vector <- gsub("wDi_luck_2014", "Luck et al., 2014",vector)
+  vector <- gsub("wDi_luck_2015", "Luck et al., 2015",vector)
+  vector <- gsub("wMel_gutzwiller_2015", "Gutzwiller et al., 2015",vector)
+  vector <- gsub("wBm_grote_2017", "Grote et al., 2017",vector)
+  vector <- gsub("wBm_chung_2019", "Chung et al., 2019",vector)
+  vector <- factor(vector,levels=c("Darby et al., 2012",
+                                   "Darby et al., 2014",
+                                   "Luck et al., 2014",
+                                   "Luck et al., 2015",
+                                   "Gutzwiller et al., 2015",
+                                   "Grote et al., 2017",
+                                   "Chung et al., 2019"))
+  return(vector)
+}
+find_soft_power <- function(sft){
+  df <- as.data.frame(cbind(sft$fitIndices[,1], -sign(sft$fitIndices[,3])*sft$fitIndices[,2]))
+  y <- -sign(sft$fitIndices[,3])*sft$fitIndices[,2]
+  dy <- diff(y) 
+  softpower <- which(abs(diff(y)) < 0.05)[1]
+  return(softpower)
+}
+eigengene_invert_id <- function(tpm.de.wgcna, mergedColors, mergedMEs){
+  tpm.de.wgcna$invert <- T
+  tpm.de.wgcna$module <- mergedColors
+  for(i in 1:nrow(tpm.de.wgcna)){
+    if(cor(t(tpm.de.wgcna[i,1:(ncol(tpm.de.wgcna) - 2)]), mergedMEs[,which(colnames(mergedMEs) == paste0("ME",tpm.de.wgcna$module[i]))], method = "pearson") > 0){
+      tpm.de.wgcna$invert[i] <- F
+    }
+  }
+  return(tpm.de.wgcna)
+}
+wgcna_heatmap_reorder <- function(tpm.de.wgcna){
+  clusters <- as.data.frame(table(tpm.de.wgcna$module))
+  clusters <- clusters[order(-clusters[,2]),1]
+  
+  tpm.de.wgcna.reordered <- as.data.frame(matrix(nrow = 0,
+                                                 ncol = ncol(tpm.de.wgcna)))
+  for(i in 1:length(clusters)){
+    tpm.de.wgcna.reordered <- as.data.frame(rbind(tpm.de.wgcna.reordered,
+                                                  tpm.de.wgcna[tpm.de.wgcna$module == clusters[i] & tpm.de.wgcna$invert == F,],
+                                                  tpm.de.wgcna[tpm.de.wgcna$module == clusters[i] & tpm.de.wgcna$invert == T,]))
+  }
+  return(tpm.de.wgcna.reordered)
+}
+functionaltermenrichment <- function(genes, geneinfo){
+  for(i in 1:ncol(geneinfo)){geneinfo[,i] <- as.character(geneinfo[,i])}
+  geneinfo$interpro_description[which(is.na(geneinfo$interpro_description))] <- "No InterPro entry"
+  geneinfo$go_biologicalprocess[which(is.na(geneinfo$go_biologicalprocess))] <- "No GO terms for biological process"
+  geneinfo$go_cellularcomponent[which(is.na(geneinfo$go_cellularcomponent))] <- "No GO terms for cellular component"
+  geneinfo$go_molecularfunction[which(is.na(geneinfo$go_molecularfunction))] <- "No GO terms for molecular function"
+  
+  functionalterms.list <- list(ipr=as.data.frame(table(unlist(strsplit(paste(geneinfo$interpro_description, collapse = "|"),  split = "[|]")))),
+                               gobio=as.data.frame(table(unlist(strsplit(paste(geneinfo$go_biologicalprocess, collapse = "|"),  split = "[|]")))),
+                               gocell=as.data.frame(table(unlist(strsplit(paste(geneinfo$go_cellularcomponent, collapse = "|"),  split = "[|]")))),
+                               gomol=as.data.frame(table(unlist(strsplit(paste(geneinfo$go_molecularfunction, collapse = "|"),  split = "[|]")))))
+  
+  geneinfo.subset <- geneinfo[geneinfo$gene %in% genes,]
+  term <- c()
+  clusteroccurences <- c()
+  genomeoccurences <- c()
+  pvalue <- c()
+  correctedpvalue <- c()
+  oddsratio <- c()
+
+  functionalterms.list.subset <- list(ipr=as.data.frame(table(unlist(strsplit(paste(geneinfo.subset$interpro_description, collapse = "|"),  split = "[|]")))),
+                                      gobio=as.data.frame(table(unlist(strsplit(paste(geneinfo.subset$go_biologicalprocess, collapse = "|"),  split = "[|]")))),
+                                      gocell=as.data.frame(table(unlist(strsplit(paste(geneinfo.subset$go_cellularcomponent, collapse = "|"),  split = "[|]")))),
+                                      gomol=as.data.frame(table(unlist(strsplit(paste(geneinfo.subset$go_molecularfunction, collapse = "|"),  split = "[|]")))))
+  
+  for(i in 1:length(functionalterms.list)){
+    for(j in 1:nrow(functionalterms.list[[i]])){
+      freq.all <- functionalterms.list[[i]][j,2]
+      freq.subset <- ifelse(functionalterms.list[[i]][j,1] %in% functionalterms.list.subset[[i]][,1],
+                            functionalterms.list.subset[[i]][functionalterms.list.subset[[i]][,1] == as.character(functionalterms.list[[i]][j,1]),2],
+                            0)
+      genes.all <- nrow(geneinfo)
+      genes.subset <- nrow(geneinfo.subset)
+
+      fisherexact.matrix <- matrix(c(freq.subset, freq.all - freq.subset,
+                                     genes.subset - freq.subset, genes.all - genes.subset - freq.all + freq.subset),
+                                   nrow = 2,
+                                   ncol = 2)
+      fisher.test <- fisher.test(fisherexact.matrix)
+      
+      term[length(term) + 1] <- as.character(functionalterms.list[[i]][j,1])
+      clusteroccurences[length(clusteroccurences) + 1] <- as.numeric(as.character(freq.subset))
+      genomeoccurences[length(genomeoccurences) + 1] <- as.numeric(as.character(freq.all))
+      pvalue[length(pvalue) + 1] <- as.numeric(as.character(fisher.test$p.value))
+      correctedpvalue[length(correctedpvalue) + 1] <- p.adjust(as.numeric(as.character(fisher.test$p.value)), method = "fdr", n = nrow(functionalterms.list[[i]]))
+      oddsratio[length(oddsratio) + 1] <- as.numeric(as.character(fisher.test$estimate))
+    }
+  }
+  
+  terms.df <- as.data.frame(cbind(term,
+                                  clusteroccurences,
+                                  genomeoccurences,
+                                  pvalue,
+                                  correctedpvalue,
+                                  oddsratio))
+  terms.df <- terms.df[order(as.numeric(as.character(terms.df$pvalue))),]
+  return(terms.df)
+}
+```
+
+## Set R inputs <a name="ranalysis_setinputs"></a>
+
+R inputs from bash should be:
+
+RAW_COUNTS.DIR = "$WORKING_DIR"/fadu
+GFF3MAP.DIR = "$REFERENCES_DIR"
+
+```{R}
+RAW_COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/fadu/"
+GFF3MAP.DIR <- 
+
+
+maps.dir <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/maps/"
+sample_map.path <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
+geneinfo.dir <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/interproscan"
+gff3map.dir <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/references"
+output.dir="Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
+
+
+srr2wolbachiamappedreads.path <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/srr_wolbachiamappedreads.tsv"
+```
+
+## Create counts and TPM tables <a name="ranalysis_counts"></a>
+
+### Combine count files into a single table for each study <a name="ranalysis_counts_maketable"></a>
+
+### Remove non-protein-coding genes from counts table <a name="ranalysis_counts_removenonproteincoding"></a>
+
+### Remove non-protein-coding genes from counts table <a name="ranalysis_counts_removenonproteincoding"></a>
