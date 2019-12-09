@@ -770,15 +770,15 @@ COUNTS="$WORKING_DIR"/wBm_chung_2019_counts.tsv
 
 ## wDi
 INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wDi.cds.fna.interproscan.tsv
-COUNTS="$REFERENCES_DIR"/wDi_luck_2015_counts.tsv
+COUNTS="$WORKING_DIR"/wDi_luck_2015_counts.tsv
 
 ## wMel
 INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wMel.cds.fna.interproscan.tsv
-COUNTS="$REFERENCES_DIR"/wMel_darby_2014_counts.tsv
+COUNTS="$WORKING_DIR"/wMel_darby_2014_counts.tsv
 
 ## wOo
 INTERPROSCAN_OUTPUT="$REFERENCES_DIR"/wOo.cds.fna.interproscan.tsv
-COUNTS="$REFERENCES_DIR"/wOo_darby_2012_counts.tsv
+COUNTS="$WORKING_DIR"/wOo_darby_2012_counts.tsv
 ```
 
 #### Commands:
@@ -801,6 +801,7 @@ OUTPUT.DIR = "$WORKING_DIR"
 ```{R}
 SAMPLE_MAP.PATH  <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/study_sample_map.tsv.txt"
 COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
+GENEINFO.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/references"
 GFF3MAP.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/references"
 RAW_COUNTS.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/fadu"
 OUTPUT.DIR <- "Z:/EBMAL/mchung_dir/wolbachia_metatranscriptome_analysis/"
@@ -1424,4 +1425,1493 @@ for(i in 1:length(tpm.list)){
 ![Image description](/images/wBm_grote_2017_rarefaction.png)
 
 ##### wBm, Chung et al 2019
-![Image description](/images/wBm_chung_2019_rarefaction.png | width=100)
+![Image description](/images/wBm_chung_2019_rarefaction.png)
+
+### Exclude samples and/or studies from differential expression analyses due to inadequate sequencing depth <a name="ranalysis_de_exclude"></a>
+
+All samples from Luck et al 2014 were excluded due to having inadequate replicates and sequencing depth for differential expression analyses. All samples with <2000 gene counts from Luck et al 2015 are excluded due to have inadequate sequencing depth (refer to saturation curves).
+
+```{R}
+counts.kept.list <- counts.list
+tpm.kept.list <- tpm.list
+
+counts.edgeR.list <- counts.list
+tpm.edgeR.list <- tpm.list
+
+counts.edgeR.list[[which(names(counts.edgeR.list) == "wDi_luck_2014")]] <- NULL
+tpm.edgeR.list[[which(names(tpm.edgeR.list) == "wDi_luck_2014")]] <- NULL
+
+counts.kept.list[[which(names(counts.kept.list) == "wDi_luck_2015")]] <- counts.kept.list[[which(names(counts.kept.list) == "wDi_luck_2015")]][colSums(counts.kept.list[[which(names(counts.kept.list) == "wDi_luck_2015")]]) > 2000]
+tpm.kept.list[[which(names(tpm.kept.list) == "wDi_luck_2015")]] <- tpm.kept.list[[which(names(tpm.kept.list) == "wDi_luck_2015")]][,colnames(tpm.kept.list[[which(names(tpm.kept.list) == "wDi_luck_2015")]]) %in% colnames(counts.kept.list[[which(names(counts.kept.list) == "wDi_luck_2015")]])]
+
+counts.edgeR.list[[which(names(counts.edgeR.list) == "wDi_luck_2015")]] <- counts.edgeR.list[[which(names(counts.edgeR.list) == "wDi_luck_2015")]][colSums(counts.edgeR.list[[which(names(counts.edgeR.list) == "wDi_luck_2015")]]) > 2000]
+tpm.edgeR.list[[which(names(tpm.edgeR.list) == "wDi_luck_2015")]] <- tpm.edgeR.list[[which(names(tpm.edgeR.list) == "wDi_luck_2015")]][,colnames(tpm.edgeR.list[[which(names(tpm.edgeR.list) == "wDi_luck_2015")]]) %in% colnames(counts.edgeR.list[[which(names(counts.edgeR.list) == "wDi_luck_2015")]])]
+
+qlf.list <- counts.edgeR.list
+```
+
+### Identify the number of genes in each study that meets the minimum CPM threshold <a name="ranalysis_de_exclude"></a>
+
+```{R}
+for(i in 1:length(counts.kept.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- groups[groups[,1] %in% colnames(counts.kept.list[[i]]),]
+  groups <- unique(groups)
+
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+
+  cpm.cutoff <- 5/min(colSums(counts.kept.list[[i]])) * 1000000
+
+  y <- DGEList(counts = counts.kept.list[[i]], group = groups[,2])
+  y <- calcNormFactors(y)
+  keep <- rowSums(cpm(y) >= cpm.cutoff) >= min(table(groups[,2]))
+
+  keep.df <- as.data.frame(table(keep))
+  print(paste0(names(counts.kept.list)[i],": ",keep.df[keep.df[,1] == F,2]," genes excluded using edgeR filter, ",keep.df[keep.df[,1] == T,2], " genes kept" ))
+
+  counts.kept.list[[which(names(counts.kept.list) == names(counts.list)[i])]] <- counts.kept.list[[which(names(counts.kept.list) == names(counts.list)[i])]][keep,]
+  tpm.kept.list[[which(names(tpm.kept.list) == names(tpm.list)[i])]] <- tpm.kept.list[[which(names(tpm.kept.list) == names(tpm.list)[i])]][keep,]
+}
+```
+
+```{R, eval = F}
+[1] "wOo_darby_2012: 91 genes excluded using edgeR filter, 560 genes kept"
+[1] "wMel_darby_2014: 219 genes excluded using edgeR filter, 867 genes kept"
+[1] "wDi_luck_2014: 853 genes excluded using edgeR filter, 18 genes kept"
+[1] "wDi_luck_2015: 546 genes excluded using edgeR filter, 325 genes kept"
+[1] "wMel_gutzwiller_2015: 305 genes excluded using edgeR filter, 781 genes kept"
+[1] "wBm_grote_2017: 414 genes excluded using edgeR filter, 425 genes kept"
+[1] "wBm_chung_2019: 206 genes excluded using edgeR filter, 548 genes kept"
+```
+
+### Identify differentially expressed genes (FDR < 0.05) in each study <a name="ranalysis_de_de"></a>
+
+```{R}
+FDRcutoff <- 0.05
+
+for(i in 1:length(counts.edgeR.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(counts.edgeR.list)[i] & sample_map$sample_identifier %in% colnames(counts.edgeR.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+
+  cpm.cutoff <- 5/min(colSums(counts.edgeR.list[[i]])) * 1000000
+
+  y <- DGEList(counts = counts.edgeR.list[[i]], group = groups[,2])
+  y <- calcNormFactors(y)
+  keep <- rowSums(cpm(y) >= cpm.cutoff) >= min(table(groups[,2]))
+
+  y <- y[keep, , keep.lib.sizes = F]
+  design <- model.matrix(~groups[,2])
+  y <- estimateDisp(y , design)
+  fit <- glmQLFit(y, design)
+  qlf <- glmQLFTest(fit, coef = 2:ncol(fit))
+
+  FDR <- as.data.frame(p.adjust(qlf$table$PValue, method="BH"))
+  rownames(FDR) <- rownames(qlf$table)
+  FDR.genes <- rownames(FDR[FDR[,1] < FDRcutoff, , drop = F])
+  print(paste0(names(counts.edgeR.list)[i],": ",length(FDR.genes)," DE genes" ))
+  
+  qlf.list[[i]] <- as.data.frame(qlf$table)
+  counts.edgeR.list[[i]] <- counts.edgeR.list[[i]][rownames(counts.edgeR.list[[i]]) %in% FDR.genes,]
+  tpm.edgeR.list[[i]] <- tpm.edgeR.list[[i]][rownames(tpm.edgeR.list[[i]]) %in% FDR.genes,]
+  
+  write.table(tpm.edgeR.list[[i]],
+            paste0(OUTPUT.DIR,"/",names(tpm.edgeR.list)[i],"_de_tpm.tsv"),
+            row.names = T,
+            col.names = T,
+            quote = F,
+            sep = "\t")
+}
+```
+
+```{R, eval = F}
+[1] "wOo_darby_2012: 0 DE genes"
+[1] "wMel_darby_2014: 120 DE genes"
+[1] "wDi_luck_2015: 36 DE genes"
+[1] "wMel_gutzwiller_2015: 473 DE genes"
+[1] "wBm_grote_2017: 94 DE genes"
+[1] "wBm_chung_2019: 373 DE genes"
+```
+
+### Conduct principal component analyses <a name="ranalysis_de_pca"></a>
+#### All genes <a name="ranalysis_de_pca_all"></a>
+
+```{R, fig.height=5,fig.width=5}
+for(i in 1:length(tpm.list)){ 
+	sample_map.subset <- sample_map[sample_map$study == names(counts.list)[i] & sample_map$sample_identifier %in% colnames(counts.list[[i]]),]
+
+	groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+	                            as.character(sample_map.subset$sample_group),
+	                            as.character(sample_map.subset$color)))
+	groups <- unique(groups)
+
+	groups[,1] <- factor(groups[,1],levels=groups[,1])
+	groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+	groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+
+	pca.df <- t(scale(t(log2(tpm.list[[i]] + 1))))
+	pca.df[is.na(pca.df)] <- 0
+	pca.df <- pca.df[rowSums(pca.df == 0) != ncol(pca.df),]
+	pca <- PCA(as.data.frame(scale(t(pca.df))), graph = FALSE, ncp = ncol(counts.list[[i]]) - 1)
+
+	pca.plot <- ggplot()+
+	  geom_point(aes(x=pca$ind$coord[,1], y=pca$ind$coord[,2], color = groups[,2],size = colSums(counts.list[[i]])))+
+	  labs(col = "Samples", size = "Reads Mapped\nto Features", 
+	       x = paste0("PC1 (", round(pca$eig[1,2],1), "%)"), 
+	       y = paste0("PC2 (", round(pca$eig[2,2],1), "%)"))+
+	  guides(color = F,size = F)+
+	  # guides(colour = guide_legend(ncol = 2))+
+	  scale_color_manual(values = levels(groups[,3]))+
+	  scale_size_continuous(limits=size_limits,breaks=size_breaks,trans = "log")+
+	  theme_bw()
+
+	pdf(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_pca_allgenes.pdf"),
+	  height=5,
+	  width=5)
+	print(pca.plot)
+	dev.off()
+	
+	png(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_pca_allgenes.png"),
+	  height=5,
+	  width=5,
+	  units = "in",res=300)
+	print(pca.plot)
+	dev.off()
+
+	print(pca.plot)
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_pca_allgenes.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_pca_allgenes.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_pca_allgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_pca_allgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_pca_allgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_pca_allgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_pca_allgenes.png)
+
+#### Kept genes <a name="ranalysis_de_pca_kept"></a>
+
+```{R, fig.height=5,fig.width=5}
+for(i in 1:length(tpm.kept.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.kept.list)[i] & sample_map$sample_identifier %in% colnames(tpm.kept.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  if(nrow(tpm.kept.list[[i]]) > 0){
+    pca.df <- t(scale(t(log2(tpm.kept.list[[i]] + 1))))
+    pca.df <- pca.df[rowSums(pca.df == 0) != ncol(pca.df),]
+    pca <- PCA(as.data.frame(scale(t(pca.df))), graph = FALSE, ncp = ncol(tpm.kept.list[[i]]) - 1)
+    
+    pca.plot <- ggplot()+
+      geom_point(aes(x=pca$ind$coord[,1], y=pca$ind$coord[,2], color = groups[,2],size = colSums(counts.kept.list[[i]])))+
+      labs(col = "Samples", size = "Reads Mapped\nto Features", 
+           x = paste0("PC1 (", round(pca$eig[1,2],1), "%)"), 
+           y = paste0("PC2 (", round(pca$eig[2,2],1), "%)"))+
+      guides(color = F,size = F)+
+      # guides(colour = guide_legend(ncol = 2))+
+      scale_color_manual(values = levels(groups[,3]))+
+      scale_size_continuous(limits=size_limits,breaks=size_breaks,trans = "log")+
+      theme_bw()
+    
+    pdf(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_pca_keptgenes.pdf"),
+          height=5,
+          width=5)
+      print(pca.plot)
+    dev.off()
+      
+    png(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_pca_keptgenes.png"),
+  	    height=5,
+  	    width=5,
+  	    units = "in",res=300)
+  	  print(pca.plot)
+  	dev.off()
+    
+    print(pca.plot)
+  }
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_pca_keptgenes.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_pca_keptgenes.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_pca_keptgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_pca_keptgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_pca_keptgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_pca_keptgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_pca_keptgenes.png)
+
+### Differentially expressed genes <a name="ranalysis_de_pca_de"></a>
+
+```{R, fig.height=5,fig.width=5}
+for(i in 1:length(tpm.edgeR.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.edgeR.list)[i]& sample_map$sample_identifier %in% colnames(tpm.edgeR.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  if(nrow(tpm.edgeR.list[[i]]) > 0){
+    pca.df <- t(scale(t(log2(tpm.edgeR.list[[i]] + 1))))
+    pca.df <- pca.df[rowSums(pca.df == 0) != ncol(pca.df),]
+    pca <- PCA(as.data.frame(scale(t(pca.df))), graph = FALSE, ncp = ncol(tpm.edgeR.list[[i]]) - 1)
+    
+    pca.plot <- ggplot()+
+      geom_point(aes(x=pca$ind$coord[,1], y=pca$ind$coord[,2], color = groups[,2],size = colSums(counts.edgeR.list[[i]])))+
+      labs(col = "Samples", size = "Reads Mapped\nto Features", 
+           x = paste0("PC1 (", round(pca$eig[1,2],1), "%)"), 
+           y = paste0("PC2 (", round(pca$eig[2,2],1), "%)"))+
+      guides(color = F,size = F)+
+      # guides(colour = guide_legend(ncol = 2))+
+      scale_color_manual(values = levels(groups[,3]))+
+      scale_size_continuous(limits=size_limits,breaks=size_breaks,trans = "log")+
+      theme_bw()
+    
+    pdf(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_pca_degenes.pdf"),
+        height=5,
+        width=5)
+      print(pca.plot)
+    dev.off()
+    
+    png(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_pca_degenes.png"),
+        height=5,
+        width=5,
+        units = "in",res=300)
+      print(pca.plot)
+    dev.off()
+    
+    print(pca.plot)
+  }
+}
+```
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_pca_degenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_pca_degenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_pca_degenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_pca_degenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_pca_degenes.png)
+
+### Conduct hierarchical clustering analyses <a name="ranalysis_de_hc"></a>
+#### All genes <a name="ranalysis_de_hc_all"></a>
+
+```{R, fig.height=8, fig.width=11}
+for(i in 1:length(tpm.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.list)[i]& sample_map$sample_identifier %in% colnames(tpm.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  dendrogram <- as.data.frame(t(scale(t(log2(tpm.list[[i]] + 1)))))
+  dendrogram <- dendrogram[rowSums(is.na(dendrogram)) == 0,]
+  result <- pvclust(dendrogram, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+  
+  structure <- get_dendro_structure(result)
+  dendro.data <- get_dendro_data(result)
+  bootstrap.positions <- get_dendro_bootstraps(dendro.data)
+    
+  points.df <- as.data.frame(cbind(seq(1,length(structure),1),
+                                   structure))
+  dendrogroups <- groups[,2][result$hclust$order]
+  dendrocol <- groups[,3][result$hclust$order]
+  dendrosize <- colSums(counts.list[[i]])[result$hclust$order]
+  
+  for(j in 1:length(unique(groups[,1]))){
+    result$hclust$labels <- gsub(groups[,1][j],groups[,2][j],result$hclust$labels)
+  }
+  
+  dendrogram.plot <- ggdendrogram(hang.dendrogram(as.dendrogram(result$hclust)), theme_dendro = T)+
+    geom_point(aes(x=seq(1,length(structure)), y = structure, color = dendrogroups, size = dendrosize))+
+    scale_color_manual(values = levels(groups[,3]))+
+    labs(x = "", y = "", col = "Samples", size = "Reads Mapped\nto Features")+
+    guides(colour = guide_legend(ncol = 2))+
+    theme_minimal()+      
+    scale_size_continuous(limits=size_limits,breaks=size_breaks,trans = "log")+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 1),
+          axis.text.y = element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          legend.position="none")
+  
+  for(j in 1:length(result$edges$bp)){
+    text <- round(result$edges$bp[j] * 100,0)
+    dendrogram.plot <- dendrogram.plot + annotate("text", label = text, x=bootstrap.positions[j,1] + 0.4, y=bootstrap.positions[j,2] + 0.03, size = 3)
+  }
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_dendrogram_allgenes.pdf"),
+      width = 11,
+      height = 8)
+    print(dendrogram.plot)
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(counts.list)[i],"_dendrogram_allgenes.png"),
+      width = 11,
+      height = 8,
+      units = "in",res=300)
+    print(dendrogram.plot)
+  dev.off()
+  
+  print(dendrogram.plot)
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_dendrogram_allgenes.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_dendrogram_allgenes.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_dendrogram_allgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_dendrogram_allgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_dendrogram_allgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_dendrogram_allgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_dendrogram_allgenes.png)
+
+#### Kept genes <a name="ranalysis_de_hc_kept"></a>
+
+```{R, fig.height=8,fig.width=11}
+for(i in 1:length(tpm.kept.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.kept.list)[i] & sample_map$sample_identifier %in% colnames(tpm.kept.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  dendrogram <- as.data.frame(t(scale(t(log2(tpm.kept.list[[i]]) + 1))))
+  if(nrow(dendrogram) > 0){
+    result <- pvclust(dendrogram, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+    
+    structure <- get_dendro_structure(result)
+    dendro.data <- get_dendro_data(result)
+    bootstrap.positions <- get_dendro_bootstraps(dendro.data)
+      
+    points.df <- as.data.frame(cbind(seq(1,length(structure),1),
+                                     structure))
+    dendrogroups <- groups[,2][result$hclust$order]
+    dendrocol <- groups[,3][result$hclust$order]
+    dendrosize <- colSums(counts.kept.list[[i]])[result$hclust$order]
+    
+    for(j in 1:length(unique(groups[,1]))){
+      result$hclust$labels <- gsub(groups[,1][j],groups[,2][j],result$hclust$labels)
+    }
+    
+    dendrogram.plot <- ggdendrogram(hang.dendrogram(as.dendrogram(result$hclust)), theme_dendro = T)+
+      geom_point(aes(x=seq(1,length(structure)), y = structure, color = dendrogroups, size = dendrosize))+
+      scale_color_manual(values = levels(groups[,3]))+
+      labs(x = "", y = "", col = "Samples", size = "Reads Mapped\nto Features")+
+      guides(colour = guide_legend(ncol = 2))+
+      theme_minimal()+
+      scale_size_continuous(limits=size_limits,breaks=size_breaks,trans = "log")+
+      theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 1),
+            axis.text.y = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            legend.position="none")
+    
+    for(j in 1:length(result$edges$bp)){
+      text <- round(result$edges$bp[j] * 100,0)
+      dendrogram.plot <- dendrogram.plot + annotate("text", label = text, x=bootstrap.positions[j,1] + 0.4, y=bootstrap.positions[j,2] + 0.03, size = 3)
+    }
+    pdf(paste0(OUTPUT.DIR,"/",names(counts.kept.list)[i],"_dendrogram_keptgenes.pdf"),
+        width = 11,
+        height = 8)
+      print(dendrogram.plot)
+    dev.off()
+    
+    png(paste0(OUTPUT.DIR,"/",names(counts.kept.list)[i],"_dendrogram_keptgenes.png"),
+        width = 11,
+        height = 8,
+        units = "in",res=300)
+      print(dendrogram.plot)
+    dev.off()
+    
+    print(dendrogram.plot)
+  }
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_dendrogram_keptgenes.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_dendrogram_keptgenes.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_dendrogram_keptgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_dendrogram_keptgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_dendrogram_keptgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_dendrogram_keptgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_dendrogram_keptgenes.png)
+
+#### Differentially expressed genes <a name="ranalysis_de_hc_de"></a>
+
+```{R,fig.height=8,fig.width=11}
+for(i in 1:length(tpm.edgeR.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.edgeR.list)[i] & sample_map$sample_identifier %in% colnames(tpm.edgeR.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  dendrogram <- as.data.frame(t(scale(t(log2(tpm.edgeR.list[[i]]) + 1))))
+  if(nrow(dendrogram) > 0){
+    result <- pvclust(dendrogram, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+    
+    structure <- get_dendro_structure(result)
+    dendro.data <- get_dendro_data(result)
+    bootstrap.positions <- get_dendro_bootstraps(dendro.data)
+      
+    points.df <- as.data.frame(cbind(seq(1,length(structure),1),
+                                     structure))
+    dendrogroups <- groups[,2][result$hclust$order]
+    dendrocol <- groups[,3][result$hclust$order]
+    dendrosize <- colSums(counts.edgeR.list[[i]])[result$hclust$order]
+    
+    for(j in 1:length(unique(groups[,1]))){
+      result$hclust$labels <- gsub(groups[,1][j],groups[,2][j],result$hclust$labels)
+    }
+    
+    dendrogram.plot <- ggdendrogram(hang.dendrogram(as.dendrogram(result$hclust)), theme_dendro = T)+
+      geom_point(aes(x=seq(1,length(structure)), y = structure, color = dendrogroups, size = dendrosize))+
+      scale_color_manual(values = levels(groups[,3]))+
+      labs(x = "", y = "", col = "Samples", size = "Reads Mapped\nto Features")+
+      guides(colour = guide_legend(ncol = 2))+
+      theme_minimal()+
+      scale_size_continuous(limits=size_limits,breaks=size_breaks,trans = "log")+
+      theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 1),
+            axis.text.y = element_blank(),
+            panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            legend.position="none")
+    
+    for(j in 1:length(result$edges$bp)){
+      text <- round(result$edges$bp[j] * 100,0)
+      dendrogram.plot <- dendrogram.plot + annotate("text", label = text, x=bootstrap.positions[j,1] + 0.4, y=bootstrap.positions[j,2] + 0.03, size = 3)
+    }
+    
+    pdf(paste0(OUTPUT.DIR,"/",names(counts.edgeR.list)[i],"_dendrogram_degenes.pdf"),
+        width = 11,
+        height = 8)
+      print(dendrogram.plot)
+    dev.off()
+    
+    png(paste0(OUTPUT.DIR,"/",names(counts.edgeR.list)[i],"_dendrogram_degenes.png"),
+        width = 11,
+        height = 8,
+        units = "in",res=300)
+      print(dendrogram.plot)
+    dev.off()
+    
+    print(dendrogram.plot)
+  }
+}
+```
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_dendrogram_keptgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_dendrogram_keptgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_dendrogram_keptgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_dendrogram_keptgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_dendrogram_keptgenes.png)
+
+### Create TPM and log2TPM heatmaps <a name="ranalysis_de_heatmap"></a>
+#### All genes <a name="ranalysis_de_heatmap_all"></a>
+
+```{R,fig.height=10,fig.width=8}
+for(i in 1:length(tpm.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.list)[i] & sample_map$sample_identifier %in% colnames(tpm.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  heatmap1.df <- as.data.frame(log2(tpm.list[[i]]+1))
+  heatmap2.df <- as.data.frame(t(scale(t(log2(tpm.list[[i]] + 1)))))
+  
+  colcol <- as.character(groups[,3])
+  
+  #rowdendro <- pvclust(t(heatmap1.df), method.dist="cor", method.hclust="average", nboot=100)
+  coldendro <- pvclust(heatmap2.df, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+  
+  heatmap2.df[is.na(heatmap2.df)] <- 0
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(tpm.list)[i],"_heatmap_allgenes.pdf"),
+      width = 8,
+      height = 10)
+  heatmap.2(as.matrix(heatmap1.df),
+            col=hmcol1,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(0,10,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  
+  heatmap.2(as.matrix(heatmap2.df),
+            col=hmcol2,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(-3,3,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(tpm.list)[i],"_heatmap_allgenes.png"),
+      width = 8,
+      height = 10,
+      units = "in",res=300)
+  heatmap.2(as.matrix(heatmap1.df),
+            col=hmcol1,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(0,10,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  
+  heatmap.2(as.matrix(heatmap2.df),
+            col=hmcol2,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(-3,3,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  dev.off()
+  
+  heatmap.2(as.matrix(heatmap1.df),
+            col=hmcol1,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+            labCol=groups[,2],
+           #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(0,10,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  
+  heatmap.2(as.matrix(heatmap2.df),
+            col=hmcol2,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(-3,3,by=.5),
+            symkey=F,
+            dendrogram = "both")
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_heatmap_allgenes.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_heatmap_allgenes.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_heatmap_allgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_heatmap_allgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_heatmap_allgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_heatmap_allgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_heatmap_allgenes.png)
+
+#### Kept genes <a name="ranalysis_de_heatmap_kept"></a>
+
+```{R, fig.height=10, fig.width=8}
+for(i in 1:length(tpm.kept.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.kept.list)[i] & sample_map$sample_identifier %in% colnames(tpm.kept.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  heatmap1.df <- as.data.frame(log2(tpm.kept.list[[i]]+1))
+  heatmap2.df <- as.data.frame(t(scale(t(log2(tpm.kept.list[[i]] + 1)))))
+  
+  colcol <- as.character(groups[,3])
+  
+  #rowdendro <- pvclust(t(heatmap1.df), method.dist="cor", method.hclust="average", nboot=100)
+  coldendro <- pvclust(heatmap2.df, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+  
+  heatmap2.df[is.na(heatmap2.df)] <- 0
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(tpm.kept.list)[i],"_heatmap_keptgenes.pdf"),
+      width = 8,
+      height = 10)
+  heatmap.2(as.matrix(heatmap1.df),
+            col=hmcol1,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(0,10,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  
+  heatmap.2(as.matrix(heatmap2.df),
+            col=hmcol2,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(-3,3,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(tpm.kept.list)[i],"_heatmap_keptgenes.png"),
+      width = 8,
+      height = 10,
+      units = "in",res=300)
+  heatmap.2(as.matrix(heatmap1.df),
+            col=hmcol1,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(0,10,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  
+  heatmap.2(as.matrix(heatmap2.df),
+            col=hmcol2,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(-3,3,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  dev.off()
+  
+  heatmap.2(as.matrix(heatmap1.df),
+            col=hmcol1,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+            labCol=groups[,2],
+           #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(0,10,by=.5),
+            symkey=F,
+            dendrogram = "both")
+  
+  heatmap.2(as.matrix(heatmap2.df),
+            col=hmcol2,
+            trace="none",
+            labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+            labCol=groups[,2],
+            #Rowv = as.dendrogram(rowdendro),
+            Colv = as.dendrogram(coldendro),
+            ColSideColors=colcol,
+            lwid=c(1,4),
+            lhei = c(1,5),
+            breaks = seq(-3,3,by=.5),
+            symkey=F,
+            dendrogram = "both")
+}
+```
+
+##### wOo, Darby et al 2012
+![Image description](/images/wOo_darby_2012_heatmap_keptgenes.png)
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_heatmap_keptgenes.png)
+
+##### wDi, Luck et al 2014
+![Image description](/images/wDi_luck_2014_heatmap_keptgenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_heatmap_keptgenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_heatmap_keptgenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_heatmap_keptgenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_heatmap_keptgenes.png)
+
+#### Differentially expressed genes <a name="ranalysis_de_heatmap_de"></a>
+
+```{R, fig.height=10, fig.width=8}
+for(i in 1:length(tpm.edgeR.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.edgeR.list)[i] & sample_map$sample_identifier %in% colnames(tpm.edgeR.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+  
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  heatmap1.df <- as.data.frame(log2(tpm.edgeR.list[[i]]+1))
+  heatmap2.df <- as.data.frame(t(scale(t(log2(tpm.edgeR.list[[i]] + 1)))))
+  
+  colcol <- as.character(groups[,3])
+  
+  if(nrow(tpm.edgeR.list[[i]]) > 0){
+    #rowdendro <- pvclust(t(heatmap1.df), method.dist="cor", method.hclust="average", nboot=100)
+    coldendro <- pvclust(heatmap2.df, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+    
+    heatmap2.df[is.na(heatmap2.df)] <- 0
+    
+    pdf(paste0(OUTPUT.DIR,"/",names(tpm.edgeR.list)[i],"_heatmap_degenes.pdf"),
+        width = 8,
+        height = 10)
+    heatmap.2(as.matrix(heatmap1.df),
+              col=hmcol1,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+              labCol=groups[,2],
+              #Rowv = as.dendrogram(rowdendro),
+              Colv = as.dendrogram(coldendro),
+              ColSideColors=colcol,
+              lwid=c(1,4),
+              lhei = c(1,5),
+              breaks = seq(0,10,by=.5),
+              symkey=F,
+              dendrogram = "both")
+    
+    heatmap.2(as.matrix(heatmap2.df),
+              col=hmcol2,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+              labCol=groups[,2],
+              #Rowv = as.dendrogram(rowdendro),
+              Colv = as.dendrogram(coldendro),
+              ColSideColors=colcol,
+              lwid=c(1,4),
+              lhei = c(1,5),
+              breaks = seq(-3,3,by=.5),
+              symkey=F,
+              dendrogram = "both")
+    dev.off()
+    
+    png(paste0(OUTPUT.DIR,"/",names(tpm.edgeR.list)[i],"_heatmap_keptgenes.png"),
+        width = 8,
+        height = 10,
+        units = "in",res=300)
+    heatmap.2(as.matrix(heatmap1.df),
+              col=hmcol1,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+              labCol=groups[,2],
+              #Rowv = as.dendrogram(rowdendro),
+              Colv = as.dendrogram(coldendro),
+              ColSideColors=colcol,
+              lwid=c(1,4),
+              lhei = c(1,5),
+              breaks = seq(0,10,by=.5),
+              symkey=F,
+              dendrogram = "both")
+    
+    heatmap.2(as.matrix(heatmap2.df),
+              col=hmcol2,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+              labCol=groups[,2],
+              #Rowv = as.dendrogram(rowdendro),
+              Colv = as.dendrogram(coldendro),
+              ColSideColors=colcol,
+              lwid=c(1,4),
+              lhei = c(1,5),
+              breaks = seq(-3,3,by=.5),
+              symkey=F,
+              dendrogram = "both")
+    dev.off()
+    
+    heatmap.2(as.matrix(heatmap1.df),
+              col=hmcol1,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(heatmap1.df)),
+              labCol=groups[,2],
+             #Rowv = as.dendrogram(rowdendro),
+              Colv = as.dendrogram(coldendro),
+              ColSideColors=colcol,
+              lwid=c(1,4),
+              lhei = c(1,5),
+              breaks = seq(0,10,by=.5),
+              symkey=F,
+              dendrogram = "both")
+    
+    heatmap.2(as.matrix(heatmap2.df),
+              col=hmcol2,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(heatmap2.df)),
+              labCol=groups[,2],
+              #Rowv = as.dendrogram(rowdendro),
+              Colv = as.dendrogram(coldendro),
+              ColSideColors=colcol,
+              lwid=c(1,4),
+              lhei = c(1,5),
+              breaks = seq(-3,3,by=.5),
+              symkey=F,
+              dendrogram = "both")
+  }
+}
+```
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_heatmap_degenes.png)
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_heatmap_degenes.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_heatmap_degenes.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_heatmap_degenes.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_heatmap_degenes.png)
+
+### Choose studies for basic pairwise analyses or WGCNA <a name="ranalysis_de_selectanalysis"></a>
+
+```{R}
+pairwise.studies <- c("wMel_darby_2014")
+wgcna.studies <- c("wDi_luck_2015","wMel_gutzwiller_2015","wBm_grote_2017","wBm_chung_2019")
+```
+
+### Conduct pairwise analyses on studies with two biological groups <a name="ranalysis_de_pairwise"></a>
+
+#### Create z-score of log2TPM heatmaps with a column bar that shows up- and down-regulated genes <a name="ranalysis_de_pairwise_hm"></a>
+
+```{R, fig.height = 10, fig.width = 5}
+for(i in 1:length(pairwise.studies)){
+  sample_map.subset <- sample_map[sample_map$study == pairwise.studies[i],]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  qlf <- as.data.frame(qlf.list[names(qlf.list) == pairwise.studies[i]])
+  qlf <- qlf[order(qlf[,1],decreasing = T),]
+  qlf <- qlf[rownames(qlf) %in% rownames(as.data.frame(tpm.edgeR.list[names(tpm.edgeR.list) == pairwise.studies[i]])),]
+  
+  log2tpm.de <- log2(as.data.frame(tpm.edgeR.list[names(tpm.edgeR.list) == pairwise.studies[i]])+1)
+  zscore.log2tpm.de <- as.data.frame(t(scale(t(log2tpm.de))))
+  zscore.log2tpm.de <- zscore.log2tpm.de[match(rownames(qlf),rownames(zscore.log2tpm.de)),]
+  
+  hmcol1 <- colorRampPalette(c("navyblue","white","firebrick3"))(12)
+  hmcol2 <- colorRampPalette(c("#FFFFFF","#FDE0D2","#FABAA1","#F69274", "#F16B4E","#EF3D2D","#590A16","#A51E23","#650C16"))(30)
+  rowcol1 <- ifelse(qlf[,1] > 0,"red","blue")
+  colcol <- as.character(groups[,3])
+  rowsep <- get_heatmap_separators(rowcol1)
+  colsep <- get_heatmap_separators(colcol)
+  
+  coldendro <- pvclust(as.data.frame(tpm.edgeR.list[names(tpm.edgeR.list) == pairwise.studies[i]]), method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+
+  pdf(paste0(OUTPUT.DIR,"/",pairwise.studies[i],"_pairwise_zscorelog2tpm_heatmap.pdf"),
+      width = 5,
+      height = 10)
+    
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+              col=hmcol1,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+              Rowv = F,
+              Colv = as.dendrogram(coldendro),
+              RowSideColors=rowcol1,
+              ColSideColors=colcol,
+              lhei = c(2,8),
+              breaks = seq(-3,3,by=.5),
+              rowsep = rowsep,
+              colsep = colsep,
+              symkey=F,
+              dendrogram = "column")
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",pairwise.studies[i],"_pairwise_zscorelog2tpm_heatmap.png"),
+      width = 5,
+      height = 10,
+      units = "in",res=300)
+    
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+              col=hmcol1,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+              Rowv = F,
+              Colv = as.dendrogram(coldendro),
+              RowSideColors=rowcol1,
+              ColSideColors=colcol,
+              lhei = c(2,8),
+              breaks = seq(-3,3,by=.5),
+              rowsep = rowsep,
+              colsep = colsep,
+              symkey=F,
+              dendrogram = "column")
+  dev.off()
+  
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+              col=hmcol1,
+              trace="none",
+              labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+              Rowv = F,
+              Colv = as.dendrogram(coldendro),
+              RowSideColors=rowcol1,
+              ColSideColors=colcol,
+              lhei = c(2,8),
+              breaks = seq(-3,3,by=.5),
+              rowsep = rowsep,
+              colsep = colsep,
+              symkey=F,
+              dendrogram = "column")
+  
+}
+```
+
+##### wMel, Darby et al 2014
+![Image description](/images/wMel_darby_2014_pairwise_zscorelog2tpm_heatmap.pdf)
+
+#### Conduct functional term enrichment analysis on up- and down-regulated gene subsets <a name="ranalysis_de_pairwise_fxnterm"></a>
+
+```{R}
+terms.pairwise.list <- list()
+terms.sig.pairwise.list <- terms.pairwise.list
+
+for(i in 1:length(pairwise.studies)){
+  strain <- substr(pairwise.studies,1,regexpr("_",pairwise.studies)-1)
+  geneinfo <- read.delim(paste0(GENEINFO.DIR,"/",strain,".cds.fna.interproscan.geneinfo.tsv"))
+  
+  qlf <- as.data.frame(qlf.list[names(qlf.list) == pairwise.studies[i]])
+  qlf <- qlf[order(qlf[,1],decreasing = T),]
+  qlf <- qlf[rownames(qlf) %in% rownames(as.data.frame(tpm.edgeR.list[names(tpm.edgeR.list) == pairwise.studies[i]])),]
+  
+  terms.colnames <- c("term","clusteroccurences","genomeoccurences","pvalue","correctedpvalue","oddsratio","group")
+  terms.pairwise <- as.data.frame(matrix(nrow = 0,
+                                         ncol = 7))
+  colnames(terms.pairwise) <- terms.colnames
+  
+  terms.pairwise.up <- as.data.frame(cbind(functionaltermenrichment(rownames(qlf)[qlf[,1] > 0],geneinfo),
+                                           "upregulated"))
+  terms.pairwise.down <- as.data.frame(cbind(functionaltermenrichment(rownames(qlf)[qlf[,1] < 0],geneinfo),
+                                       "downregulated"))
+  
+  colnames(terms.pairwise.up) <- terms.colnames
+  colnames(terms.pairwise.down) <- terms.colnames
+  terms.pairwise <- as.data.frame(rbind(terms.pairwise.up,
+                                     terms.pairwise.down))
+  
+  for(j in 2:6){
+    terms.pairwise[,j] <- as.numeric(as.character(terms.pairwise[,j]))
+  }
+  
+  terms.pairwise.list[[i]] <- terms.pairwise
+  terms.sig.pairwise.list[[i]] <- terms.pairwise[terms.pairwise$correctedpvalue < 0.05,]
+  
+  names(terms.pairwise.list)[i] <- pairwise.studies[i]
+  
+  write.table(terms.pairwise.list[[i]],
+            paste0(OUTPUT.DIR,"/",names(terms.pairwise.list)[i],"_functionaltermenrichment.tsv"),
+            row.names = T,
+            col.names = T,
+            quote = F,
+            sep = "\t")
+}
+```
+
+### Conduct WGCNA on time-course studies <a name="ranalysis_de_wgcna"></a>
+
+#### Identify WGCNA soft power values <a name="ranalysis_de_wgcna_softpower"></a>
+```{R, fig.height = 4, fig.width = 8}
+tpm.wgcna.list <- tpm.edgeR.list
+for(i in 1:length(tpm.wgcna.list)){
+  tpm.wgcna.list[[i]] <- as.data.frame(t(tpm.edgeR.list[[i]]))
+}
+tpm.wgcna.list <- tpm.wgcna.list[names(tpm.wgcna.list) %in% wgcna.studies]
+softpower.list <- tpm.wgcna.list
+
+for(i in 1:length(tpm.wgcna.list)){
+  powers <- c(1:20)
+  sft <- pickSoftThreshold(tpm.wgcna.list[[i]], powerVector = powers, verbose = 5)
+  softpower.list[[i]] <- find_soft_power(sft)
+  
+  text.color <- rep("black",length(sft$fitIndices[,1]))
+  text.color[which(sft$fitIndices[,1] == softpower.list[[i]])] <- "red"
+  
+  scale_independence.plot <- ggplot()+
+    geom_text(mapping = aes(x = sft$fitIndices[,1], y = -sign(sft$fitIndices[,3])*sft$fitIndices[,2], label=sft$fitIndices[,1]), color = text.color)+
+    labs(title = "scale independence", x = "soft threshold (power)", y = "scale free topology model fit, signed R^2")+
+    theme_bw()
+  
+  mean_connectivity.plot <- ggplot()+
+    geom_text(mapping = aes(x = sft$fitIndices[,1], y = sft$fitIndices[,5], label=sft$fitIndices[,1]), color = text.color)+
+    labs(title = "mean connectivity", x = "soft threshold (power)", y = "mean connectivity")+
+    theme_bw()
+  
+  wgcna_soft_power_plots <- list(scale_independence.plot, mean_connectivity.plot)
+  lay <- rbind(c(1,2))
+  pdf(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_soft_power_plot.pdf"),
+      width = 8, 
+      height = 4)
+  grid.arrange(grobs = wgcna_soft_power_plots,
+               widths = c(5,5),
+               heights = c(5),
+               layout_matrix = lay)
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_soft_power_plot.png"),
+      width = 8, 
+      height = 4,
+      units = "in",res=300)
+  grid.arrange(grobs = wgcna_soft_power_plots,
+               widths = c(5,5),
+               heights = c(5),
+               layout_matrix = lay)
+  dev.off()
+  
+  grid.arrange(grobs = wgcna_soft_power_plots,
+               widths = c(5,5),
+               heights = c(5),
+               layout_matrix = lay)
+}
+```
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_wgcna_soft_power_plot.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_wgcna_soft_power_plot.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_wgcna_soft_power_plot.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_wgcna_soft_power_plot.png)
+
+#### Create WGCNA expression modules and merge similar modules <a name="ranalysis_de_wgcna_createmodules"></a>
+
+```{r wgcna_createmodules, fig.height = 4, fig.width = 8}
+for(i in 1:length(tpm.wgcna.list)){
+  adjacency <- adjacency(tpm.wgcna.list[[i]], power = softpower.list[[i]])
+  TOM <- TOMsimilarity(adjacency)
+  dissTOM <- 1-TOM
+  geneTree <- hclust(as.dist(dissTOM), method = "average");
+  
+  minModuleSize <- 1
+  dynamicMods <- cutreeDynamic(dendro = geneTree, distM = dissTOM,
+                               deepSplit = 2, pamRespectsDendro = FALSE,
+                               minClusterSize = minModuleSize)
+  
+  dynamicColors = labels2colors(dynamicMods)
+  MEList = moduleEigengenes(tpm.wgcna.list[[i]], colors = dynamicColors)
+  MEs = MEList$eigengenes
+  MEDiss = 1-cor(MEs, use = "pairwise.complete.obs")
+  METree = hclust(as.dist(MEDiss), method = "average")
+  
+  MEDissThres = 0.25
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_merge_eigengenes_plot.pdf"),
+      width = 8,
+      height = 5)
+  plot(METree, main = "clustering of module eigengenes",
+       xlab = "", sub = "")
+  
+  abline(h=MEDissThres, col = "red")
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_merge_eigengenes_plot.png"),
+      width = 8,
+      height = 5,
+      units = "in",res=300)
+  plot(METree, main = "clustering of module eigengenes",
+       xlab = "", sub = "")
+  abline(h=MEDissThres, col = "red")
+  dev.off()
+  
+  plot(METree, main = "clustering of module eigengenes",
+       xlab = "", sub = "")
+  abline(h=MEDissThres, col = "red")
+  
+  merge = mergeCloseModules(tpm.wgcna.list[[i]], dynamicColors, cutHeight = MEDissThres, verbose = 3)
+  mergedColors = merge$colors
+  mergedMEs = merge$newMEs
+  
+  pdf(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_eigengene_dendrogram_plot.pdf"),
+      width = 8,
+      height = 5)
+  plotDendroAndColors(geneTree, cbind(dynamicColors, mergedColors), c("dynamic tree cut", "merged dynamic"),
+                      dendroLabels = FALSE, hang = 0.03, addGuide = TRUE, guideHang = 0.05)
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_eigengene_dendrogram_plot.png"),
+      width = 8,
+      height = 5,
+      units = "in",res=300)
+  plotDendroAndColors(geneTree, cbind(dynamicColors, mergedColors), c("dynamic tree cut", "merged dynamic"),
+                      dendroLabels = FALSE, hang = 0.03, addGuide = TRUE, guideHang = 0.05)
+  dev.off()
+  
+  plotDendroAndColors(geneTree, cbind(dynamicColors, mergedColors), c("dynamic tree cut", "merged dynamic"),
+                      dendroLabels = FALSE, hang = 0.03, addGuide = TRUE, guideHang = 0.05)
+  
+  tpm.wgcna.list[[i]] <- eigengene_invert_id(as.data.frame(t(tpm.wgcna.list[[i]])), mergedColors, mergedMEs)
+  tpm.wgcna.list[[i]] <- wgcna_heatmap_reorder(tpm.wgcna.list[[i]])
+  
+  write.table(tpm.wgcna.list[[i]],
+              paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_tpm_de_modules.tsv"),
+              row.names = T,
+              col.names = T,
+              quote = F,
+              sep = "\t")
+}
+```
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_wgcna_eigengene_dendrogram_plot.png)
+![Image description](/images/wDi_luck_2015_wgcna_merge_eigengenes_plot.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_wgcna_eigengene_dendrogram_plot.png)
+![Image description](/images/wMel_gutzwiller_2015_wgcna_merge_eigengenes_plot.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_wgcna_eigengene_dendrogram_plot.png)
+![Image description](/images/wBm_grote_2017_wgcna_merge_eigengenes_plot.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_wgcna_eigengene_dendrogram_plot.png)
+![Image description](/images/wBm_chung_2019_wgcna_merge_eigengenes_plot.png)
+
+#### Plot WGCNA-derived expression modules <a name="ranalysis_de_wgcna_heatmap"></a>
+
+```{R, fig.height = 10, fig.width = 5}
+for(i in 1:length(tpm.wgcna.list)){
+  sample_map.subset <- sample_map[sample_map$study == names(tpm.wgcna.list)[i] & sample_map$sample_identifier %in% colnames(tpm.wgcna.list[[i]]),]
+  groups <- as.data.frame(cbind(as.character(sample_map.subset$sample_identifier),
+                                as.character(sample_map.subset$sample_group),
+                                as.character(sample_map.subset$color)))
+  groups <- unique(groups)
+
+  groups[,1] <- factor(groups[,1],levels=groups[,1])
+  groups[,2] <- factor(groups[,2],levels=unique(groups[,2]))
+  groups[,3] <- factor(groups[,3],levels=unique(groups[,3]))
+  
+  log2tpm.de <- log2(tpm.wgcna.list[[i]][,1:(ncol(tpm.wgcna.list[[i]]) - 2)] + 1)
+  zscore.log2tpm.de <- as.data.frame(t(scale(t(log2tpm.de))))
+  
+  hmcol1 <- colorRampPalette(c("navyblue","white","firebrick3"))(12)
+  hmcol2 <- colorRampPalette(c("#FFFFFF","#FDE0D2","#FABAA1","#F69274", "#F16B4E","#EF3D2D","#590A16","#A51E23","#650C16"))(30)
+  rowcol1 <- tpm.wgcna.list[[i]]$module
+  colcol <- as.character(groups[,3])
+  rowsep <- get_heatmap_separators(rowcol1)
+  colsep <- get_heatmap_separators(colcol)
+  
+  rowcol2 <- tpm.wgcna.list[[i]]$invert
+  rowcol2[rowcol2 == F] <- "grey"
+  rowcol2[rowcol2 == T] <- "black"
+  
+  coldendro.df <- as.data.frame(tpm.kept.list[names(tpm.kept.list) == names(tpm.wgcna.list)[i]])
+  coldendro.df <- t(scale(t(log2(coldendro.df + 1))))
+  coldendro <- pvclust(coldendro.df, method.dist="cor", method.hclust="average", nboot=100, quiet=T)
+
+  if(names(tpm.wgcna.list)[i] == "wMel_gutzwiller_2015"){
+    coldendro <- rotate(as.dendrogram(coldendro), c(30:50,55:54,52:53,51,11:29,1:10))
+  }
+
+  pdf(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_zscorelog2tpm_heatmap.pdf"),
+      width = 5,
+      height = 10)
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+                col=hmcol1,
+                trace="none",
+                labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+                Rowv = F,
+                Colv = as.dendrogram(coldendro),
+                RowSideColors=rowcol1,
+                ColSideColors=colcol,
+                lhei = c(2,8),
+                breaks = seq(-3,3,by=.5),
+                rowsep = rowsep,
+                colsep = colsep,
+                dendrogram = "col")
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+                col=hmcol1,
+                trace="none",
+                labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+                Rowv = F,
+                Colv = as.dendrogram(coldendro),
+                RowSideColors=rowcol2,
+                ColSideColors=colcol,
+                lhei = c(2,8),
+                breaks = seq(-3,3,by=.5),
+                rowsep = rowsep,
+                colsep = colsep,
+                dendrogram = "col")
+  dev.off()
+  
+  png(paste0(OUTPUT.DIR,"/",names(tpm.wgcna.list)[i],"_wgcna_zscorelog2tpm_heatmap.png"),
+      width = 5,
+      height = 10,
+      units = "in",res=300)
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+                col=hmcol1,
+                trace="none",
+                labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+                Rowv = F,
+                Colv = as.dendrogram(coldendro),
+                RowSideColors=rowcol1,
+                ColSideColors=colcol,
+                lhei = c(2,8),
+                breaks = seq(-3,3,by=.5),
+                rowsep = rowsep,
+                colsep = colsep,
+                dendrogram = "col")
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+                col=hmcol1,
+                trace="none",
+                labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+                Rowv = F,
+                Colv = as.dendrogram(coldendro),
+                RowSideColors=rowcol2,
+                ColSideColors=colcol,
+                lhei = c(2,8),
+                breaks = seq(-3,3,by=.5),
+                rowsep = rowsep,
+                colsep = colsep,
+                dendrogram = "col")
+  dev.off()
+  
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+                col=hmcol1,
+                trace="none",
+                labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+                Rowv = F,
+                Colv = as.dendrogram(coldendro),
+                RowSideColors=rowcol1,
+                ColSideColors=colcol,
+                lhei = c(2,8),
+                breaks = seq(-3,3,by=.5),
+                rowsep = rowsep,
+                colsep = colsep,
+                dendrogram = "col")
+  heatmap.2(as.matrix(zscore.log2tpm.de),
+                col=hmcol1,
+                trace="none",
+                labRow=vector(mode = "character", length = nrow(zscore.log2tpm.de)),
+                Rowv = F,
+                Colv = as.dendrogram(coldendro),
+                RowSideColors=rowcol2,
+                ColSideColors=colcol,
+                lhei = c(2,8),
+                breaks = seq(-3,3,by=.5),
+                rowsep = rowsep,
+                colsep = colsep,
+                dendrogram = "col")
+}
+```
+
+##### wDi, Luck et al 2015
+![Image description](/images/wDi_luck_2015_wgcna_zscorelog2tpm_heatmap.png)
+
+##### wMel, Gutzwiller et al 2015
+![Image description](/images/wMel_gutzwiller_2015_wgcna_zscorelog2tpm_heatmap.png)
+
+##### wBm, Grote et al 2017
+![Image description](/images/wBm_grote_2017_wgcna_zscorelog2tpm_heatmap.png)
+
+##### wBm, Chung et al 2019
+![Image description](/images/wBm_chung_2019_wgcna_zscorelog2tpm_heatmap.png)
+
+#### Conduct functional term enrichment analysis on WGCNA expression modules <a name="ranalysis_de_wgcna_fxnterm"></a>
+
+```{R}
+terms.wgcna.list <- tpm.wgcna.list
+terms.sig.wgcna.list <- tpm.wgcna.list
+
+for(i in 1:length(tpm.wgcna.list)){
+  strain <- substr(names(tpm.wgcna.list)[i],1,regexpr("_",names(tpm.wgcna.list)[i])-1)
+  geneinfo <- read.delim(paste0(GENEINFO.DIR,"/",strain,".cds.fna.interproscan.geneinfo.tsv"))
+  
+  terms.colnames <- c("term","clusteroccurences","genomeoccurences","pvalue","correctedpvalue","oddsratio","module","invert")
+  terms.wgcna <- as.data.frame(matrix(nrow = 0,
+                                      ncol = 8))
+  colnames(terms.wgcna) <- terms.colnames
+  for(j in 1:length(unique(tpm.wgcna.list[[i]]$module))){
+    terms.wgcna.f <- as.data.frame(cbind(functionaltermenrichment(rownames(tpm.wgcna.list[[i]])[tpm.wgcna.list[[i]]$module == unique(tpm.wgcna.list[[i]]$module)[j] & tpm.wgcna.list[[i]]$invert == F],geneinfo),unique(tpm.wgcna.list[[i]]$module)[j],F))
+    terms.wgcna.t <- as.data.frame(cbind(functionaltermenrichment(rownames(tpm.wgcna.list[[i]])[tpm.wgcna.list[[i]]$module == unique(tpm.wgcna.list[[i]]$module)[j] & tpm.wgcna.list[[i]]$invert == T],geneinfo),unique(tpm.wgcna.list[[i]]$module)[j],T))
+    
+    colnames(terms.wgcna.f) <- terms.colnames
+    colnames(terms.wgcna.t) <- terms.colnames
+    terms.wgcna <- as.data.frame(rbind(terms.wgcna,
+                                       terms.wgcna.f, 
+                                       terms.wgcna.t))
+  }
+  
+  for(j in 2:6){
+    terms.wgcna[,j] <- as.numeric(as.character(terms.wgcna[,j]))
+  }
+  
+  terms.wgcna.list[[i]] <- terms.wgcna
+  terms.sig.wgcna.list[[i]] <- terms.wgcna[terms.wgcna$correctedpvalue < 0.05,]
+  
+  write.table(terms.wgcna.list[[i]],
+            paste0(OUTPUT.DIR,"/",names(terms.wgcna.list)[i],"_functionaltermenrichment.tsv"),
+            row.names = T,
+            col.names = T,
+            quote = F,
+            sep = "\t")
+}
+```
