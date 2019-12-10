@@ -50,6 +50,23 @@
 			3. [Heatmap log2TPM key](#ranalysis_de_keys_hm1)
 			4. [Heatmap z-score log2TPM key](#ranalysis_de_keys_hm2)
 		6. [Assess if samples have been sequenced to saturation using saturation curves](#ranalysis_de_keys_saturation)
+		7. [Exclude samples and/or studies from differential expression analyses due to inadequate sequencing depth](#ranalysis_de_exclude)
+		8. [Identify the number of genes in each study that meets the minimum CPM threshold](#ranalysis_de_exclude)
+	9. [Identify differentially expressed genes (FDR < 0.05) in each study](#ranalysis_de_de)
+	10. [Conduct principal component analyses](#ranalysis_de_pca)
+	11. [Conduct hierarchical clustering analyses](#ranalysis_de_hc)
+	12. [Create TPM and log2TPM heatmaps](#ranalysis_de_heatmap)
+	13. [Choose studies for basic pairwise analyses or WGCNA](#ranalysis_de_selectanalysis)
+	14. [Conduct pairwise analyses on studies with two biological groups](#ranalysis_de_pairwise)
+		1. [Create z-score of log2TPM heatmaps with a column bar that shows up- and down-regulated genes](#ranalysis_de_pairwise_hm)
+		2. [Conduct functional term enrichment analysis on up- and down-regulated gene subsets](#ranalysis_de_pairwise_fxnterm)
+	15. [Conduct WGCNA on time-course studies](#ranalysis_de_wgcna)
+		1. [Identify WGCNA soft power values](#ranalysis_de_wgcna_softpower)
+		2. [Create WGCNA expression modules and merge similar modules](#ranalysis_de_wgcna_createmodules)
+		3. [Plot WGCNA-derived expression modules](#ranalysis_de_wgcna_heatmap)
+		4. [Conduct functional term enrichment analysis on WGCNA expression modules](#ranalysis_de_wgcna_fxnterm)
+
+
 
 # Set software and directory paths <a name="setpaths"></a>
 
@@ -1683,7 +1700,7 @@ for(i in 1:length(tpm.kept.list)){
 ##### wBm, Chung et al 2019
 ![Image description](/images/wBm_chung_2019_pca_keptgenes.png)
 
-### Differentially expressed genes <a name="ranalysis_de_pca_de"></a>
+#### Differentially expressed genes <a name="ranalysis_de_pca_de"></a>
 
 ```{R, fig.height=5,fig.width=5}
 for(i in 1:length(tpm.edgeR.list)){
