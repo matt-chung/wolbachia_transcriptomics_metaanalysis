@@ -1,0 +1,182 @@
+study	biosample_id	sra_id	sample_identifier	sample_group	color
+wBm_chung_2019	SAMN04314690	SRR3111564	chung_wbm_vector18hpi_a	"vector, 18 hpi"	indianred1
+wBm_chung_2019	SAMN04314690	SRR5192555	chung_wbm_vector18hpi_a	"vector, 18 hpi"	indianred1
+wBm_chung_2019	SAMN04314691	SRR3111566	chung_wbm_vector18hpi_b	"vector, 18 hpi"	indianred1
+wBm_chung_2019	SAMN04314691	SRR5192556	chung_wbm_vector18hpi_b	"vector, 18 hpi"	indianred1
+wBm_chung_2019	SAMN04314692	SRR3111567	chung_wbm_vector4dpi_a	"vector, 4 dpi"	indianred3
+wBm_chung_2019	SAMN04314692	SRR5192557	chung_wbm_vector4dpi_a	"vector, 4 dpi"	indianred3
+wBm_chung_2019	SAMN04314693	SRR3111570	chung_wbm_vector4dpi_b	"vector, 4 dpi"	indianred3
+wBm_chung_2019	SAMN04314693	SRR5192558	chung_wbm_vector4dpi_b	"vector, 4 dpi"	indianred3
+wBm_chung_2019	SAMN04314693	SRR5192559	chung_wbm_vector4dpi_b	"vector, 4 dpi"	indianred3
+wBm_chung_2019	SAMN04314694	SRR3111573	chung_wbm_vector8dpi_a	"vector, 8 dpi"	red
+wBm_chung_2019	SAMN04314694	SRR5192560	chung_wbm_vector8dpi_a	"vector, 8 dpi"	red
+wBm_chung_2019	SAMN04314695	SRR3111574	chung_wbm_vector8dpi_b	"vector, 8 dpi"	red
+wBm_chung_2019	SAMN04314695	SRR5192561	chung_wbm_vector8dpi_b	"vector, 8 dpi"	red
+wBm_chung_2019	SAMN04314682	SRR5099219	chung_wbm_mammal1dpi_a	"jird, 1 dpi"	chartreuse1
+wBm_chung_2019	SAMN04314682	SRR5099220	chung_wbm_mammal1dpi_a	"jird, 1 dpi"	chartreuse1
+wBm_chung_2019	SAMN04314688	SRR5099250	chung_wbm_mammal1dpi_b	"jird, 1 dpi"	chartreuse1
+wBm_chung_2019	SAMN04314688	SRR5099251	chung_wbm_mammal1dpi_b	"jird, 1 dpi"	chartreuse1
+wBm_chung_2019	SAMN04314683	SRR5099332	chung_wbm_mammal2dpi_a	"jird, 2 dpi"	chartreuse3
+wBm_chung_2019	SAMN04314683	SRR5099333	chung_wbm_mammal2dpi_a	"jird, 2 dpi"	chartreuse3
+wBm_chung_2019	SAMN04314689	SRR5099334	chung_wbm_mammal2dpi_b	"jird, 2 dpi"	chartreuse3
+wBm_chung_2019	SAMN04314689	SRR5099335	chung_wbm_mammal2dpi_b	"jird, 2 dpi"	chartreuse3
+wBm_chung_2019	SAMN04314672	SRR3111502	chung_wbm_mammal3dpi_a	"jird, 3 dpi"	green3
+wBm_chung_2019	SAMN04314673	SRR3111503	chung_wbm_mammal3dpi_b	"jird, 3 dpi"	green3
+wBm_chung_2019	SAMN04314674	SRR3111505	chung_wbm_mammal4dpi_a	"jird, 4 dpi"	green4
+wBm_chung_2019	SAMN04314674	SRR3111506	chung_wbm_mammal4dpi_a	"jird, 4 dpi"	green4
+wBm_chung_2019	SAMN04314675	SRR3111508	chung_wbm_mammal4dpi_b	"jird, 4 dpi"	green4
+wBm_chung_2019	SAMN04314676	SRR3111509	chung_wbm_mammal8dpi_a	"jird, 8 dpi"	darkgreen
+wBm_chung_2019	SAMN04314677	SRR3111511	chung_wbm_mammal8dpi_b	"jird, 8 dpi"	darkgreen
+wBm_chung_2019	SAMN04314678	SRR3111513	chung_wbm_mammal20dpi_immaturemale_a	"jird, 20 dpi, immature male"	dodgerblue
+wBm_chung_2019	SAMN04314679	SRR3111515	chung_wbm_mammal20dpi_immaturemale_b	"jird, 20 dpi, immature male"	dodgerblue
+wBm_chung_2019	SAMN04314680	SRR3111519	chung_wbm_mammal24dpi_immaturefemale_a	"jird, 24 dpi, immature female"	steelblue1
+wBm_chung_2019	SAMN04314680	SRR5192564	chung_wbm_mammal24dpi_immaturefemale_a	"jird, 24 dpi, immature female"	steelblue1
+wBm_chung_2019	SAMN04314681	SRR3111522	chung_wbm_mammal24dpi_immaturefemale_b	"jird, 24 dpi, immature female"	steelblue1
+wBm_chung_2019	SAMN04314668	SRR3111492	chung_wbm_adultmale_a	"jird, adult male"	darkorchid
+wBm_chung_2019	SAMN04314669	SRR3111495	chung_wbm_adultmale_b	"jird, adult male"	darkorchid
+wBm_chung_2019	SAMN04314664	SRR3111300	chung_wbm_adultfemale_a	"jird, adult female"	mediumpurple1
+wBm_chung_2019	SAMN04314664	SRR5192563	chung_wbm_adultfemale_a	"jird, adult female"	mediumpurple1
+wBm_chung_2019	SAMN04314665	SRR3111487	chung_wbm_adultfemale_b	"jird, adult female"	mediumpurple1
+wBm_chung_2019	SAMN04314666	SRR3111489	chung_wbm_adultfemale_c	"jird, adult female"	mediumpurple1
+wBm_chung_2019	SAMN04314667	SRR3111491	chung_wbm_adultfemale_d	"jird, adult female"	mediumpurple1
+wBm_chung_2019	SAMN04314667	SRR5192562	chung_wbm_adultfemale_d	"jird, adult female"	mediumpurple1
+wBm_chung_2019	SAMN04314670	SRR3111496	chung_wbm_embryo_a	"jird, embryo"	gold
+wBm_chung_2019	SAMN04314671	SRR3111499	chung_wbm_embryo_b	"jird, embryo"	gold
+wBm_chung_2019	SAMN04314684	SRR5099328	chung_wbm_immatureMF_a	"jird, immature microfilariae"	darkgoldenrod1
+wBm_chung_2019	SAMN04314684	SRR5099329	chung_wbm_immatureMF_a	"jird, immature microfilariae"	darkgoldenrod1
+wBm_chung_2019	SAMN04314685	SRR3111543	chung_wbm_immatureMF_b	"jird, immature microfilariae"	darkgoldenrod1
+wBm_chung_2019	SAMN04314686	SRR5099330	chung_wbm_matureMF_a	"jird, mature microfilariae"	darkorange
+wBm_chung_2019	SAMN04314686	SRR5099331	chung_wbm_matureMF_a	"jird, mature microfilariae"	darkorange
+wBm_chung_2019	SAMN04314687	SRR3111545	chung_wbm_matureMF_b	"jird, mature microfilariae"	darkorange
+wBm_chung_2019	SAMN04314687	SRR3111546	chung_wbm_matureMF_b	"jird, mature microfilariae"	darkorange
+wBm_grote_2017	SAMN05824316	SRR4308250	grote_wbm_L4_a	L4	olivedrab1
+wBm_grote_2017	SAMN05824317	SRR4308251	grote_wbm_L4_b	L4	olivedrab1
+wBm_grote_2017	SAMN05824311	SRR4308248	grote_wbm_30dpi_immaturemale_a	"30 dpi, immature male"	darkslategray1
+wBm_grote_2017	SAMN05824313	SRR4308249	grote_wbm_30dpi_immaturemale_b	"30 dpi, immature male"	darkslategray1
+wBm_grote_2017	SAMN05824307	SRR4308258	grote_wbm_30dpi_immaturefemale_a	"30 dpi, immature female"	plum
+wBm_grote_2017	SAMN05824310	SRR4308259	grote_wbm_30dpi_immaturefemale_b	"30 dpi, immature female"	plum
+wBm_grote_2017	SAMN05824305	SRR4308256	grote_wbm_42dpi_immaturemale_a	"42 dpi, immature male"	dodgerblue
+wBm_grote_2017	SAMN05824306	SRR4308257	grote_wbm_42dpi_immaturemale_b	"42 dpi, immature male"	dodgerblue
+wBm_grote_2017	SAMN05824302	SRR4308254	grote_wbm_42dpi_immaturefemale_a	"42 dpi, immature female"	mediumpurple1
+wBm_grote_2017	SAMN05824303	SRR4308255	grote_wbm_42dpi_immaturefemale_b	"42 dpi, immature female"	mediumpurple1
+wBm_grote_2017	SAMN05789730	SRR4308252	grote_wbm_120dpi_adultmale_a	"120 dpi, adult male"	deepskyblue4
+wBm_grote_2017	SAMN05789731	SRR4308253	grote_wbm_120dpi_adultmale_b	"120 dpi, adult male"	deepskyblue4
+wBm_grote_2017	SAMN05789345	SRR4308246	grote_wbm_120dpi_adultfemale_a	"120 dpi, adult female"	darkorchid4
+wBm_grote_2017	SAMN05789346	SRR4308247	grote_wbm_120dpi_adultfemale_b	"120 dpi, adult female"	darkorchid4
+wOo_darby_2012	SAMN01091901	SRR535815	darby_woo_adultmale_a	adult male	deepskyblue4
+wOo_darby_2012	SAMN01091902	SRR535816	darby_woo_adultmale_a	adult male	deepskyblue4
+wOo_darby_2012	SAMN01091903	SRR535817	darby_woo_adultmale_b	adult male	deepskyblue4
+wOo_darby_2012	SAMN01091904	SRR535818	darby_woo_adultfemale_a	adult female	darkorchid4
+wOo_darby_2012	SAMN01091905	SRR535819	darby_woo_adultfemale_b	adult female	darkorchid4
+wMel_gutzwiller_2015	SAMN00003023	SRR1197337	gutzwiller_wmel_embryo0to2hr_a	0-2 hr embryo	#FFD700
+wMel_gutzwiller_2015	SAMN00003023	SRR1197370	gutzwiller_wmel_embryo0to2hr_b	0-2 hr embryo	#FFD700
+wMel_gutzwiller_2015	SAMN00003023	SRR767606	gutzwiller_wmel_embryo0to2hr_a	0-2 hr embryo	#FFD700
+wMel_gutzwiller_2015	SAMN00003024	SRR1197336	gutzwiller_wmel_embryo2to4hr_a	2-4 hr embryo	#FFD000
+wMel_gutzwiller_2015	SAMN00003024	SRR1197368	gutzwiller_wmel_embryo2to4hr_b	2-4 hr embryo	#FFD000
+wMel_gutzwiller_2015	SAMN00003024	SRR767626	gutzwiller_wmel_embryo2to4hr_a	2-4 hr embryo	#FFD000
+wMel_gutzwiller_2015	SAMN00003028	SRR1197334	gutzwiller_wmel_embryo10to12hr_a	10-12 hr embryo	#FFB400
+wMel_gutzwiller_2015	SAMN00003028	SRR1197367	gutzwiller_wmel_embryo10to12hr_b	10-12 hr embryo	#FFB400
+wMel_gutzwiller_2015	SAMN00003028	SRR767616	gutzwiller_wmel_embryo10to12hr_a	10-12 hr embryo	#FFB400
+wMel_gutzwiller_2015	SAMN00003029	SRR1197332	gutzwiller_wmel_embryo12to14hr_a	12-14 hr embryo	#FFAE00
+wMel_gutzwiller_2015	SAMN00003029	SRR1197369	gutzwiller_wmel_embryo12to14hr_b	12-14 hr embryo	#FFAE00
+wMel_gutzwiller_2015	SAMN00003029	SRR767613	gutzwiller_wmel_embryo12to14hr_a	12-14 hr embryo	#FFAE00
+wMel_gutzwiller_2015	SAMN00003032	SRR1197327	gutzwiller_wmel_embryo18to20hr_a	18-20 hr embryo	#FF9900
+wMel_gutzwiller_2015	SAMN00003032	SRR1197363	gutzwiller_wmel_embryo18to20hr_b	18-20 hr embryo	#FF9900
+wMel_gutzwiller_2015	SAMN00003032	SRR767622	gutzwiller_wmel_embryo18to20hr_a	18-20 hr embryo	#FF9900
+wMel_gutzwiller_2015	SAMN00003034	SRR1197328	gutzwiller_wmel_embryo22to24hr_a	22-24 hr embryo	#FF8C00
+wMel_gutzwiller_2015	SAMN00003034	SRR1197366	gutzwiller_wmel_embryo22to24hr_b	22-24 hr embryo	#FF8C00
+wMel_gutzwiller_2015	SAMN00003034	SRR767625	gutzwiller_wmel_embryo22to24hr_a	22-24 hr embryo	#FF8C00
+wMel_gutzwiller_2015	SAMN00003035	SRR1197325	gutzwiller_wmel_L1_a	L1	indianred1
+wMel_gutzwiller_2015	SAMN00003035	SRR1197426	gutzwiller_wmel_L1_b	L1	indianred1
+wMel_gutzwiller_2015	SAMN00003035	SRR767624	gutzwiller_wmel_L1_a	L1	indianred1
+wMel_gutzwiller_2015	SAMN00003036	SRR1197324	gutzwiller_wmel_L2_a	L2	indianred3
+wMel_gutzwiller_2015	SAMN00003036	SRR1197425	gutzwiller_wmel_L2_b	L2	indianred3
+wMel_gutzwiller_2015	SAMN00003036	SRR767623	gutzwiller_wmel_L2_a	L2	indianred3
+wMel_gutzwiller_2015	SAMN00003037	SRR1197326	gutzwiller_wmel_L3_12hrpostmolt_a	"12 hr post molt, L3"	chartreuse1
+wMel_gutzwiller_2015	SAMN00003037	SRR1197424	gutzwiller_wmel_L3_12hrpostmolt_b	"12 hr post molt, L3"	chartreuse1
+wMel_gutzwiller_2015	SAMN00003037	SRR767627	gutzwiller_wmel_L3_12hrpostmolt_a	"12 hr post molt, L3"	chartreuse1
+wMel_gutzwiller_2015	SAMN00003038	SRR1197312	gutzwiller_wmel_L3_darkbluegutPS_1to2_a	"dark blue gut PS1-2, L3"	green3
+wMel_gutzwiller_2015	SAMN00003038	SRR1197392	gutzwiller_wmel_L3_darkbluegutPS_1to2_a	"dark blue gut PS1-2, L3"	green3
+wMel_gutzwiller_2015	SAMN00003038	SRR1197412	gutzwiller_wmel_L3_darkbluegutPS_1to2_b	"dark blue gut PS1-2, L3"	green3
+wMel_gutzwiller_2015	SAMN00003039	SRR1197308	gutzwiller_wmel_L3_lightbluegutPS_3to6_a	"light blue gut PS3-6, L3"	green4
+wMel_gutzwiller_2015	SAMN00003039	SRR1197388	gutzwiller_wmel_L3_lightbluegutPS_3to6_a	"light blue gut PS3-6, L3"	green4
+wMel_gutzwiller_2015	SAMN00003039	SRR1197467	gutzwiller_wmel_L3_lightbluegutPS_3to6_b	"light blue gut PS3-6, L3"	green4
+wMel_gutzwiller_2015	SAMN00003083	SRR1197307	gutzwiller_wmel_L3_cleargutPS_7to9_a	"clear gut PS7-9, L3"	darkgreen
+wMel_gutzwiller_2015	SAMN00003083	SRR1197387	gutzwiller_wmel_L3_cleargutPS_7to9_a	"clear gut PS7-9, L3"	darkgreen
+wMel_gutzwiller_2015	SAMN00003083	SRR1197408	gutzwiller_wmel_L3_cleargutPS_7to9_b	"clear gut PS7-9, L3"	darkgreen
+wMel_gutzwiller_2015	SAMN00003084	SRR1197290	gutzwiller_wmel_WPP_a	WPP	#FFB6C1
+wMel_gutzwiller_2015	SAMN00003084	SRR1197423	gutzwiller_wmel_WPP_b	WPP	#FFB6C1
+wMel_gutzwiller_2015	SAMN00003084	SRR767617	gutzwiller_wmel_WPP_a	WPP	#FFB6C1
+wMel_gutzwiller_2015	SAMN00003046	SRR1197289	gutzwiller_wmel_pupae_12hrpostWPP_a	"12 hr post WPP, pupae"	#E7A5B0
+wMel_gutzwiller_2015	SAMN00003046	SRR1197422	gutzwiller_wmel_pupae_12hrpostWPP_b	"12 hr post WPP, pupae"	#E7A5B0
+wMel_gutzwiller_2015	SAMN00003046	SRR767608	gutzwiller_wmel_pupae_12hrpostWPP_a	"12 hr post WPP, pupae"	#E7A5B0
+wMel_gutzwiller_2015	SAMN00003047	SRR1197288	gutzwiller_wmel_pupae_24hrpostWPP_a	"24 hr post WPP, pupae"	#D0949F
+wMel_gutzwiller_2015	SAMN00003047	SRR1197421	gutzwiller_wmel_pupae_24hrpostWPP_b	"24 hr post WPP, pupae"	#D0949F
+wMel_gutzwiller_2015	SAMN00003047	SRR767604	gutzwiller_wmel_pupae_24hrpostWPP_a	"24 hr post WPP, pupae"	#D0949F
+wMel_gutzwiller_2015	SAMN00003085	SRR1197287	gutzwiller_wmel_pupae_2dayspostWPP_a	"2 days post WPP, pupae"	#B9848E
+wMel_gutzwiller_2015	SAMN00003085	SRR1197420	gutzwiller_wmel_pupae_2dayspostWPP_b	"2 days post WPP, pupae"	#B9848E
+wMel_gutzwiller_2015	SAMN00003085	SRR767614	gutzwiller_wmel_pupae_2dayspostWPP_a	"2 days post WPP, pupae"	#B9848E
+wMel_gutzwiller_2015	SAMN00003086	SRR1197285	gutzwiller_wmel_pupae_3dayspostWPP_a	"3 days post WPP, pupae"	#A2737D
+wMel_gutzwiller_2015	SAMN00003086	SRR1197419	gutzwiller_wmel_pupae_3dayspostWPP_b	"3 days post WPP, pupae"	#A2737D
+wMel_gutzwiller_2015	SAMN00003086	SRR767611	gutzwiller_wmel_pupae_3dayspostWPP_a	"3 days post WPP, pupae"	#A2737D
+wMel_gutzwiller_2015	SAMN00003048	SRR1197286	gutzwiller_wmel_pupae_4dayspostWPP_a	"4 days post WPP, pupae"	#8B636C
+wMel_gutzwiller_2015	SAMN00003048	SRR1197416	gutzwiller_wmel_pupae_4dayspostWPP_b	"4 days post WPP, pupae"	#8B636C
+wMel_gutzwiller_2015	SAMN00003048	SRR767612	gutzwiller_wmel_pupae_4dayspostWPP_a	"4 days post WPP, pupae"	#8B636C
+wMel_gutzwiller_2015	SAMN00003040	SRR1197317	gutzwiller_wmel_adultfemale_1dayposteclosion_a	"1 day post eclosion, adult female"	plum
+wMel_gutzwiller_2015	SAMN00003040	SRR1197418	gutzwiller_wmel_adultfemale_1dayposteclosion_b	"1 day post eclosion, adult female"	plum
+wMel_gutzwiller_2015	SAMN00003040	SRR767621	gutzwiller_wmel_adultfemale_1dayposteclosion_a	"1 day post eclosion, adult female"	plum
+wMel_gutzwiller_2015	SAMN00003042	SRR1197313	gutzwiller_wmel_adultfemale_5dayposteclosion_a	"5 day post eclosion, adult female"	mediumpurple1
+wMel_gutzwiller_2015	SAMN00003042	SRR1197464	gutzwiller_wmel_adultfemale_5dayposteclosion_b	"5 day post eclosion, adult female"	mediumpurple1
+wMel_gutzwiller_2015	SAMN00003042	SRR1197465	gutzwiller_wmel_adultfemale_5dayposteclosion_c	"5 day post eclosion, adult female"	mediumpurple1
+wMel_gutzwiller_2015	SAMN00003042	SRR1197433	gutzwiller_wmel_adultfemale_5dayposteclosion_d	"5 day post eclosion, adult female"	mediumpurple1
+wMel_gutzwiller_2015	SAMN00003042	SRR1197393	gutzwiller_wmel_adultfemale_5dayposteclosion_a	"5 day post eclosion, adult female"	mediumpurple1
+wMel_gutzwiller_2015	SAMN00003042	SRR1197414	gutzwiller_wmel_adultfemale_5dayposteclosion_f	"5 day post eclosion, adult female"	mediumpurple1
+wMel_gutzwiller_2015	SAMN00003041	SRR1197314	gutzwiller_wmel_adultfemale_30dayposteclosion_a	"30 day post eclosion, adult female"	darkorchid4
+wMel_gutzwiller_2015	SAMN00003041	SRR1197411	gutzwiller_wmel_adultfemale_30dayposteclosion_b	"30 day post eclosion, adult female"	darkorchid4
+wMel_gutzwiller_2015	SAMN00003041	SRR1197394	gutzwiller_wmel_adultfemale_30dayposteclosion_a	"30 day post eclosion, adult female"	darkorchid4
+wMel_gutzwiller_2015	SAMN00003043	SRR1197315	gutzwiller_wmel_adultmale_1dayposteclosion_a	"1 day post eclosion, adult male"	darkslategray1
+wMel_gutzwiller_2015	SAMN00003043	SRR1197415	gutzwiller_wmel_adultmale_1dayposteclosion_b	"1 day post eclosion, adult male"	darkslategray1
+wMel_gutzwiller_2015	SAMN00003043	SRR767619	gutzwiller_wmel_adultmale_1dayposteclosion_a	"1 day post eclosion, adult male"	darkslategray1
+wMel_gutzwiller_2015	SAMN00003044	SRR1197316	gutzwiller_wmel_adultmale_5dayposteclosion_a	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003044	SRR1197435	gutzwiller_wmel_adultmale_5dayposteclosion_b	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003044	SRR1197417	gutzwiller_wmel_adultmale_5dayposteclosion_c	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003044	SRR1197436	gutzwiller_wmel_adultmale_5dayposteclosion_d	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003044	SRR767607	gutzwiller_wmel_adultmale_5dayposteclosion_a	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003044	SRR1197468	gutzwiller_wmel_adultmale_5dayposteclosion_i	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003044	SRR1197469	gutzwiller_wmel_adultmale_5dayposteclosion_j	"5 day post eclosion, adult male"	dodgerblue
+wMel_gutzwiller_2015	SAMN00003045	SRR1197311	gutzwiller_wmel_adultmale_30dayposteclosion_a	"30 day post eclosion, adult male"	deepskyblue4
+wMel_gutzwiller_2015	SAMN00003045	SRR1197391	gutzwiller_wmel_adultmale_30dayposteclosion_a	"30 day post eclosion, adult male"	deepskyblue4
+wMel_gutzwiller_2015	SAMN00003045	SRR1197413	gutzwiller_wmel_adultmale_30dayposteclosion_b	"30 day post eclosion, adult male"	deepskyblue4
+wDi_luck_2014	SAMN03103651	SRR1610144	luck_wdi_L3_a	L3	green3
+wDi_luck_2014	SAMN03103651	SRR1610416	luck_wdi_L3_a	L3	green3
+wDi_luck_2014	SAMN03103652	SRR1610145	luck_wdi_L4_a	L4	olivedrab1
+wDi_luck_2014	SAMN03103652	SRR1610420	luck_wdi_L4_a	L4	olivedrab1
+wDi_luck_2014	SAMN03103648	SRR1610277	luck_wdi_adultmale_a	adult male	deepskyblue4
+wDi_luck_2014	SAMN03103649	SRR1610142	luck_wdi_adultfemale_a	adult female	darkorchid4
+wDi_luck_2014	SAMN03103649	SRR1610278	luck_wdi_adultfemale_a	adult female	darkorchid4
+wDi_luck_2014	SAMN03103650	SRR1610143	luck_wdi_MF_a	microfilariae	darkorange
+wDi_luck_2014	SAMN03103650	SRR1610279	luck_wdi_MF_a	microfilariae	darkorange
+wMel_darby_2014	SAMN02400669	SRR1029542	darby_wmel_doxy_a	doxycycline	red4
+wMel_darby_2014	SAMN02400669	SRR1648142	darby_wmel_doxy_a	doxycycline	red4
+wMel_darby_2014	SAMN02400670	SRR1029544	darby_wmel_doxy_b	doxycycline	red4
+wMel_darby_2014	SAMN02400670	SRR1648144	darby_wmel_doxy_b	doxycycline	red4
+wMel_darby_2014	SAMN02400671	SRR1029543	darby_wmel_doxy_c	doxycycline	red4
+wMel_darby_2014	SAMN02400671	SRR1648145	darby_wmel_doxy_c	doxycycline	red4
+wMel_darby_2014	SAMN02400668	SRR1648141	darby_wmel_nodoxy_c	no doxycycline	deepskyblue4
+wMel_darby_2014	SAMN02400666	SRR1029539	darby_wmel_nodoxy_a	no doxycycline	deepskyblue4
+wMel_darby_2014	SAMN02400666	SRR1648139	darby_wmel_nodoxy_a	no doxycycline	deepskyblue4
+wMel_darby_2014	SAMN02400667	SRR1029540	darby_wmel_nodoxy_b	no doxycycline	deepskyblue4
+wMel_darby_2014	SAMN02400667	SRR1648140	darby_wmel_nodoxy_b	no doxycycline	deepskyblue4
+wMel_darby_2014	SAMN02400668	SRR1029541	darby_wmel_nodoxy_c	no doxycycline	deepskyblue4
+wDi_luck_2015	SAMN03483168	SRR1974174	luck_wdi_adultfemale_bodywall_a	"body wall, adult female"	dodgerblue
+wDi_luck_2015	SAMN03483169	SRR1974175	luck_wdi_adultfemale_bodywall_b	"body wall, adult female"	dodgerblue
+wDi_luck_2015	SAMN03483170	SRR1974176	luck_wdi_adultfemale_head_a	"head, adult female"	red4
+wDi_luck_2015	SAMN03483171	SRR1974177	luck_wdi_adultfemale_head_b	"head, adult female"	red4
+wDi_luck_2015	SAMN03483172	SRR1974178	luck_wdi_adultfemale_intestine_a	"intestine, adult female"	darkorange
+wDi_luck_2015	SAMN03483173	SRR1974179	luck_wdi_adultfemale_intestine_b	"intestine, adult female"	darkorange
+wDi_luck_2015	SAMN03483174	SRR1974180	luck_wdi_adultfemale_uterus_a	"uterus, adult female"	darkorchid4
+wDi_luck_2015	SAMN03483175	SRR1974181	luck_wdi_adultfemale_uterus_b	"uterus, adult female"	darkorchid4
+wDi_luck_2015	SAMN03483176	SRR1974182	luck_wdi_adultmale_bodywall_a	"body wall, adult male"	green3
+wDi_luck_2015	SAMN03483177	SRR1974183	luck_wdi_adultmale_bodywall_b	"body wall, adult male"	green3
+wDi_luck_2015	SAMN03483178	SRR1974184	luck_wdi_adultmale_intestine_a	"intestine, adult male"	darkgoldenrod1
+wDi_luck_2015	SAMN03483179	SRR1974185	luck_wdi_adultmale_testis_a	"testis, adult male"	chartreuse1
