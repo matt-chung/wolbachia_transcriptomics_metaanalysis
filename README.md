@@ -84,6 +84,7 @@ PYTHON_BIN_DIR=/usr/local/bin
 FADU_BIN_DIR=/home/mattchung/scripts/FADU
 HISAT2_BIN_DIR=/usr/local/packages/hisat2-2.1.0
 INTERPROSCAN_BIN_DIR=/local/aberdeen2rw/julie/Matt_dir/packages/interproscan-5.34-73.0
+NCBIBLAST_BIN_DIR=/usr/local/packages/ncbi-blast-2.2.26/bin
 SAMTOOLS_BIN_DIR=/usr/local/packages/samtools-1.9/bin
 SEQTK_BIN_DIR=/usr/local/packages/seqtk-1.2/bin
 SRATOOLKIT_BIN_DIR=/usr/local/packages/sratoolkit-2.9.0/bin
@@ -2935,4 +2936,60 @@ for(i in 1:length(tpm.wgcna.list)){
             quote = F,
             sep = "\t")
 }
+```
+
+## Download reference files (2019-12-13) <a name="coreanalysis_getreferences"></a>
+
+The faa reference for wDi must be downloaded from this link: http://rast.nmpdr.org/rast.cgi?page=JobDetails&job=53659 (login:guest, password:guest). All subsequent code will make use of this wDi.faa at this path: "$REFERENCES_DIR"/wDi.faa
+
+#### Commands:
+```{bash, eval = F}
+## wBm
+wget -O "$REFERENCES_DIR"/wBm.faa.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/385/GCF_000008385.1_ASM838v1/GCF_000008385.1_ASM838v1_translated_cds.faa.gz
+gunzip "$REFERENCES_DIR"/wBm.faa.gz
+
+## wMel
+wget -O "$REFERENCES_DIR"/wMel.faa.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/008/025/GCF_000008025.1_ASM802v1/GCF_000008025.1_ASM802v1_translated_cds.faa.gz
+gunzip "$REFERENCES_DIR"/wMel.faa.gz
+
+## wOo
+wget -O "$REFERENCES_DIR"/wOo.faa.gz ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/306/885/GCF_000306885.1_ASM30688v1/GCF_000306885.1_ASM30688v1_translated_cds.faa.gz
+gunzip "$REFERENCES_DIR"/wOo.faa.gz
+
+```
+## Create BLAST database with the amino acid sequences of the four Wolbachia genomes (2019-12-13) <a name="coreanalysis_createblastdb"></a>
+
+#### Inputs:
+```{bash, eval = F}
+DB_FAA="$REFERENCES_DIR"/combined_wolbachia_reference.faa
+```
+#### Commands:
+```{bash, eval = F}
+cat "$REFERENCES_DIR"/wBm.faa "$REFERENCES_DIR"/wDi.faa "$REFERENCES_DIR"/wMel.faa "$REFERENCES_DIR"/wOo.faa > "$DB_FAA"
+$NCBIBLAST_BIN_DIR/formatdb -t "$(echo "$DB_FAA" | sed "s/[.]faa$//g")" -i "$DB_FAA"
+```
+
+## Run self-BLASTP search against the protein sequences of the four Wolbachia strains (2019-12-13) <a name="coreanalysis_createblastdb"></a>
+#### Inputs:
+```{bash, eval = F}
+BLAST_DB="$REFERENCES_DIR"/combined_wolbachia_reference.faa
+```
+#### Commands:
+```{bash, eval = F}
+qsub -P jdhotopp-lab -l mem_free=5G -N blastp -wd "$(dirname "$BLAST_DB")" -b y $NCBIBLAST_BIN_DIR/blastall -p blastp -i "$BLAST_DB" -d "$BLAST_DB" -e 1e-5 -m 8 -o "$(dirname "$BLAST_DB")"/blastp_raw.out
+```
+
+## Run PanOCT to identify core Wolbachia genes (2019-12-13) <a name="coreanalysis_createblastdb"></a>
+#### Inputs:
+```{bash, eval = F}
+FAA="$REFERENCES_DIR"/combined_wolbachia_reference.faa
+BLAST_OUTPUT="$(dirname "$BLAST_DB")"/blastp_raw.out
+OUTPUT_DIR="$WORKING_DIR"/panoct
+```
+
+#### Inputs:
+```{bash, eval = F}
+mkdir -p "$OUTPUT_DIR"
+
+
 ```
