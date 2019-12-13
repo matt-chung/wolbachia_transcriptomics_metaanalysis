@@ -2881,16 +2881,20 @@ for(i in 1:length(tpm.wgcna.list)){
 ```
 
 ##### wDi, Luck et al 2015
-![Image description](/images/wDi_luck_2015_wgcna_zscorelog2tpm_heatmap.png)
+![Image description](/images/wDi_luck_2015_wgcna_zscorelog2tpm_heatmap_bar1.png)
+![Image description](/images/wDi_luck_2015_wgcna_zscorelog2tpm_heatmap_bar2.png)
 
 ##### wMel, Gutzwiller et al 2015
-![Image description](/images/wMel_gutzwiller_2015_wgcna_zscorelog2tpm_heatmap.png)
+![Image description](/images/wMel_gutzwiller_2015_wgcna_zscorelog2tpm_heatmap_bar1.png)
+![Image description](/images/wMel_gutzwiller_2015_wgcna_zscorelog2tpm_heatmap_bar2.png)
 
 ##### wBm, Grote et al 2017
-![Image description](/images/wBm_grote_2017_wgcna_zscorelog2tpm_heatmap.png)
+![Image description](/images/wBm_grote_2017_wgcna_zscorelog2tpm_heatmap_bar1.png)
+![Image description](/images/wBm_grote_2017_wgcna_zscorelog2tpm_heatmap_bar2.png)
 
 ##### wBm, Chung et al 2019
-![Image description](/images/wBm_chung_2019_wgcna_zscorelog2tpm_heatmap.png)
+![Image description](/images/wBm_chung_2019_wgcna_zscorelog2tpm_heatmap_bar1.png)
+![Image description](/images/wBm_chung_2019_wgcna_zscorelog2tpm_heatmap_bar2.png)
 
 #### Conduct functional term enrichment analysis on WGCNA expression modules <a name="ranalysis_de_wgcna_fxnterm"></a>
 
