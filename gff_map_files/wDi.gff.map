@@ -1,0 +1,910 @@
+contig	start	stop	strand	ID	Name	Ontology_term
+wDi22.scaf1	  1116	  2162	-	fig|82301.12.peg.1	Uroporphyrinogen III decarboxylase	KEGG_ENZYME:4.1.1.37
+wDi22.scaf1	  2646	  3365	+	fig|82301.12.peg.2	Hemolysin TlyC2C contains CBS domains	NA
+wDi22.scaf1	  3531	  3890	-	fig|82301.12.peg.3	FIG01207933: hypothetical protein	NA
+wDi22.scaf1	  3896	  4168	-	fig|82301.12.peg.4	Conserved domain protein	NA
+wDi22.scaf1	  4323	  5360	+	fig|82301.12.peg.5	Phosphoribosylformylglycinamidine cyclo-ligase	KEGG_ENZYME:6.3.3.1
+wDi22.scaf1	  5357	  6079	-	fig|82301.12.peg.6	Phosphoribosylaminoimidazole-succinocarboxamide synthase	KEGG_ENZYME:6.3.2.6
+wDi22.scaf1	  6148	  6855	+	fig|82301.12.peg.7	tRNA (Guanine37-N1) -methyltransferase	KEGG_ENZYME:2.1.1.31
+wDi22.scaf1	  6839	  7216	+	fig|82301.12.peg.8	LSU ribosomal protein L19p	NA
+wDi22.scaf1	  7327	  8583	+	fig|82301.12.peg.9	Phosphate transport system permease protein PstA (TC 3.A.1.7.1)	NA
+wDi22.scaf1	  8580	  9377	+	fig|82301.12.peg.10	Phosphoribosylformylglycinamidine synthase2C glutamine amidotransferase subunit	KEGG_ENZYME:6.3.5.3
+wDi22.scaf1	 10316	 10933	-	fig|82301.12.peg.11	Octanoate-[acyl-carrier-protein]-protein-N-octanoyltransferase	NA
+wDi22.scaf1	 12847	 13869	-	fig|82301.12.peg.12	GTP-binding protein Obg	NA
+wDi22.scaf1	 13857	 15131	-	fig|82301.12.peg.13	Enolase	KEGG_ENZYME:4.2.1.11
+wDi22.scaf1	 15136	 16593	-	fig|82301.12.peg.14	UDP-N-acetylmuramate--alanine ligase	KEGG_ENZYME:6.3.2.8
+wDi22.scaf1	 16670	 17350	+	fig|82301.12.peg.15	Rare lipoprotein A	NA
+wDi22.scaf1	 19863	 19994	+	fig|82301.12.peg.16	hypothetical protein	NA
+wDi22.scaf1	 20143	 20868	-	fig|82301.12.peg.17	rRNA small subunit methyltransferase H	NA
+wDi22.scaf1	 21926	 23446	+	fig|82301.12.peg.18	22C3-bisphosphoglycerate-independent phosphoglycerate mutase	KEGG_ENZYME:5.4.2.1
+wDi22.scaf1	 23487	 24467	-	fig|82301.12.peg.19	Malonyl CoA-acyl carrier protein transacylase	KEGG_ENZYME:2.3.1.39
+wDi22.scaf1	 24596	 24808	+	fig|82301.12.peg.20	LSU ribosomal protein L31p	NA
+wDi22.scaf1	 24842	 25636	+	fig|82301.12.peg.21	NAD kinase	KEGG_ENZYME:2.7.1.23
+wDi22.scaf1	 26239	 26358	+	fig|82301.12.peg.22	hypothetical protein	NA
+wDi22.scaf1	 26480	 26593	+	fig|82301.12.peg.23	hypothetical protein	NA
+wDi22.scaf1	 26556	 26690	+	fig|82301.12.peg.24	hypothetical protein	NA
+wDi22.scaf1	 27142	 28173	+	fig|82301.12.peg.25	Ferric iron ABC transporter2C iron-binding protein	NA
+wDi22.scaf1	 28303	 28416	-	fig|82301.12.peg.26	hypothetical protein	NA
+wDi22.scaf1	 28944	 29843	+	fig|82301.12.peg.27	Aspartate carbamoyltransferase	KEGG_ENZYME:2.1.3.2
+wDi22.scaf1	 30044	 30226	-	fig|82301.12.peg.28	hypothetical protein	NA
+wDi22.scaf1	 31396	 31548	-	fig|82301.12.peg.29	Probable extracellular metallopeptidase	NA
+wDi22.scaf1	 32486	 33382	+	fig|82301.12.peg.30	Zinc transporter ZitB	NA
+wDi22.scaf1	 33392	 33508	+	fig|82301.12.peg.31	hypothetical protein	NA
+wDi22.scaf1	 33830	 34639	-	fig|82301.12.peg.32	surface antigen-related protein	NA
+wDi22.scaf1	 34692	 35918	-	fig|82301.12.peg.33	MiaB family protein2C possibly involved in tRNA or rRNA modification	NA
+wDi22.scaf1	 36115	 36468	-	fig|82301.12.peg.34	Aspartyl-tRNA(Asn) amidotransferase subunit C @ Glutamyl-tRNA(Gln) amidotransferase subunit C	KEGG_ENZYME:6.3.5.6,KEGG_ENZYME:6.3.5.7
+wDi22.scaf1	 36458	 37384	-	fig|82301.12.peg.35	Ribose-phosphate pyrophosphokinase	KEGG_ENZYME:2.7.6.1
+wDi22.scaf1	 38210	 39034	-	fig|82301.12.peg.36	WlaX protein	NA
+wDi22.scaf1	 39027	 39911	-	fig|82301.12.peg.37	GTP-binding protein Era	NA
+wDi22.scaf1	 40145	 41965	-	fig|82301.12.peg.38	Glucosamine--fructose-6-phosphate aminotransferase [isomerizing]	KEGG_ENZYME:2.6.1.16
+wDi22.scaf1	 42011	 42427	-	fig|82301.12.peg.39	Preprotein translocase subunit YajC (TC 3.A.5.1.1)	NA
+wDi22.scaf1	 42589	 43173	+	fig|82301.12.peg.40	COG0009 YrdC subfamily2C required for N6-threonylcarbamoyl adenosine t(6)A37 modification in tRNA	NA
+wDi22.scaf1	 43195	 44025	+	fig|82301.12.peg.41	DNA polymerase III delta prime subunit	KEGG_ENZYME:2.7.7.7
+wDi22.scaf1	 44166	 44345	+	fig|82301.12.peg.42	hypothetical protein	NA
+wDi22.scaf1	 44778	 45446	+	fig|82301.12.peg.43	type IV secretion system protein VirB82C putative	NA
+wDi22.scaf1	 45459	 46001	-	fig|82301.12.peg.44	Ribonuclease HII	KEGG_ENZYME:3.1.26.4
+wDi22.scaf1	 46062	 47042	-	fig|82301.12.peg.45	Phospho-N-acetylmuramoyl-pentapeptide-transferase	KEGG_ENZYME:2.7.8.13
+wDi22.scaf1	 47112	 49232	-	fig|82301.12.peg.46	Cell division protein FtsK	NA
+wDi22.scaf1	 49780	 50889	+	fig|82301.12.peg.47	DNA polymerase III beta subunit	KEGG_ENZYME:2.7.7.7
+wDi22.scaf1	 50894	 51631	-	fig|82301.12.peg.48	tRNA pseudouridine synthase A	KEGG_ENZYME:4.2.1.70
+wDi22.scaf1	 53113	 53250	+	fig|82301.12.peg.49	hypothetical protein	NA
+wDi22.scaf1	 53290	 54942	+	fig|82301.12.peg.50	SSU ribosomal protein S1p	NA
+wDi22.scaf1	 54965	 55138	+	fig|82301.12.peg.51	Bacterial nucleoid DNA-binding protein2C HupA family	NA
+wDi22.scaf1	 55110	 55238	+	fig|82301.12.peg.52	hypothetical protein	NA
+wDi22.scaf1	 55339	 55473	+	fig|82301.12.peg.53	hypothetical protein	NA
+wDi22.scaf1	 55596	 55868	-	fig|82301.12.peg.54	YgfY COG2938	NA
+wDi22.scaf1	 55967	 57091	+	fig|82301.12.peg.55	Intramembrane protease RasP/YluC2C implicated in cell division based on FtsL cleavage	NA
+wDi22.scaf1	 57123	 59441	+	fig|82301.12.peg.56	Outer membrane protein assembly factor YaeT precursor	NA
+wDi22.scaf1	 59442	 60002	+	fig|82301.12.peg.57	Outer membrane protein H precursor	NA
+wDi22.scaf1	 60023	 60463	+	fig|82301.12.peg.58	(3R)-hydroxymyristoyl-[acyl carrier protein] dehydratase	KEGG_ENZYME:4.2.1.-
+wDi22.scaf1	 60494	 63400	+	fig|82301.12.peg.59	Glutamate synthase [NADPH] small chain	KEGG_ENZYME:1.4.1.13
+wDi22.scaf1	 64408	 65955	+	fig|82301.12.peg.60	NADH dehydrogenase subunit 5	NA
+wDi22.scaf1	 65940	 67283	+	fig|82301.12.peg.61	Signal recognition particle2C subunit Ffh SRP54 (TC 3.A.5.1.1)	NA
+wDi22.scaf1	 67412	 67588	-	fig|82301.12.peg.62	hypothetical protein	NA
+wDi22.scaf1	 68237	 68932	+	fig|82301.12.peg.63	Sigma cross-reacting protein 27A	NA
+wDi22.scaf1	 69042	 69407	+	fig|82301.12.peg.64	hypothetical protein	NA
+wDi22.scaf1	 69638	 69751	+	fig|82301.12.peg.65	hypothetical protein	NA
+wDi22.scaf1	 70267	 70380	-	fig|82301.12.peg.66	hypothetical protein	NA
+wDi22.scaf1	 70939	 71460	+	fig|82301.12.peg.67	4-hydroxy-3-methylbut-2-enyl diphosphate reductase	KEGG_ENZYME:1.17.1.2
+wDi22.scaf1	 71438	 71755	+	fig|82301.12.peg.68	4-hydroxy-3-methylbut-2-enyl diphosphate reductase	KEGG_ENZYME:1.17.1.2
+wDi22.scaf1	 72134	 73408	+	fig|82301.12.peg.69	putrescine-ornithine antiporter	NA
+wDi22.scaf1	 73507	 74781	+	fig|82301.12.peg.70	putrescine-ornithine antiporter	NA
+wDi22.scaf1	 74790	 75215	-	fig|82301.12.peg.71	hypothetical protein	NA
+wDi22.scaf1	 75356	 76384	+	fig|82301.12.peg.72	Aspartate-semialdehyde dehydrogenase	KEGG_ENZYME:1.2.1.11
+wDi22.scaf1	 76400	 77446	-	fig|82301.12.peg.73	Phosphoribosylaminoimidazole carboxylase ATPase subunit	KEGG_ENZYME:4.1.1.21
+wDi22.scaf1	 77562	 77966	+	fig|82301.12.peg.74	ApaG protein	NA
+wDi22.scaf1	 77990	 79426	-	fig|82301.12.peg.75	Ferric iron ABC transporter2C permease protein	NA
+wDi22.scaf1	 79696	 80544	+	fig|82301.12.peg.76	Rhodanese domain protein UPF01762C Rickettsiales subgroup	NA
+wDi22.scaf1	 80976	 81128	-	fig|82301.12.peg.77	hypothetical protein	NA
+wDi22.scaf1	 81444	 83894	-	fig|82301.12.peg.78	DNA topoisomerase I	KEGG_ENZYME:5.99.1.2
+wDi22.scaf1	 85816	 87534	-	fig|82301.12.peg.79	Glutathione-regulated potassium-efflux system protein KefKL	NA
+wDi22.scaf1	 87542	 88114	-	fig|82301.12.peg.80	Alkyl hydroperoxide reductase and/or thiol-specific antioxidant family (AhpC/TSA) protein	NA
+wDi22.scaf1	 88227	 88838	+	fig|82301.12.peg.81	Thymidylate kinase	KEGG_ENZYME:2.7.4.9
+wDi22.scaf1	 89010	 90377	-	fig|82301.12.peg.82	GTPase and tRNA-U34 5-formylation enzyme TrmE	NA
+wDi22.scaf1	 90630	 91760	+	fig|82301.12.peg.83	Parvulin-like peptidyl-prolyl isomerase	NA
+wDi22.scaf1	 91808	 92407	-	fig|82301.12.peg.84	Ubiquinol-cytochrome C reductase iron-sulfur subunit	KEGG_ENZYME:1.10.2.2
+wDi22.scaf1	 92512	 95214	-	fig|82301.12.peg.85	DNA gyrase subunit A	KEGG_ENZYME:5.99.1.3
+wDi22.scaf1	 95911	 96027	+	fig|82301.12.peg.86	hypothetical protein	NA
+wDi22.scaf1	 96844	 97032	+	fig|82301.12.peg.87	hypothetical protein	NA
+wDi22.scaf1	 97411	 98274	-	fig|82301.12.peg.88	Thymidylate synthase thyX	KEGG_ENZYME:2.1.1.-
+wDi22.scaf1	 98284	 99561	-	fig|82301.12.peg.89	UDP-N-acetylglucosamine 1-carboxyvinyltransferase	KEGG_ENZYME:2.5.1.7
+wDi22.scaf1	 99619	 99996	-	fig|82301.12.peg.90	Holo-[acyl-carrier protein] synthase	KEGG_ENZYME:2.7.8.7
+wDi22.scaf1	 99998	101272	-	fig|82301.12.peg.91	Prolyl-tRNA synthetase	KEGG_ENZYME:6.1.1.15
+wDi22.scaf1	101370	102236	-	fig|82301.12.peg.92	CXYorf1-related protein	NA
+wDi22.scaf1	102322	102438	+	fig|82301.12.peg.93	hypothetical protein	NA
+wDi22.scaf1	102654	104228	-	fig|82301.12.peg.94	Cell division protein FtsI [Peptidoglycan synthetase]	KEGG_ENZYME:2.4.1.129
+wDi22.scaf1	104917	105798	-	fig|82301.12.peg.95	Methylenetetrahydrofolate dehydrogenase (NADP+) / Methenyltetrahydrofolate cyclohydrolase	KEGG_ENZYME:1.5.1.5,KEGG_ENZYME:3.5.4.9
+wDi22.scaf1	105803	106429	-	fig|82301.12.peg.96	3-polyprenyl-4-hydroxybenzoate carboxy-lyase UbiX	KEGG_ENZYME:4.1.1.-
+wDi22.scaf1	106430	106696	-	fig|82301.12.peg.97	FIG01207870: hypothetical protein	NA
+wDi22.scaf1	106697	107971	-	fig|82301.12.peg.98	Hemolysins and related proteins containing CBS domains	NA
+wDi22.scaf1	108089	109267	-	fig|82301.12.peg.99	Acetylornithine aminotransferase	KEGG_ENZYME:2.6.1.11
+wDi22.scaf1	110435	110554	+	fig|82301.12.peg.100	hypothetical protein	NA
+wDi22.scaf1	110923	111141	-	fig|82301.12.peg.101	hypothetical protein	NA
+wDi22.scaf1	111277	112032	+	fig|82301.12.peg.102	Signal peptidase I	KEGG_ENZYME:3.4.21.89
+wDi22.scaf1	112025	113812	-	fig|82301.12.peg.103	Chaperone protein HscA	NA
+wDi22.scaf1	113790	114248	-	fig|82301.12.peg.104	Chaperone protein HscB	NA
+wDi22.scaf1	114241	114645	-	fig|82301.12.peg.105	Iron binding protein IscA for iron-sulfur cluster assembly	NA
+wDi22.scaf1	114652	115044	-	fig|82301.12.peg.106	Iron-sulfur cluster assembly scaffold protein IscU	NA
+wDi22.scaf1	115226	116137	+	fig|82301.12.peg.107	Signal recognition particle receptor protein FtsY (alpha subunit) (TC 3.A.5.1.1)	NA
+wDi22.scaf1	117538	117858	+	fig|82301.12.peg.108	SSU ribosomal protein S16p	NA
+wDi22.scaf1	117868	118896	+	fig|82301.12.peg.109	Octaprenyl-diphosphate synthase / Dimethylallyltransferase / Geranyltranstransferase (farnesyldiphosphate synthase) / Geranylgeranyl pyrophosphate synthetase	KEGG_ENZYME:2.5.1.-,KEGG_ENZYME:2.5.1.1,KEGG_ENZYME:2.5.1.10,KEGG_ENZYME:2.5.1.29
+wDi22.scaf1	118907	119473	+	fig|82301.12.peg.110	Heat shock protein GrpE	NA
+wDi22.scaf1	119486	120484	+	fig|82301.12.peg.111	Tryptophanyl-tRNA synthetase	KEGG_ENZYME:6.1.1.2
+wDi22.scaf1	500951	503338	+	fig|82301.12.peg.112	Phenylalanyl-tRNA synthetase beta chain	KEGG_ENZYME:6.1.1.20
+wDi22.scaf1	504215	504340	-	fig|82301.12.peg.113	hypothetical protein	NA
+wDi22.scaf1	504787	505344	-	fig|82301.12.peg.114	Deoxycytidine triphosphate deaminase	KEGG_ENZYME:3.5.4.13
+wDi22.scaf1	505653	506207	-	fig|82301.12.peg.115	conserved domain protein	NA
+wDi22.scaf1	506492	507961	+	fig|82301.12.peg.116	Replicative DNA helicase	KEGG_ENZYME:3.6.1.-
+wDi22.scaf1	508877	510412	-	fig|82301.12.peg.117	Methionyl-tRNA synthetase	KEGG_ENZYME:6.1.1.10
+wDi22.scaf1	510465	511631	-	fig|82301.12.peg.118	Ribose 5-phosphate isomerase B / 3-demethylubiquinone-9 3-methyltransferase	KEGG_ENZYME:5.3.1.6,KEGG_ENZYME:2.1.1.64
+wDi22.scaf1	511802	513568	+	fig|82301.12.peg.119	DNA primase	KEGG_ENZYME:2.7.7.-
+wDi22.scaf1	514389	515747	-	fig|82301.12.peg.120	DNA recombination protein RmuC	NA
+wDi22.scaf1	516161	516967	-	fig|82301.12.peg.121	Folate-dependent protein for Fe/S cluster synthesis/repair in oxidative stress	NA
+wDi22.scaf1	517104	517394	+	fig|82301.12.peg.122	Heat shock protein 60 family co-chaperone GroES	NA
+wDi22.scaf1	517496	518134	+	fig|82301.12.peg.123	Heat shock protein 60 family chaperone GroEL	NA
+wDi22.scaf1	518131	519147	+	fig|82301.12.peg.124	Heat shock protein 60 family chaperone GroEL	NA
+wDi22.scaf1	519803	520354	-	fig|82301.12.peg.125	hypothetical protein	NA
+wDi22.scaf1	520439	520774	-	fig|82301.12.peg.126	Periplasmic divalent cation tolerance protein cutA	NA
+wDi22.scaf1	521032	522183	-	fig|82301.12.peg.127	hypothetical protein	NA
+wDi22.scaf1	522489	522605	-	fig|82301.12.peg.128	hypothetical protein	NA
+wDi22.scaf1	522730	523764	+	fig|82301.12.peg.129	HflK protein	NA
+wDi22.scaf1	523767	524639	+	fig|82301.12.peg.130	HflC protein	NA
+wDi22.scaf1	524643	526124	+	fig|82301.12.peg.131	HtrA protease/chaperone protein	NA
+wDi22.scaf1	526501	526617	+	fig|82301.12.peg.132	hypothetical protein	NA
+wDi22.scaf1	527481	529535	-	fig|82301.12.peg.133	hypothetical protein	NA
+wDi22.scaf1	529568	529759	-	fig|82301.12.peg.134	hypothetical protein	NA
+wDi22.scaf1	529837	529968	-	fig|82301.12.peg.135	hypothetical protein	NA
+wDi22.scaf1	530044	531414	-	fig|82301.12.peg.136	hypothetical protein	NA
+wDi22.scaf1	531755	532534	-	fig|82301.12.peg.137	Exodeoxyribonuclease III	KEGG_ENZYME:3.1.11.2
+wDi22.scaf1	532534	533322	-	fig|82301.12.peg.138	Uroporphyrinogen-III synthase	KEGG_ENZYME:4.2.1.75
+wDi22.scaf1	534306	535733	+	fig|82301.12.peg.139	TldD protein2C part of proposed TldE/TldD proteolytic complex (PMID 12029038)	NA
+wDi22.scaf1	535728	536648	-	fig|82301.12.peg.140	conserved hypothetical protein	NA
+wDi22.scaf1	536702	539224	-	fig|82301.12.peg.141	DNA polymerase I	KEGG_ENZYME:2.7.7.7
+wDi22.scaf1	539216	539407	+	fig|82301.12.peg.142	hypothetical protein	NA
+wDi22.scaf1	540981	541109	-	fig|82301.12.peg.143	hypothetical protein	NA
+wDi22.scaf1	541245	542735	-	fig|82301.12.peg.144	ATP-dependent hsl protease ATP-binding subunit HslU	NA
+wDi22.scaf1	542737	543225	-	fig|82301.12.peg.145	ATP-dependent protease HslV	KEGG_ENZYME:3.4.25.-
+wDi22.scaf1	543400	544560	+	fig|82301.12.peg.146	Glutamate--cysteine ligase2C divergent2C of Alpha- and Beta-proteobacteria type	KEGG_ENZYME:6.3.2.2
+wDi22.scaf1	544570	545412	-	fig|82301.12.peg.147	FIG01207574: hypothetical protein	NA
+wDi22.scaf1	545490	546512	-	fig|82301.12.peg.148	Ferrochelatase2C protoheme ferro-lyase	KEGG_ENZYME:4.99.1.1
+wDi22.scaf1	546513	547313	-	fig|82301.12.peg.149	FIG01207764: hypothetical protein	NA
+wDi22.scaf1	547423	547842	+	fig|82301.12.peg.150	Nucleoside diphosphate kinase	KEGG_ENZYME:2.7.4.6
+wDi22.scaf1	548146	548880	-	fig|82301.12.peg.151	Zinc ABC transporter2C periplasmic-binding protein ZnuA	NA
+wDi22.scaf1	549022	549762	+	fig|82301.12.peg.152	Zinc ABC transporter2C ATP-binding protein ZnuC	NA
+wDi22.scaf1	549759	551189	+	fig|82301.12.peg.153	Ubiquinone biosynthesis monooxygenase UbiB	NA
+wDi22.scaf1	551266	551439	-	fig|82301.12.peg.154	hypothetical protein	NA
+wDi22.scaf1	551641	552237	-	fig|82301.12.peg.155	Orotate phosphoribosyltransferase	KEGG_ENZYME:2.4.2.10
+wDi22.scaf1	552577	552708	+	fig|82301.12.peg.156	hypothetical protein	NA
+wDi22.scaf1	553007	554521	-	fig|82301.12.peg.157	Protein-export membrane protein SecD (TC 3.A.5.1.1)	NA
+wDi22.scaf1	554589	555467	+	fig|82301.12.peg.158	Porphobilinogen deaminase	KEGG_ENZYME:2.5.1.61
+wDi22.scaf1	555458	556345	+	fig|82301.12.peg.159	UDP-N-acetylenolpyruvoylglucosamine reductase	KEGG_ENZYME:1.1.1.158
+wDi22.scaf1	556958	557104	-	fig|82301.12.peg.160	hypothetical protein	NA
+wDi22.scaf1	557605	557730	-	fig|82301.12.peg.161	hypothetical protein	NA
+wDi22.scaf1	557711	558286	+	fig|82301.12.peg.162	FIG01208389: hypothetical protein	NA
+wDi22.scaf1	558297	559580	+	fig|82301.12.peg.163	1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase	KEGG_ENZYME:1.17.7.1
+wDi22.scaf1	559597	561393	-	fig|82301.12.peg.164	Translation elongation factor LepA	NA
+wDi22.scaf1	561456	562850	-	fig|82301.12.peg.165	Malonyl-CoA decarboxylase	KEGG_ENZYME:4.1.1.9
+wDi22.scaf1	563516	563632	-	fig|82301.12.peg.166	hypothetical protein	NA
+wDi22.scaf1	565155	566033	-	fig|82301.12.peg.167	peptidase2C M23/M37 family	NA
+wDi22.scaf1	566055	566795	-	fig|82301.12.peg.168	hypothetical protein	NA
+wDi22.scaf1	566842	567579	-	fig|82301.12.peg.169	competence lipoprotein ComL2C putative	NA
+wDi22.scaf1	567671	567817	-	fig|82301.12.peg.170	hypothetical protein	NA
+wDi22.scaf1	567860	567979	-	fig|82301.12.peg.171	hypothetical protein	NA
+wDi22.scaf1	568623	569165	-	fig|82301.12.peg.172	CDP-diacylglycerol--glycerol-3-phosphate 3-phosphatidyltransferase	KEGG_ENZYME:2.7.8.5
+wDi22.scaf1	570168	570665	+	fig|82301.12.peg.173	NADP-dependent malic enzyme	KEGG_ENZYME:1.1.1.40
+wDi22.scaf1	570724	570942	+	fig|82301.12.peg.174	YrbA protein	NA
+wDi22.scaf1	570958	571281	+	fig|82301.12.peg.175	Uncharacterized monothiol glutaredoxin ycf64-like	NA
+wDi22.scaf1	571489	572721	+	fig|82301.12.peg.176	Ubiquinol--cytochrome c reductase2C cytochrome B subunit	KEGG_ENZYME:1.10.2.2
+wDi22.scaf1	572721	573485	+	fig|82301.12.peg.177	ubiquinol cytochrome C oxidoreductase2C cytochrome C1 subunit	NA
+wDi22.scaf1	573566	575500	+	fig|82301.12.peg.178	Excinuclease ABC subunit B	NA
+wDi22.scaf1	575555	576295	-	fig|82301.12.peg.179	Alternative Folylglutamate Synthase	NA
+wDi22.scaf1	576298	576759	-	fig|82301.12.peg.180	Dihydrofolate reductase	KEGG_ENZYME:1.5.1.3
+wDi22.scaf1	576774	578072	-	fig|82301.12.peg.181	Dihydropteroate synthase	KEGG_ENZYME:2.5.1.15
+wDi22.scaf1	578072	578473	-	fig|82301.12.peg.182	Dihydroneopterin aldolase	KEGG_ENZYME:4.1.2.25
+wDi22.scaf1	578577	579233	-	fig|82301.12.peg.183	PqqC-like protein	NA
+wDi22.scaf1	579358	581406	-	fig|82301.12.peg.184	DNA ligase	KEGG_ENZYME:6.5.1.2
+wDi22.scaf1	581629	582372	+	fig|82301.12.peg.185	5-nucleotidase SurE	KEGG_ENZYME:3.1.3.5
+wDi22.scaf1	582948	585608	+	fig|82301.12.peg.186	2-oxoglutarate dehydrogenase E1 component	KEGG_ENZYME:1.2.4.2
+wDi22.scaf1	586017	586220	-	fig|82301.12.peg.187	DsbA-like disulfide oxidoreductase	NA
+wDi22.scaf1	587449	588936	+	fig|82301.12.peg.188	3-polyprenyl-4-hydroxybenzoate carboxy-lyase	KEGG_ENZYME:4.1.1.-
+wDi22.scaf1	588970	589506	+	fig|82301.12.peg.189	Endonuclease Nuc	NA
+wDi22.scaf1	590623	591972	-	fig|82301.12.peg.190	Chromosomal replication initiator protein DnaA	NA
+wDi22.scaf1	592101	592214	-	fig|82301.12.peg.191	hypothetical protein	NA
+wDi22.scaf1	592312	593040	+	fig|82301.12.peg.192	Putative glutamine synthetase2C Rickettsiales type	KEGG_ENZYME:6.3.1.2
+wDi22.scaf1	593471	593638	-	fig|82301.12.peg.193	hypothetical protein	NA
+wDi22.scaf1	593651	593794	-	fig|82301.12.peg.194	hypothetical protein	NA
+wDi22.scaf1	594022	595329	-	fig|82301.12.peg.195	Adenylosuccinate synthetase	KEGG_ENZYME:6.3.4.4
+wDi22.scaf1	595969	596136	-	fig|82301.12.peg.196	hypothetical protein	NA
+wDi22.scaf1	596773	597939	-	fig|82301.12.peg.197	Bicyclomycin resistance protein	NA
+wDi22.scaf1	598101	599258	-	fig|82301.12.peg.198	2-octaprenyl-6-methoxyphenol hydroxylase	KEGG_ENZYME:1.14.13.-
+wDi22.scaf1	599312	600100	-	fig|82301.12.peg.199	Scaffold protein for [4Fe-4S] cluster assembly ApbC2C MRP-like	NA
+wDi22.scaf1	600175	600306	-	fig|82301.12.peg.200	hypothetical protein	NA
+wDi22.scaf1	601387	601530	+	fig|82301.12.peg.201	hypothetical protein	NA
+wDi22.scaf1	601665	601808	+	fig|82301.12.peg.202	hypothetical protein	NA
+wDi22.scaf1	601805	603079	-	fig|82301.12.peg.203	tRNA nucleotidyltransferase	KEGG_ENZYME:2.7.7.21,KEGG_ENZYME:2.7.7.25
+wDi22.scaf1	603483	603602	-	fig|82301.12.peg.204	hypothetical protein	NA
+wDi22.scaf1	603776	603943	-	fig|82301.12.peg.205	hypothetical protein	NA
+wDi22.scaf1	603966	605066	+	fig|82301.12.peg.206	GTP-binding and nucleic acid-binding protein YchF	NA
+wDi22.scaf1	605121	605252	-	fig|82301.12.peg.207	hypothetical protein	NA
+wDi22.scaf1	605662	605796	-	fig|82301.12.peg.208	hypothetical protein	NA
+wDi22.scaf1	606090	607019	-	fig|82301.12.peg.209	Fructose-12C6-bisphosphatase2C GlpX type	KEGG_ENZYME:3.1.3.11
+wDi22.scaf1	607999	608115	+	fig|82301.12.peg.210	hypothetical protein	NA
+wDi22.scaf1	608646	611309	-	fig|82301.12.peg.211	Pyruvate2Cphosphate dikinase	KEGG_ENZYME:2.7.9.1
+wDi22.scaf1	611310	611438	-	fig|82301.12.peg.212	hypothetical protein	NA
+wDi22.scaf1	613045	613236	-	fig|82301.12.peg.213	hypothetical protein	NA
+wDi22.scaf1	613328	613456	-	fig|82301.12.peg.214	hypothetical protein	NA
+wDi22.scaf1	615110	616108	-	fig|82301.12.peg.215	Predicted glutamine amidotransferases	NA
+wDi22.scaf1	616502	616846	+	fig|82301.12.peg.216	Phosphopantetheine adenylyltransferase	KEGG_ENZYME:2.7.7.3
+wDi22.scaf1	616912	617133	+	fig|82301.12.peg.217	hypothetical protein	NA
+wDi22.scaf1	617165	617791	-	fig|82301.12.peg.218	Phosphatidate cytidylyltransferase	KEGG_ENZYME:2.7.7.41
+wDi22.scaf1	617781	618434	-	fig|82301.12.peg.219	Undecaprenyl pyrophosphate synthetase	KEGG_ENZYME:2.5.1.31
+wDi22.scaf1	618628	618747	-	fig|82301.12.peg.220	hypothetical protein	NA
+wDi22.scaf1	618754	619311	-	fig|82301.12.peg.221	Ribosome recycling factor	NA
+wDi22.scaf1	619322	620068	-	fig|82301.12.peg.222	Uridylate kinase	KEGG_ENZYME:2.7.4.-
+wDi22.scaf1	620079	620948	-	fig|82301.12.peg.223	Translation elongation factor Ts	NA
+wDi22.scaf1	620929	621768	-	fig|82301.12.peg.224	SSU ribosomal protein S2p (SAe)	NA
+wDi22.scaf1	622197	625508	-	fig|82301.12.peg.225	Carbamoyl-phosphate synthase large chain	KEGG_ENZYME:6.3.5.5
+wDi22.scaf1	625660	626406	-	fig|82301.12.peg.226	Short-chain alcohol dehydrogenase family enzyme	NA
+wDi22.scaf1	626417	627241	-	fig|82301.12.peg.227	Inner membrane protein YihY2C formerly thought to be RNase BN	NA
+wDi22.scaf1	627871	628017	-	fig|82301.12.peg.228	hypothetical protein	NA
+wDi22.scaf1	629001	630353	+	fig|82301.12.peg.229	Phosphomannomutase	KEGG_ENZYME:5.4.2.8
+wDi22.scaf1	632088	633293	-	fig|82301.12.peg.230	Lipoprotein releasing system transmembrane protein LolC	NA
+wDi22.scaf1	633616	633771	-	fig|82301.12.peg.231	hypothetical protein	NA
+wDi22.scaf1	634105	635310	-	fig|82301.12.peg.232	FIG01208263: hypothetical protein	NA
+wDi22.scaf1	635445	635810	-	fig|82301.12.peg.233	Succinate dehydrogenase hydrophobic membrane anchor protein	NA
+wDi22.scaf1	635807	635959	-	fig|82301.12.peg.234	Succinate dehydrogenase subunit C sdhC	NA
+wDi22.scaf1	637913	638050	-	fig|82301.12.peg.235	hypothetical protein	NA
+wDi22.scaf1	638019	638561	+	fig|82301.12.peg.236	hypothetical protein	NA
+wDi22.scaf1	638915	639436	-	fig|82301.12.peg.237	Smr domain family protein	NA
+wDi22.scaf1	639532	640305	+	fig|82301.12.peg.238	23S rRNA (guanosine-2'-O-) -methyltransferase rlmB	KEGG_ENZYME:2.1.1.-
+wDi22.scaf1	640374	641096	+	fig|82301.12.peg.239	FIG005935: membrane protein	NA
+wDi22.scaf1	641310	641633	+	fig|82301.12.peg.240	Cytochrome oxidase biogenesis protein Cox11-CtaG2C copper delivery to Cox1	NA
+wDi22.scaf1	642081	642194	-	fig|82301.12.peg.241	hypothetical protein	NA
+wDi22.scaf1	642162	642284	+	fig|82301.12.peg.242	hypothetical protein	NA
+wDi22.scaf1	642454	643470	-	fig|82301.12.peg.243	Phosphate ABC transporter2C periplasmic phosphate-binding protein PstS (TC 3.A.1.7.1)	NA
+wDi22.scaf1	643567	643938	-	fig|82301.12.peg.244	LSU ribosomal protein L17p	NA
+wDi22.scaf1	645124	645510	-	fig|82301.12.peg.245	SSU ribosomal protein S11p (S14e)	NA
+wDi22.scaf1	645526	645894	-	fig|82301.12.peg.246	SSU ribosomal protein S13p (S18e)	NA
+wDi22.scaf1	645956	646606	-	fig|82301.12.peg.247	Adenylate kinase	KEGG_ENZYME:2.7.4.3
+wDi22.scaf1	646603	647931	-	fig|82301.12.peg.248	Preprotein translocase secY subunit (TC 3.A.5.1.1)	NA
+wDi22.scaf1	647935	648405	-	fig|82301.12.peg.249	LSU ribosomal protein L15p (L27Ae)	NA
+wDi22.scaf1	648409	648921	-	fig|82301.12.peg.250	SSU ribosomal protein S5p (S2e)	NA
+wDi22.scaf1	648935	649315	-	fig|82301.12.peg.251	LSU ribosomal protein L18p (L5e)	NA
+wDi22.scaf1	649315	649860	-	fig|82301.12.peg.252	LSU ribosomal protein L6p (L9e)	NA
+wDi22.scaf1	649877	650272	-	fig|82301.12.peg.253	SSU ribosomal protein S8p (S15Ae)	NA
+wDi22.scaf1	650293	650601	-	fig|82301.12.peg.254	SSU ribosomal protein S14p (S29e)	NA
+wDi22.scaf1	650619	651047	-	fig|82301.12.peg.255	LSU ribosomal protein L5p (L11e)	NA
+wDi22.scaf1	651159	651479	-	fig|82301.12.peg.256	LSU ribosomal protein L24p (L26e)	NA
+wDi22.scaf1	651476	651835	-	fig|82301.12.peg.257	LSU ribosomal protein L14p (L23e)	NA
+wDi22.scaf1	651845	652078	-	fig|82301.12.peg.258	SSU ribosomal protein S17p (S11e)	NA
+wDi22.scaf1	652071	652274	-	fig|82301.12.peg.259	LSU ribosomal protein L29p (L35e)	NA
+wDi22.scaf1	652286	652699	-	fig|82301.12.peg.260	LSU ribosomal protein L16p (L10e)	NA
+wDi22.scaf1	652711	653331	-	fig|82301.12.peg.261	SSU ribosomal protein S3p (S3e)	NA
+wDi22.scaf1	653369	653719	-	fig|82301.12.peg.262	LSU ribosomal protein L22p (L17e)	NA
+wDi22.scaf1	653725	654009	-	fig|82301.12.peg.263	SSU ribosomal protein S19p (S15e)	NA
+wDi22.scaf1	654013	654837	-	fig|82301.12.peg.264	LSU ribosomal protein L2p (L8e)	NA
+wDi22.scaf1	654839	655126	-	fig|82301.12.peg.265	LSU ribosomal protein L23p (L23Ae)	NA
+wDi22.scaf1	655123	655737	-	fig|82301.12.peg.266	LSU ribosomal protein L4p (L1e)	NA
+wDi22.scaf1	655740	656465	-	fig|82301.12.peg.267	LSU ribosomal protein L3p (L3e)	NA
+wDi22.scaf1	656462	656830	-	fig|82301.12.peg.268	SSU ribosomal protein S10p (S20e)	NA
+wDi22.scaf1	658359	659705	-	fig|82301.12.peg.269	Carbamoyl-phosphate synthase small chain	KEGG_ENZYME:6.3.5.5
+wDi22.scaf1	659748	660251	+	fig|82301.12.peg.270	hypothetical protein	NA
+wDi22.scaf1	660314	661207	-	fig|82301.12.peg.271	Methionyl-tRNA formyltransferase	KEGG_ENZYME:2.1.2.9
+wDi22.scaf1	661242	661607	-	fig|82301.12.peg.272	LSU ribosomal protein L20p	NA
+wDi22.scaf1	661628	661834	-	fig|82301.12.peg.273	LSU ribosomal protein L35p	NA
+wDi22.scaf1	661976	662443	-	fig|82301.12.peg.274	FIG01207901: hypothetical protein	NA
+wDi22.scaf1	663035	663151	-	fig|82301.12.peg.275	hypothetical protein	NA
+wDi22.scaf1	663446	663562	-	fig|82301.12.peg.276	hypothetical protein	NA
+wDi22.scaf1	663924	664037	+	fig|82301.12.peg.277	hypothetical protein	NA
+wDi22.scaf1	664529	664645	+	fig|82301.12.peg.278	hypothetical protein	NA
+wDi22.scaf1	664692	664832	-	fig|82301.12.peg.279	hypothetical protein	NA
+wDi22.scaf1	664845	665048	+	fig|82301.12.peg.280	hypothetical protein	NA
+wDi22.scaf1	665600	665719	-	fig|82301.12.peg.281	hypothetical protein	NA
+wDi22.scaf1	666367	666741	-	fig|82301.12.peg.282	Ferredoxin	NA
+wDi22.scaf1	667019	667156	+	fig|82301.12.peg.283	hypothetical protein	NA
+wDi22.scaf1	667165	667284	+	fig|82301.12.peg.284	hypothetical protein	NA
+wDi22.scaf1	667378	667515	+	fig|82301.12.peg.285	hypothetical protein	NA
+wDi22.scaf1	667845	669293	-	fig|82301.12.peg.286	glycerol dehydrogenase	NA
+wDi22.scaf1	669312	670517	+	fig|82301.12.peg.287	N-succinyl-L2CL-diaminopimelate desuccinylase	KEGG_ENZYME:3.5.1.18
+wDi22.scaf1	670633	671232	+	fig|82301.12.peg.288	Alkyl hydroperoxide reductase subunit C-like protein	NA
+wDi22.scaf1	671229	672188	+	fig|82301.12.peg.289	Thioredoxin reductase	KEGG_ENZYME:1.8.1.9
+wDi22.scaf1	672167	672283	+	fig|82301.12.peg.290	hypothetical protein	NA
+wDi22.scaf1	672574	672705	+	fig|82301.12.peg.291	hypothetical protein	NA
+wDi22.scaf1	672757	672870	+	fig|82301.12.peg.292	hypothetical protein	NA
+wDi22.scaf1	673114	674034	-	fig|82301.12.peg.293	Integrase/recombinase xerD	NA
+wDi22.scaf1	674037	675425	-	fig|82301.12.peg.294	Dihydrolipoamide dehydrogenase of 2-oxoglutarate dehydrogenase	KEGG_ENZYME:1.8.1.4
+wDi22.scaf1	675412	676527	-	fig|82301.12.peg.295	PQQ enzyme repeat family protein	NA
+wDi22.scaf1	677247	677954	+	fig|82301.12.peg.296	Pyridoxine 5'-phosphate synthase	KEGG_ENZYME:2.6.99.2
+wDi22.scaf1	677947	678258	-	fig|82301.12.peg.297	DNA-binding protein2C HU family	NA
+wDi22.scaf1	678405	678851	-	fig|82301.12.peg.298	SSU ribosomal protein S9p (S16e)	NA
+wDi22.scaf1	678862	679320	-	fig|82301.12.peg.299	LSU ribosomal protein L13p (L13Ae)	NA
+wDi22.scaf1	679453	680691	+	fig|82301.12.peg.300	outer membrane protein TolC2C putative	NA
+wDi22.scaf1	681402	681920	+	fig|82301.12.peg.301	Cell division protein FtsJ / Ribosomal RNA large subunit methyltransferase E	KEGG_ENZYME:2.1.1.-
+wDi22.scaf1	681932	682579	-	fig|82301.12.peg.302	Heme exporter protein B	NA
+wDi22.scaf1	682686	683069	+	fig|82301.12.peg.303	C4-type zinc finger protein2C DksA/TraR family	NA
+wDi22.scaf1	683095	683691	-	fig|82301.12.peg.304	Guanylate kinase	KEGG_ENZYME:2.7.4.8
+wDi22.scaf1	683738	685549	-	fig|82301.12.peg.305	Pentapeptide repeat domain protein	NA
+wDi22.scaf1	685596	686738	-	fig|82301.12.peg.306	ankyrin repeat domain protein	NA
+wDi22.scaf1	687575	688081	-	fig|82301.12.peg.307	Inorganic pyrophosphatase	KEGG_ENZYME:3.6.1.1
+wDi22.scaf1	688172	688720	-	fig|82301.12.peg.308	2-octaprenyl-3-methyl-6-methoxy-12C4-benzoquinol hydroxylase	KEGG_ENZYME:1.14.13.-
+wDi22.scaf1	689737	689853	-	fig|82301.12.peg.309	hypothetical protein	NA
+wDi22.scaf1	690237	691640	-	fig|82301.12.peg.310	Dioxygenases related to 2-nitropropane dioxygenase	NA
+wDi22.scaf1	691807	691986	+	fig|82301.12.peg.311	Dephospho-CoA kinase	KEGG_ENZYME:2.7.1.24
+wDi22.scaf1	691946	692395	+	fig|82301.12.peg.312	Dephospho-CoA kinase	KEGG_ENZYME:2.7.1.24
+wDi22.scaf1	692378	693577	-	fig|82301.12.peg.313	Ribonuclease D	KEGG_ENZYME:3.1.26.3
+wDi22.scaf1	694139	694261	+	fig|82301.12.peg.314	hypothetical protein	NA
+wDi22.scaf1	694334	695359	-	fig|82301.12.peg.315	NADH-ubiquinone oxidoreductase chain H	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	695343	697391	-	fig|82301.12.peg.316	NADH-ubiquinone oxidoreductase chain G	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	697404	697616	-	fig|82301.12.peg.317	hypothetical protein	NA
+wDi22.scaf1	698937	700097	+	fig|82301.12.peg.318	Inosine-5'-monophosphate dehydrogenase	KEGG_ENZYME:1.1.1.205
+wDi22.scaf1	700498	701286	-	fig|82301.12.peg.319	Uracil-DNA glycosylase2C family 4	NA
+wDi22.scaf1	701279	701815	-	fig|82301.12.peg.320	Peptide deformylase	KEGG_ENZYME:3.5.1.88
+wDi22.scaf1	701960	703207	+	fig|82301.12.peg.321	Cell division protein FtsA	NA
+wDi22.scaf1	703301	703492	-	fig|82301.12.peg.322	hypothetical protein	NA
+wDi22.scaf1	704055	705380	+	fig|82301.12.peg.323	GTP-binding protein EngA	NA
+wDi22.scaf1	705521	705916	+	fig|82301.12.peg.324	Periplasmic thiol:disulfide oxidoreductase DsbB2C required for DsbA reoxidation	NA
+wDi22.scaf1	706090	706710	+	fig|82301.12.peg.325	Membrane proteins related to metalloendopeptidases	NA
+wDi22.scaf1	706717	709257	+	fig|82301.12.peg.326	Leucyl-tRNA synthetase	KEGG_ENZYME:6.1.1.4
+wDi22.scaf1	709371	709499	+	fig|82301.12.peg.327	hypothetical protein	NA
+wDi22.scaf1	710584	711309	+	fig|82301.12.peg.328	ATP synthase A chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	711371	711598	+	fig|82301.12.peg.329	ATP synthase C chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	711632	711760	-	fig|82301.12.peg.330	hypothetical protein	NA
+wDi22.scaf1	711825	712079	+	fig|82301.12.peg.331	ATP synthase B chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	712088	712564	+	fig|82301.12.peg.332	ATP synthase B' chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	714058	714195	-	fig|82301.12.peg.333	hypothetical protein	NA
+wDi22.scaf1	714652	714825	-	fig|82301.12.peg.334	hypothetical protein	NA
+wDi22.scaf1	714973	715182	-	fig|82301.12.peg.335	hypothetical protein	NA
+wDi22.scaf1	715294	717576	-	fig|82301.12.peg.336	Biotin carboxylase of acetyl-CoA carboxylase / Biotin carboxyl carrier protein of acetyl-CoA carboxylase%3B Propionyl-CoA carboxylase alpha chain	KEGG_ENZYME:6.3.4.14,KEGG_ENZYME:6.4.1.3
+wDi22.scaf1	717802	717972	+	fig|82301.12.peg.337	hypothetical protein	NA
+wDi22.scaf1	718165	719526	+	fig|82301.12.peg.338	Glutamyl-tRNA synthetase	KEGG_ENZYME:6.1.1.17
+wDi22.scaf1	719560	720540	-	fig|82301.12.peg.339	COG1565: Uncharacterized conserved protein	NA
+wDi22.scaf1	720708	721088	+	fig|82301.12.peg.340	FIG01207736: hypothetical protein	NA
+wDi22.scaf1	721081	721365	+	fig|82301.12.peg.341	hypothetical protein	NA
+wDi22.scaf1	722533	723363	-	fig|82301.12.peg.342	22C32C42C5-tetrahydropyridine-22C6-dicarboxylate N-succinyltransferase	KEGG_ENZYME:2.3.1.117
+wDi22.scaf1	723572	723700	+	fig|82301.12.peg.343	hypothetical protein	NA
+wDi22.scaf1	724341	725459	-	fig|82301.12.peg.344	Rod shape-determining protein RodA	NA
+wDi22.scaf1	725531	726997	-	fig|82301.12.peg.345	NADH:ubiquinone oxidoreductase subunit 5 (chain L)/Multisubunit Na+/H+ antiporter2C MnhA subunit	NA
+wDi22.scaf1	727062	727391	+	fig|82301.12.peg.346	NADH:ubiquinone oxidoreductase 17.2 kD subunit	NA
+wDi22.scaf1	727762	727896	+	fig|82301.12.peg.347	hypothetical protein	NA
+wDi22.scaf1	728561	729271	+	fig|82301.12.peg.348	Iron(III)-transport ATP-binding protein sfuC	NA
+wDi22.scaf1	729468	729635	+	fig|82301.12.peg.349	Twin-arginine translocation protein TatA	NA
+wDi22.scaf1	729766	730422	+	fig|82301.12.peg.350	exopolysaccharide synthesis protein ExoD-related protein	NA
+wDi22.scaf1	730532	731191	+	fig|82301.12.peg.351	exopolysaccharide synthesis protein ExoD-related protein	NA
+wDi22.scaf1	731184	732557	+	fig|82301.12.peg.352	Cysteinyl-tRNA synthetase	KEGG_ENZYME:6.1.1.16
+wDi22.scaf1	732684	732980	+	fig|82301.12.peg.353	FIG01207609: hypothetical protein	NA
+wDi22.scaf1	734493	734618	+	fig|82301.12.peg.354	hypothetical protein	NA
+wDi22.scaf1	734638	735834	-	fig|82301.12.peg.355	Phosphoglycerate kinase	KEGG_ENZYME:2.7.2.3
+wDi22.scaf1	735875	736903	-	fig|82301.12.peg.356	Thioredoxin reductase	KEGG_ENZYME:1.8.1.9
+wDi22.scaf1	737754	738395	-	fig|82301.12.peg.357	Transaldolase	KEGG_ENZYME:2.2.1.2
+wDi22.scaf1	738422	738754	-	fig|82301.12.peg.358	ATP synthase epsilon chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	738785	740158	-	fig|82301.12.peg.359	ATP synthase beta chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	740309	741391	-	fig|82301.12.peg.360	Phosphate transport system permease protein PstC (TC 3.A.1.7.1)	NA
+wDi22.scaf1	741528	741662	+	fig|82301.12.peg.361	LSU ribosomal protein L34p	NA
+wDi22.scaf1	741653	741769	+	fig|82301.12.peg.362	hypothetical protein	NA
+wDi22.scaf1	741655	742014	+	fig|82301.12.peg.363	Ribonuclease P protein component	KEGG_ENZYME:3.1.26.5
+wDi22.scaf1	742097	742357	+	fig|82301.12.peg.364	FIG01207696: hypothetical protein	NA
+wDi22.scaf1	746018	747007	+	fig|82301.12.peg.365	Predicted methyltransferase2C contains N-terminal TPR repeats	NA
+wDi22.scaf1	747059	748870	+	fig|82301.12.peg.366	Ribonucleotide reductase of class Ia (aerobic)2C alpha subunit	KEGG_ENZYME:1.17.4.1
+wDi22.scaf1	748940	749338	+	fig|82301.12.peg.367	Putative Holliday junction resolvase	NA
+wDi22.scaf1	749663	751318	-	fig|82301.12.peg.368	Excinuclease ABC subunit C	NA
+wDi22.scaf1	751315	753420	-	fig|82301.12.peg.369	Glycyl-tRNA synthetase beta chain	KEGG_ENZYME:6.1.1.14
+wDi22.scaf1	753424	754263	-	fig|82301.12.peg.370	Glycyl-tRNA synthetase alpha chain	KEGG_ENZYME:6.1.1.14
+wDi22.scaf1	754349	755026	-	fig|82301.12.peg.371	conserved hypothetical protein	NA
+wDi22.scaf1	755249	757744	-	fig|82301.12.peg.372	DNA mismatch repair protein MutS	NA
+wDi22.scaf1	758128	758241	-	fig|82301.12.peg.373	hypothetical protein	NA
+wDi22.scaf1	758301	758519	-	fig|82301.12.peg.374	hypothetical protein	NA
+wDi22.scaf1	759073	759606	-	fig|82301.12.peg.375	5-formyltetrahydrofolate cyclo-ligase	KEGG_ENZYME:6.3.3.2
+wDi22.scaf1	759590	760219	-	fig|82301.12.peg.376	NADPH-dependent glutamate synthase beta chain and related oxidoreductases	NA
+wDi22.scaf1	760930	761055	-	fig|82301.12.peg.377	hypothetical protein	NA
+wDi22.scaf1	761198	763570	-	fig|82301.12.peg.378	DNA gyrase subunit B	KEGG_ENZYME:5.99.1.3
+wDi22.scaf1	764115	764249	+	fig|82301.12.peg.379	hypothetical protein	NA
+wDi22.scaf1	764291	764449	-	fig|82301.12.peg.380	hypothetical protein	NA
+wDi22.scaf1	764655	765407	-	fig|82301.12.peg.381	2-hydroxymuconic semialdehyde hydrolase	KEGG_ENZYME:3.1.1.-
+wDi22.scaf1	765411	765938	-	fig|82301.12.peg.382	cytochrome c-1	NA
+wDi22.scaf1	766078	767817	+	fig|82301.12.peg.383	Single-stranded-DNA-specific exonuclease RecJ	KEGG_ENZYME:3.1.-.-
+wDi22.scaf1	768024	768494	-	fig|82301.12.peg.384	FIG01207835: hypothetical protein	NA
+wDi22.scaf1	768569	769456	+	fig|82301.12.peg.385	tRNA delta(2)-isopentenylpyrophosphate transferase	KEGG_ENZYME:2.5.1.8
+wDi22.scaf1	770543	770689	-	fig|82301.12.peg.386	hypothetical protein	NA
+wDi22.scaf1	770649	770837	+	fig|82301.12.peg.387	ATP-dependent DNA helicase RecG( EC:3.6.1.- )	KEGG_ENZYME:3.6.1.-
+wDi22.scaf1	771344	772867	-	fig|82301.12.peg.388	IMP cyclohydrolase / Phosphoribosylaminoimidazolecarboxamide formyltransferase	KEGG_ENZYME:3.5.4.10,KEGG_ENZYME:2.1.2.3
+wDi22.scaf1	774265	775656	-	fig|82301.12.peg.389	Fumarate hydratase class II	KEGG_ENZYME:4.2.1.2
+wDi22.scaf1	776334	777911	-	fig|82301.12.peg.390	Lysyl-tRNA synthetase (class I)	KEGG_ENZYME:6.1.1.6
+wDi22.scaf1	778280	780685	+	fig|82301.12.peg.391	ATPase required for both assembly of type IV secretion complex and secretion of T-DNA complex2C VirB4	NA
+wDi22.scaf1	780678	783224	+	fig|82301.12.peg.392	Inner membrane protein of type IV secretion of T-DNA complex2C VirB6	NA
+wDi22.scaf1	783266	785671	+	fig|82301.12.peg.393	Inner membrane protein of type IV secretion of T-DNA complex2C VirB6	NA
+wDi22.scaf1	785668	788616	+	fig|82301.12.peg.394	Inner membrane protein of type IV secretion of T-DNA complex2C VirB6	NA
+wDi22.scaf1	788854	792027	+	fig|82301.12.peg.395	Inner membrane protein of type IV secretion of T-DNA complex2C VirB6	NA
+wDi22.scaf1	792017	792655	+	fig|82301.12.peg.396	FIG01208253: hypothetical protein	NA
+wDi22.scaf1	792760	793308	+	fig|82301.12.peg.397	Ribosomal RNA small subunit methyltransferase D	KEGG_ENZYME:2.1.1.-
+wDi22.scaf1	793636	793788	-	fig|82301.12.peg.398	hypothetical protein	NA
+wDi22.scaf1	793801	794082	-	fig|82301.12.peg.399	hypothetical protein	NA
+wDi22.scaf1	794067	794213	-	fig|82301.12.peg.400	hypothetical protein	NA
+wDi22.scaf1	794164	794298	+	fig|82301.12.peg.401	hypothetical protein	NA
+wDi22.scaf1	795037	795171	-	fig|82301.12.peg.402	hypothetical protein	NA
+wDi22.scaf1	795310	796653	-	fig|82301.12.peg.403	UDP-N-acetylmuramoylalanine--D-glutamate ligase	KEGG_ENZYME:6.3.2.9
+wDi22.scaf1	796777	797124	+	fig|82301.12.peg.404	Ferredoxin2C 2Fe-2S	NA
+wDi22.scaf1	797135	798184	+	fig|82301.12.peg.405	FIG01207944: hypothetical protein	NA
+wDi22.scaf1	798168	798545	+	fig|82301.12.peg.406	Cytochrome c-type biogenesis protein cycL precursor	NA
+wDi22.scaf1	799064	799177	-	fig|82301.12.peg.407	hypothetical protein	NA
+wDi22.scaf1	799168	800292	-	fig|82301.12.peg.408	tRNA (5-methylaminomethyl-2-thiouridylate)-methyltransferase	KEGG_ENZYME:2.1.1.61
+wDi22.scaf1	800535	801611	-	fig|82301.12.peg.409	Rod shape-determining protein MreB	NA
+wDi22.scaf1	801633	803060	-	fig|82301.12.peg.410	Thermostable carboxypeptidase 1	KEGG_ENZYME:3.4.17.19
+wDi22.scaf1	803335	803817	+	fig|82301.12.peg.411	18K peptidoglycan-associated outer membrane lipoprotein%3B Peptidoglycan-associated lipoprotein precursor%3B Outer membrane protein P6%3B OmpA/MotB precursor	NA
+wDi22.scaf1	803970	805313	+	fig|82301.12.peg.412	tRNA(Ile)-lysidine synthetase	NA
+wDi22.scaf1	805326	807155	+	fig|82301.12.peg.413	Cell division protein FtsH	KEGG_ENZYME:3.4.24.-
+wDi22.scaf1	807202	807330	-	fig|82301.12.peg.414	hypothetical protein	NA
+wDi22.scaf1	807769	808368	-	fig|82301.12.peg.415	Cytochrome oxidase biogenesis protein Surf12C facilitates heme A insertion	NA
+wDi22.scaf1	808713	809207	-	fig|82301.12.peg.416	FIG01207547: hypothetical protein	NA
+wDi22.scaf1	809207	809842	-	fig|82301.12.peg.417	Hydrolase2C haloacid dehalogenase-like family	NA
+wDi22.scaf1	810467	810595	+	fig|82301.12.peg.418	hypothetical protein	NA
+wDi22.scaf1	811083	812993	+	fig|82301.12.peg.419	Chaperone protein HtpG	NA
+wDi22.scaf1	813644	813808	-	fig|82301.12.peg.420	hypothetical protein	NA
+wDi22.scaf1	814466	815248	+	fig|82301.12.peg.421	hypothetical protein	NA
+wDi22.scaf1	815314	816516	+	fig|82301.12.peg.422	5-aminolevulinate synthase	KEGG_ENZYME:2.3.1.37
+wDi22.scaf1	816508	817206	-	fig|82301.12.peg.423	Inositol-1-monophosphatase	KEGG_ENZYME:3.1.3.25
+wDi22.scaf1	817213	817833	-	fig|82301.12.peg.424	Translation elongation factor P	NA
+wDi22.scaf1	817843	818364	-	fig|82301.12.peg.425	16S rRNA processing protein RimM	NA
+wDi22.scaf1	820944	821063	+	fig|82301.12.peg.426	Thiol peroxidase2C Bcp-type	KEGG_ENZYME:1.11.1.15
+wDi22.scaf1	821596	821757	-	fig|82301.12.peg.427	hypothetical protein	NA
+wDi22.scaf1	821733	821948	-	fig|82301.12.peg.428	hypothetical protein	NA
+wDi22.scaf1	823824	824594	-	fig|82301.12.peg.429	Transcriptional regulatory protein basR/pmrA	NA
+wDi22.scaf1	824920	825903	+	fig|82301.12.peg.430	Glycerol-3-phosphate dehydrogenase [NAD(P)+]	KEGG_ENZYME:1.1.1.94
+wDi22.scaf1	825923	826405	+	fig|82301.12.peg.431	Phosphatidylglycerophosphatase A	KEGG_ENZYME:3.1.3.27
+wDi22.scaf1	826395	827174	+	fig|82301.12.peg.432	acetyltransferase2C GNAT family	NA
+wDi22.scaf1	827231	828391	+	fig|82301.12.peg.433	Probably membrane associated protein containing PAS/PAC domain	NA
+wDi22.scaf1	828371	829159	-	fig|82301.12.peg.434	Succinate dehydrogenase iron-sulfur protein	KEGG_ENZYME:1.3.99.1
+wDi22.scaf1	829231	829707	-	fig|82301.12.peg.435	Metal-dependent hydrolase YbeY2C involved in rRNA and/or ribosome maturation and assembly	NA
+wDi22.scaf1	830111	830827	-	fig|82301.12.peg.436	Cell division protein FtsZ	KEGG_ENZYME:3.4.24.-
+wDi22.scaf1	830875	831273	-	fig|82301.12.peg.437	Cell division protein FtsZ	KEGG_ENZYME:3.4.24.-
+wDi22.scaf1	832503	832628	+	fig|82301.12.peg.438	hypothetical protein	NA
+wDi22.scaf1	833028	833660	-	fig|82301.12.peg.439	FIG01208441: hypothetical protein	NA
+wDi22.scaf1	833766	834206	-	fig|82301.12.peg.440	Deoxyuridine 5'-triphosphate nucleotidohydrolase	KEGG_ENZYME:3.6.1.23
+wDi22.scaf1	834256	835164	-	fig|82301.12.peg.441	Acetylglutamate kinase	KEGG_ENZYME:2.7.2.8
+wDi22.scaf1	835169	835750	-	fig|82301.12.peg.442	GTP-binding protein EngB	NA
+wDi22.scaf1	835838	836959	+	fig|82301.12.peg.443	Peptide chain release factor 1	NA
+wDi22.scaf1	837353	837484	-	fig|82301.12.peg.444	hypothetical protein	NA
+wDi22.scaf1	838107	838235	-	fig|82301.12.peg.445	hypothetical protein	NA
+wDi22.scaf1	839506	839637	+	fig|82301.12.peg.446	hypothetical protein	NA
+wDi22.scaf1	840461	840589	-	fig|82301.12.peg.447	hypothetical protein	NA
+wDi22.scaf1	841440	844061	+	fig|82301.12.peg.448	Alanyl-tRNA synthetase	KEGG_ENZYME:6.1.1.7
+wDi22.scaf1	844046	846790	-	fig|82301.12.peg.449	FIG01207903: hypothetical protein	NA
+wDi22.scaf1	846850	850110	-	fig|82301.12.peg.450	Isoleucyl-tRNA synthetase	KEGG_ENZYME:6.1.1.5
+wDi22.scaf1	850572	851924	-	fig|82301.12.peg.451	tRNA-i(6)A37 methylthiotransferase	NA
+wDi22.scaf1	852690	854018	+	fig|82301.12.peg.452	Glutamyl-tRNA(Gln) synthetase	KEGG_ENZYME:6.1.1.24
+wDi22.scaf1	854772	854921	+	fig|82301.12.peg.453	hypothetical protein	NA
+wDi22.scaf1	855071	855184	-	fig|82301.12.peg.454	hypothetical protein	NA
+wDi22.scaf1	855181	856461	-	fig|82301.12.peg.455	Dihydroorotase	KEGG_ENZYME:3.5.2.3
+wDi22.scaf1	856975	859551	+	fig|82301.12.peg.456	N-Acetyl-D-glucosamine ABC transport system2C sugar-binding protein	NA
+wDi22.scaf1	859523	861328	-	fig|82301.12.peg.457	Succinate dehydrogenase flavoprotein subunit	KEGG_ENZYME:1.3.99.1
+wDi22.scaf1	862676	862837	-	fig|82301.12.peg.458	Primosomal protein N'2C superfamily II helicase2C PriA	NA
+wDi22.scaf1	862883	863020	-	fig|82301.12.peg.459	Helicase PriA essential for oriC/DnaA-independent DNA replication	NA
+wDi22.scaf1	863021	863179	-	fig|82301.12.peg.460	Helicase PriA essential for oriC/DnaA-independent DNA replication	NA
+wDi22.scaf1	863546	863671	-	fig|82301.12.peg.461	hypothetical protein	NA
+wDi22.scaf1	863695	863952	-	fig|82301.12.peg.462	hypothetical protein	NA
+wDi22.scaf1	863942	864070	-	fig|82301.12.peg.463	hypothetical protein	NA
+wDi22.scaf1	864095	864484	-	fig|82301.12.peg.464	Helicase PriA essential for oriC/DnaA-independent DNA replication	NA
+wDi22.scaf1	864555	864683	-	fig|82301.12.peg.465	hypothetical protein	NA
+wDi22.scaf1	865268	866164	+	fig|82301.12.peg.466	Fructose-bisphosphate aldolase class I	KEGG_ENZYME:4.1.2.13
+wDi22.scaf1	866605	866793	-	fig|82301.12.peg.467	hypothetical protein	NA
+wDi22.scaf1	866814	866951	-	fig|82301.12.peg.468	hypothetical protein	NA
+wDi22.scaf1	866915	867961	+	fig|82301.12.peg.469	Dihydroorotate dehydrogenase	KEGG_ENZYME:1.3.3.1
+wDi22.scaf1	868042	868749	+	fig|82301.12.peg.470	Ribonuclease III	KEGG_ENZYME:3.1.26.3
+wDi22.scaf1	869417	870892	+	fig|82301.12.peg.471	Aspartyl-tRNA(Asn) amidotransferase subunit A @ Glutamyl-tRNA(Gln) amidotransferase subunit A	KEGG_ENZYME:6.3.5.6,KEGG_ENZYME:6.3.5.7
+wDi22.scaf1	870951	871880	-	fig|82301.12.peg.472	hypothetical protein	NA
+wDi22.scaf1	872187	873452	-	fig|82301.12.peg.473	3-oxoacyl-[acyl-carrier-protein] synthase2C KASII	KEGG_ENZYME:2.3.1.41
+wDi22.scaf1	873449	873721	-	fig|82301.12.peg.474	Acyl carrier protein	NA
+wDi22.scaf1	873875	874096	-	fig|82301.12.peg.475	hypothetical protein	NA
+wDi22.scaf1	874532	874651	+	fig|82301.12.peg.476	hypothetical protein	NA
+wDi22.scaf1	874702	875571	+	fig|82301.12.peg.477	conserved domain protein	NA
+wDi22.scaf1	875604	877112	-	fig|82301.12.peg.478	Sodium/proton antiporter shaA	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	877697	877858	-	fig|82301.12.peg.479	hypothetical protein	NA
+wDi22.scaf1	878484	878609	-	fig|82301.12.peg.480	hypothetical protein	NA
+wDi22.scaf1	878572	879789	-	fig|82301.12.peg.481	tRNA-guanine transglycosylase	KEGG_ENZYME:2.4.2.29
+wDi22.scaf1	879790	880290	-	fig|82301.12.peg.482	NADH-ubiquinone oxidoreductase chain E	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	880802	881965	-	fig|82301.12.peg.483	membrane protein2C putative	NA
+wDi22.scaf1	882000	882158	+	fig|82301.12.peg.484	hypothetical protein	NA
+wDi22.scaf1	882469	882612	+	fig|82301.12.peg.485	hypothetical protein	NA
+wDi22.scaf1	882727	882879	-	fig|82301.12.peg.486	hypothetical protein	NA
+wDi22.scaf1	884149	884298	+	fig|82301.12.peg.487	hypothetical protein	NA
+wDi22.scaf1	884291	885532	-	fig|82301.12.peg.488	2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase / 2-C-methyl-D-erythritol 22C4-cyclodiphosphate synthase	KEGG_ENZYME:2.7.7.60,KEGG_ENZYME:4.6.1.12
+wDi22.scaf1	885542	886231	-	fig|82301.12.peg.489	Triosephosphate isomerase	KEGG_ENZYME:5.3.1.1
+wDi22.scaf1	888086	888778	+	fig|82301.12.peg.490	Phosphatidylserine decarboxylase	KEGG_ENZYME:4.1.1.65
+wDi22.scaf1	888775	889545	+	fig|82301.12.peg.491	CDP-diacylglycerol--serine O-phosphatidyltransferase	KEGG_ENZYME:2.7.8.8
+wDi22.scaf1	889941	890063	-	fig|82301.12.peg.492	hypothetical protein	NA
+wDi22.scaf1	890563	890703	-	fig|82301.12.peg.493	hypothetical protein	NA
+wDi22.scaf1	890883	892352	+	fig|82301.12.peg.494	sodium/alanine symporter family protein	NA
+wDi22.scaf1	892464	893045	+	fig|82301.12.peg.495	Acyl-phosphate:glycerol-3-phosphate O-acyltransferase PlsY	NA
+wDi22.scaf1	893503	893655	-	fig|82301.12.peg.496	hypothetical protein	NA
+wDi22.scaf1	893885	894001	-	fig|82301.12.peg.497	hypothetical protein	NA
+wDi22.scaf1	894186	896993	-	fig|82301.12.peg.498	Excinuclease ABC subunit A	NA
+wDi22.scaf1	897920	898063	-	fig|82301.12.peg.499	hypothetical protein	NA
+wDi22.scaf1	898770	899789	+	fig|82301.12.peg.500	hypothetical protein	NA
+wDi22.scaf1	899813	900352	+	fig|82301.12.peg.501	Putative 3-methyladenine DNA glycosylase	NA
+wDi22.scaf1	900399	901271	-	fig|82301.12.peg.502	FIG01208366: hypothetical protein	NA
+wDi22.scaf1	901392	901763	-	fig|82301.12.peg.503	Glutaredoxin 3	NA
+wDi22.scaf1	901832	902767	+	fig|82301.12.peg.504	Riboflavin kinase / FMN adenylyltransferase	KEGG_ENZYME:2.7.1.26,KEGG_ENZYME:2.7.7.2
+wDi22.scaf1	902764	903243	+	fig|82301.12.peg.505	Lipoprotein signal peptidase	KEGG_ENZYME:3.4.23.36
+wDi22.scaf1	903472	904623	+	fig|82301.12.peg.506	zinc protease	NA
+wDi22.scaf1	904610	905920	+	fig|82301.12.peg.507	ZINC PROTEASE	KEGG_ENZYME:3.4.99.-
+wDi22.scaf1	905917	906441	-	fig|82301.12.peg.508	Phosphoribosylglycinamide formyltransferase	KEGG_ENZYME:2.1.2.2
+wDi22.scaf1	907175	907699	-	fig|82301.12.peg.509	Na+/H+ ion antiporter family protein	NA
+wDi22.scaf1	907960	908694	+	fig|82301.12.peg.510	membrane protein2C TerC family	NA
+wDi22.scaf1	908678	910240	-	fig|82301.12.peg.511	GMP synthase [glutamine-hydrolyzing]	KEGG_ENZYME:6.3.5.2
+wDi22.scaf1	910979	912250	-	fig|82301.12.peg.512	Phosphoribosylamine--glycine ligase	KEGG_ENZYME:6.3.4.13
+wDi22.scaf1	912286	913515	-	fig|82301.12.peg.513	Seryl-tRNA synthetase	KEGG_ENZYME:6.1.1.11
+wDi22.scaf1	913660	915000	+	fig|82301.12.peg.514	FIG01207848: hypothetical protein	NA
+wDi22.scaf1	915038	915991	+	fig|82301.12.peg.515	tRNA dihydrouridine synthase B	KEGG_ENZYME:1.-.-.-
+wDi22.scaf1	916140	916289	-	fig|82301.12.peg.516	hypothetical protein	NA
+wDi22.scaf1	916841	916975	+	fig|82301.12.peg.517	hypothetical protein	NA
+wDi22.scaf1	917359	918636	-	fig|82301.12.peg.518	Serine hydroxymethyltransferase	KEGG_ENZYME:2.1.2.1
+wDi22.scaf1	918693	919904	-	fig|82301.12.peg.519	major facilitator family transporter	NA
+wDi22.scaf1	121559	121795	+	fig|82301.12.peg.520	FIG01208520: hypothetical protein	NA
+wDi22.scaf1	121988	122356	+	fig|82301.12.peg.521	KAP family P-loop domain protein	NA
+wDi22.scaf1	123668	124933	-	fig|82301.12.peg.522	Dihydrolipoamide acetyltransferase component of pyruvate dehydrogenase complex	KEGG_ENZYME:2.3.1.12
+wDi22.scaf1	125606	128452	-	fig|82301.12.peg.523	FIG01207651: hypothetical protein	NA
+wDi22.scaf1	128433	130793	-	fig|82301.12.peg.524	Type IV secretory pathway2C VirB4 components	NA
+wDi22.scaf1	130844	130978	-	fig|82301.12.peg.525	hypothetical protein	NA
+wDi22.scaf1	131037	131213	+	fig|82301.12.peg.526	hypothetical protein	NA
+wDi22.scaf1	131537	131701	+	fig|82301.12.peg.527	hypothetical protein	NA
+wDi22.scaf1	131804	131926	+	fig|82301.12.peg.528	hypothetical protein	NA
+wDi22.scaf1	132112	133152	-	fig|82301.12.peg.529	Enoyl-[acyl-carrier-protein] reductase [FMN]	KEGG_ENZYME:1.3.1.9
+wDi22.scaf1	133158	133679	-	fig|82301.12.peg.530	cytochrome b5612C putative	NA
+wDi22.scaf1	133865	134983	-	fig|82301.12.peg.531	Mitochondrial processing peptidase-like protein	KEGG_ENZYME:3.4.24.64
+wDi22.scaf1	135108	135740	-	fig|82301.12.peg.532	Superoxide dismutase [Fe]	KEGG_ENZYME:1.15.1.1
+wDi22.scaf1	137621	137752	+	fig|82301.12.peg.533	hypothetical protein	NA
+wDi22.scaf1	139006	139167	+	fig|82301.12.peg.534	hypothetical protein	NA
+wDi22.scaf1	139167	139766	+	fig|82301.12.peg.535	Inactive homolog of metal-dependent proteases2C putative molecular chaperone	NA
+wDi22.scaf1	139801	140550	-	fig|82301.12.peg.536	FIG01207875: hypothetical protein	NA
+wDi22.scaf1	140767	140931	+	fig|82301.12.peg.537	hypothetical protein	NA
+wDi22.scaf1	141196	142350	+	fig|82301.12.peg.538	Dihydrolipoamide succinyltransferase component (E2) of 2-oxoglutarate dehydrogenase complex	KEGG_ENZYME:2.3.1.61
+wDi22.scaf1	142573	142698	-	fig|82301.12.peg.539	hypothetical protein	NA
+wDi22.scaf1	143190	143363	-	fig|82301.12.peg.540	hypothetical protein	NA
+wDi22.scaf1	143577	143726	-	fig|82301.12.peg.541	hypothetical protein	NA
+wDi22.scaf1	143827	146331	+	fig|82301.12.peg.542	Protein export cytoplasm protein SecA ATPase RNA helicase (TC 3.A.5.1.1)	NA
+wDi22.scaf1	147055	148050	-	fig|82301.12.peg.543	Ribonucleotide reductase of class Ia (aerobic)2C beta subunit	KEGG_ENZYME:1.17.4.1
+wDi22.scaf1	148184	148522	+	fig|82301.12.peg.544	small protein A	NA
+wDi22.scaf1	149151	149771	+	fig|82301.12.peg.545	Ribonuclease D related protein	NA
+wDi22.scaf1	149892	150215	+	fig|82301.12.peg.546	Thioredoxin	NA
+wDi22.scaf1	151017	152933	+	fig|82301.12.peg.547	ATP-dependent DNA helicase UvrD/PcrA	NA
+wDi22.scaf1	152950	153927	-	fig|82301.12.peg.548	Quinone oxidoreductase	KEGG_ENZYME:1.6.5.5
+wDi22.scaf1	156761	158191	+	fig|82301.12.peg.549	Isocitrate dehydrogenase [NAD]	KEGG_ENZYME:1.1.1.41
+wDi22.scaf1	158977	159132	+	fig|82301.12.peg.550	hypothetical protein	NA
+wDi22.scaf1	159516	160181	+	fig|82301.12.peg.551	Endonuclease III	KEGG_ENZYME:4.2.99.18
+wDi22.scaf1	160674	161948	-	fig|82301.12.peg.552	NADH-ubiquinone oxidoreductase chain F	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	163546	163671	-	fig|82301.12.peg.553	hypothetical protein	NA
+wDi22.scaf1	163679	163816	+	fig|82301.12.peg.554	hypothetical protein	NA
+wDi22.scaf1	163791	165329	-	fig|82301.12.peg.555	Metallo-beta-lactamase family protein2C RNA-specific	NA
+wDi22.scaf1	165667	166470	+	fig|82301.12.peg.556	Enoyl-[acyl-carrier-protein] reductase [NADH]	KEGG_ENZYME:1.3.1.9
+wDi22.scaf1	166646	167023	+	fig|82301.12.peg.557	NADH-ubiquinone oxidoreductase chain I	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	167029	168930	+	fig|82301.12.peg.558	Threonyl-tRNA synthetase	KEGG_ENZYME:6.1.1.3
+wDi22.scaf1	168943	169452	+	fig|82301.12.peg.559	Translation initiation factor 3	NA
+wDi22.scaf1	169615	170835	-	fig|82301.12.peg.560	L-Proline/Glycine betaine transporter ProP	NA
+wDi22.scaf1	170913	172715	-	fig|82301.12.peg.561	Aspartyl-tRNA synthetase @ Aspartyl-tRNA(Asn) synthetase	KEGG_ENZYME:6.1.1.12,KEGG_ENZYME:6.1.1.23
+wDi22.scaf1	172904	173332	+	fig|82301.12.peg.562	FIG01207718: hypothetical protein	NA
+wDi22.scaf1	173336	173962	+	fig|82301.12.peg.563	ABC transporter involved in cytochrome c biogenesis2C ATPase component CcmA	NA
+wDi22.scaf1	174754	174867	-	fig|82301.12.peg.564	hypothetical protein	NA
+wDi22.scaf1	175460	176986	+	fig|82301.12.peg.565	Acetyl-coenzyme A carboxyl transferase alpha chain / Acetyl-coenzyme A carboxyl transferase beta chain%3B Propionyl-CoA carboxylase beta chain	KEGG_ENZYME:6.4.1.2,KEGG_ENZYME:6.4.1.2,KEGG_ENZYME:6.4.1.3
+wDi22.scaf1	177109	177330	+	fig|82301.12.peg.566	hypothetical protein	NA
+wDi22.scaf1	177348	178163	+	fig|82301.12.peg.567	Formamidopyrimidine-DNA glycosylase	KEGG_ENZYME:3.2.2.23
+wDi22.scaf1	178136	178360	-	fig|82301.12.peg.568	hypothetical protein	NA
+wDi22.scaf1	178365	178772	+	fig|82301.12.peg.569	Pyridoxamine 5'-phosphate oxidase	KEGG_ENZYME:1.4.3.5
+wDi22.scaf1	179843	179974	+	fig|82301.12.peg.570	hypothetical protein	NA
+wDi22.scaf1	180733	181503	+	fig|82301.12.peg.571	Forms the bulk of type IV secretion complex that spans outer membrane and periplasm (VirB9)	NA
+wDi22.scaf1	181663	182466	-	fig|82301.12.peg.572	NADH-ubiquinone oxidoreductase chain D	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	184603	185391	-	fig|82301.12.peg.573	Prolipoprotein diacylglyceryl transferase	KEGG_ENZYME:2.4.99.-
+wDi22.scaf1	185382	185846	-	fig|82301.12.peg.574	tmRNA-binding protein SmpB	NA
+wDi22.scaf1	186005	186589	-	fig|82301.12.peg.575	membrane protein CvpA2C putative	NA
+wDi22.scaf1	187557	187715	+	fig|82301.12.peg.576	hypothetical protein	NA
+wDi22.scaf1	188014	188157	+	fig|82301.12.peg.577	hypothetical protein	NA
+wDi22.scaf1	188867	189913	+	fig|82301.12.peg.578	Phenylalanyl-tRNA synthetase alpha chain	KEGG_ENZYME:6.1.1.20
+wDi22.scaf1	190016	191152	+	fig|82301.12.peg.579	N-acetylglucosamine-1-phosphate uridyltransferase / Glucosamine-1-phosphate N-acetyltransferase	KEGG_ENZYME:2.7.7.23,KEGG_ENZYME:2.3.1.157
+wDi22.scaf1	191209	191670	-	fig|82301.12.peg.580	hypothetical protein	NA
+wDi22.scaf1	192172	192297	-	fig|82301.12.peg.581	hypothetical protein	NA
+wDi22.scaf1	192850	193461	+	fig|82301.12.peg.582	LSU ribosomal protein L25p	NA
+wDi22.scaf1	193461	194012	+	fig|82301.12.peg.583	Peptidyl-tRNA hydrolase	KEGG_ENZYME:3.1.1.29
+wDi22.scaf1	194314	194490	+	fig|82301.12.peg.584	hypothetical protein	NA
+wDi22.scaf1	195392	196588	+	fig|82301.12.peg.585	Proposed peptidoglycan lipid II flippase MurJ	NA
+wDi22.scaf1	196696	199137	+	fig|82301.12.peg.586	FIG01208433: hypothetical protein	NA
+wDi22.scaf1	200321	202255	-	fig|82301.12.peg.587	RNA polymerase sigma factor RpoD	NA
+wDi22.scaf1	202375	202665	-	fig|82301.12.peg.588	PH adaptation potassium efflux system protein C%3B sodium- potassium/hydrogen antiporter subunit C	NA
+wDi22.scaf1	202688	203116	-	fig|82301.12.peg.589	Multisubunit Na+/H+ antiporter2C MnhB subunit	NA
+wDi22.scaf1	203119	203544	-	fig|82301.12.peg.590	PH adaptation potassium efflux system protein B1%3B sodium- potassium/hydrogen antiporter subunit B1	NA
+wDi22.scaf1	203642	203869	-	fig|82301.12.peg.591	Na(+) H(+) antiporter subunit G	NA
+wDi22.scaf1	203933	204181	-	fig|82301.12.peg.592	FIG01207846: hypothetical protein	NA
+wDi22.scaf1	204210	204614	-	fig|82301.12.peg.593	DNA-directed RNA polymerase omega subunit	KEGG_ENZYME:2.7.7.6
+wDi22.scaf1	204680	204961	-	fig|82301.12.peg.594	FIG01207727: hypothetical protein	NA
+wDi22.scaf1	205369	205860	+	fig|82301.12.peg.595	Phosphoribosylaminoimidazole carboxylase catalytic subunit	KEGG_ENZYME:4.1.1.21
+wDi22.scaf1	205868	207742	+	fig|82301.12.peg.596	DNA mismatch repair protein MutL	NA
+wDi22.scaf1	208373	209245	+	fig|82301.12.peg.597	ATP synthase gamma chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	209264	210598	+	fig|82301.12.peg.598	TldE/PmbA protein2C part of proposed TldE/TldD proteolytic complex (PMID 12029038)	NA
+wDi22.scaf1	210776	211030	+	fig|82301.12.peg.599	Cold shock protein CspA	NA
+wDi22.scaf1	211083	212306	+	fig|82301.12.peg.600	Cold-shock DEAD-box protein A	NA
+wDi22.scaf1	212851	213642	-	fig|82301.12.peg.601	Methionine aminopeptidase	KEGG_ENZYME:3.4.11.18
+wDi22.scaf1	214020	222542	-	fig|82301.12.peg.602	DNA-directed RNA polymerase beta subunit / DNA-directed RNA polymerase beta' subunit	KEGG_ENZYME:2.7.7.6,KEGG_ENZYME:2.7.7.6
+wDi22.scaf1	222608	223009	-	fig|82301.12.peg.603	LSU ribosomal protein L7/L12 (P1/P2)	NA
+wDi22.scaf1	223019	223552	-	fig|82301.12.peg.604	LSU ribosomal protein L10p (P0)	NA
+wDi22.scaf1	223557	224216	-	fig|82301.12.peg.605	LSU ribosomal protein L1p (L10Ae)	NA
+wDi22.scaf1	224221	224661	-	fig|82301.12.peg.606	LSU ribosomal protein L11p (L12e)	NA
+wDi22.scaf1	224664	225506	-	fig|82301.12.peg.607	Transcription antitermination protein NusG	NA
+wDi22.scaf1	225484	225684	-	fig|82301.12.peg.608	Preprotein translocase subunit SecE (TC 3.A.5.1.1)	NA
+wDi22.scaf1	226954	229020	-	fig|82301.12.peg.609	Translation elongation factor G	NA
+wDi22.scaf1	229038	229517	-	fig|82301.12.peg.610	SSU ribosomal protein S7p (S5e)	NA
+wDi22.scaf1	229522	229896	-	fig|82301.12.peg.611	SSU ribosomal protein S12p (S23e)	NA
+wDi22.scaf1	231205	231924	-	fig|82301.12.peg.612	Cell division protein FtsQ	NA
+wDi22.scaf1	231936	232940	-	fig|82301.12.peg.613	D-alanine--D-alanine ligase	KEGG_ENZYME:6.3.2.4
+wDi22.scaf1	234638	235645	+	fig|82301.12.peg.614	YgjD/Kae1/Qri7 family2C required for N6-threonylcarbamoyl adenosine t(6)A37 modification in tRNA	NA
+wDi22.scaf1	235822	237564	+	fig|82301.12.peg.615	type I secretion system ATPase	NA
+wDi22.scaf1	237832	238476	-	fig|82301.12.peg.616	hypothetical protein	NA
+wDi22.scaf1	238732	238917	+	fig|82301.12.peg.617	hypothetical protein	NA
+wDi22.scaf1	238879	239037	-	fig|82301.12.peg.618	hypothetical protein	NA
+wDi22.scaf1	240205	240369	+	fig|82301.12.peg.619	hypothetical protein	NA
+wDi22.scaf1	241403	241876	+	fig|82301.12.peg.620	Single-stranded DNA-binding protein	NA
+wDi22.scaf1	241907	242833	+	fig|82301.12.peg.621	Dihydrodipicolinate synthase	KEGG_ENZYME:4.2.1.52
+wDi22.scaf1	242903	243028	+	fig|82301.12.peg.622	hypothetical protein	NA
+wDi22.scaf1	243657	244652	-	fig|82301.12.peg.623	Porphobilinogen synthase	KEGG_ENZYME:4.2.1.24
+wDi22.scaf1	245051	245170	+	fig|82301.12.peg.624	hypothetical protein	NA
+wDi22.scaf1	245981	247342	-	fig|82301.12.peg.625	Cysteine desulfurase2C IscS subfamily	KEGG_ENZYME:2.8.1.7
+wDi22.scaf1	248056	250659	+	fig|82301.12.peg.626	Aconitate hydratase	KEGG_ENZYME:4.2.1.3
+wDi22.scaf1	251021	251161	+	fig|82301.12.peg.627	hypothetical protein	NA
+wDi22.scaf1	251306	251437	+	fig|82301.12.peg.628	hypothetical protein	NA
+wDi22.scaf1	251587	251715	+	fig|82301.12.peg.629	hypothetical protein	NA
+wDi22.scaf1	252437	252583	+	fig|82301.12.peg.630	hypothetical protein	NA
+wDi22.scaf1	253156	253275	+	fig|82301.12.peg.631	hypothetical protein	NA
+wDi22.scaf1	253352	253540	+	fig|82301.12.peg.632	hypothetical protein	NA
+wDi22.scaf1	253967	254131	+	fig|82301.12.peg.633	hypothetical protein	NA
+wDi22.scaf1	254337	254456	-	fig|82301.12.peg.634	hypothetical protein	NA
+wDi22.scaf1	254916	256478	+	fig|82301.12.peg.635	Transcription termination protein NusA	NA
+wDi22.scaf1	256488	258806	+	fig|82301.12.peg.636	Translation initiation factor 2	NA
+wDi22.scaf1	258816	259163	+	fig|82301.12.peg.637	Ribosome-binding factor A	NA
+wDi22.scaf1	259326	260024	+	fig|82301.12.peg.638	4-hydroxybenzoate polyprenyltransferase	KEGG_ENZYME:2.5.1.-
+wDi22.scaf1	260642	262387	-	fig|82301.12.peg.639	Peptidyl-prolyl cis-trans isomerase ppiD	KEGG_ENZYME:5.2.1.8
+wDi22.scaf1	262815	263357	+	fig|82301.12.peg.640	FIG01208028: hypothetical protein	NA
+wDi22.scaf1	263562	264977	+	fig|82301.12.peg.641	Transcription termination factor Rho	NA
+wDi22.scaf1	265081	266346	-	fig|82301.12.peg.642	Cytosol aminopeptidase PepA	KEGG_ENZYME:3.4.11.1
+wDi22.scaf1	266600	267208	-	fig|82301.12.peg.643	dioxygenase2C putative	NA
+wDi22.scaf1	267567	267686	+	fig|82301.12.peg.644	hypothetical protein	NA
+wDi22.scaf1	267683	267811	-	fig|82301.12.peg.645	LSU ribosomal protein L36p	NA
+wDi22.scaf1	267880	268701	-	fig|82301.12.peg.646	Hypothetical protein DUF2999	NA
+wDi22.scaf1	268857	269567	+	fig|82301.12.peg.647	Cytochrome c-type biogenesis protein CcmC2C putative heme lyase for CcmE	NA
+wDi22.scaf1	269838	269969	+	fig|82301.12.peg.648	hypothetical protein	NA
+wDi22.scaf1	270061	270177	+	fig|82301.12.peg.649	hypothetical protein	NA
+wDi22.scaf1	271039	271194	-	fig|82301.12.peg.650	hypothetical protein	NA
+wDi22.scaf1	271839	273701	+	fig|82301.12.peg.651	FIG01208044: hypothetical protein	NA
+wDi22.scaf1	274382	274969	+	fig|82301.12.peg.652	NADH-ubiquinone oxidoreductase chain J	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	274977	275099	-	fig|82301.12.peg.653	hypothetical protein	NA
+wDi22.scaf1	275122	275268	+	fig|82301.12.peg.654	NADH-ubiquinone oxidoreductase chain K	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	275273	277129	+	fig|82301.12.peg.655	NADH-ubiquinone oxidoreductase chain L	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	277133	278569	+	fig|82301.12.peg.656	NADH-ubiquinone oxidoreductase chain M	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	278571	278798	-	fig|82301.12.peg.657	hypothetical protein	NA
+wDi22.scaf1	278761	279960	+	fig|82301.12.peg.658	NADH-ubiquinone oxidoreductase chain N	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	279962	280753	+	fig|82301.12.peg.659	Biotin-protein ligase / Biotin operon repressor	KEGG_ENZYME:6.3.4.15
+wDi22.scaf1	280750	280887	+	fig|82301.12.peg.660	hypothetical protein	NA
+wDi22.scaf1	280871	281257	+	fig|82301.12.peg.661	Cytochrome c-type biogenesis protein CcmE2C heme chaperone	NA
+wDi22.scaf1	282797	282979	+	fig|82301.12.peg.662	LSU ribosomal protein L32p	NA
+wDi22.scaf1	282930	284027	+	fig|82301.12.peg.663	Phosphate:acyl-ACP acyltransferase PlsX	NA
+wDi22.scaf1	284038	285003	+	fig|82301.12.peg.664	3-oxoacyl-[acyl-carrier-protein] synthase2C KASIII	KEGG_ENZYME:2.3.1.41
+wDi22.scaf1	285015	285386	-	fig|82301.12.peg.665	FIG01207721: hypothetical protein	NA
+wDi22.scaf1	285507	287324	-	fig|82301.12.peg.666	Xaa-Pro aminopeptidase	KEGG_ENZYME:3.4.11.9
+wDi22.scaf1	287343	289256	-	fig|82301.12.peg.667	tRNA uridine 5-carboxymethylaminomethyl modification enzyme GidA	NA
+wDi22.scaf1	290683	290886	-	fig|82301.12.peg.668	Diaminohydroxyphosphoribosylaminopyrimidine deaminase / 5-amino-6-(5-phosphoribosylamino)uracil reductase	KEGG_ENZYME:3.5.4.26,KEGG_ENZYME:1.1.1.193
+wDi22.scaf1	290946	291077	-	fig|82301.12.peg.669	hypothetical protein	NA
+wDi22.scaf1	291100	291255	-	fig|82301.12.peg.670	hypothetical protein	NA
+wDi22.scaf1	291287	291460	+	fig|82301.12.peg.671	hypothetical protein	NA
+wDi22.scaf1	291457	292404	-	fig|82301.12.peg.672	dNTP triphosphohydrolase2C broad substrate specificity2C subgroup 2	NA
+wDi22.scaf1	292704	293168	+	fig|82301.12.peg.673	probable iron binding protein from the HesB_IscA_SufA family	NA
+wDi22.scaf1	293210	293884	+	fig|82301.12.peg.674	Lipoprotein releasing system ATP-binding protein LolD	NA
+wDi22.scaf1	294131	294829	-	fig|82301.12.peg.675	Alpha/beta hydrolase	NA
+wDi22.scaf1	294937	296124	+	fig|82301.12.peg.676	Cysteine desulfurase	KEGG_ENZYME:2.8.1.7
+wDi22.scaf1	296674	297387	-	fig|82301.12.peg.677	hypothetical protein	NA
+wDi22.scaf1	297973	298182	+	fig|82301.12.peg.678	tRNA pseudouridine synthase B( EC:4.2.1.70 )	KEGG_ENZYME:4.2.1.70
+wDi22.scaf1	298222	298407	+	fig|82301.12.peg.679	hypothetical protein	NA
+wDi22.scaf1	298420	298692	+	fig|82301.12.peg.680	SSU ribosomal protein S15p (S13e)	NA
+wDi22.scaf1	298707	300974	+	fig|82301.12.peg.681	Polyribonucleotide nucleotidyltransferase	KEGG_ENZYME:2.7.7.8
+wDi22.scaf1	301038	301718	-	fig|82301.12.peg.682	Ribulose-phosphate 3-epimerase	KEGG_ENZYME:5.1.3.1
+wDi22.scaf1	302167	302292	+	fig|82301.12.peg.683	hypothetical protein	NA
+wDi22.scaf1	303038	304456	-	fig|82301.12.peg.684	UDP-N-acetylmuramoylalanyl-D-glutamyl-22C6-diaminopimelate--D-alanyl-D-alanine ligase	KEGG_ENZYME:6.3.2.10
+wDi22.scaf1	304644	305549	+	fig|82301.12.peg.685	FIG01207833: hypothetical protein	NA
+wDi22.scaf1	305553	305921	+	fig|82301.12.peg.686	Bis(5'-nucleosyl)-tetraphosphatase (asymmetrical)	KEGG_ENZYME:3.6.1.17
+wDi22.scaf1	305945	306298	+	fig|82301.12.peg.687	NADH ubiquinone oxidoreductase chain A	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	306303	306809	+	fig|82301.12.peg.688	NADH-ubiquinone oxidoreductase chain B	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	306811	307383	+	fig|82301.12.peg.689	NADH-ubiquinone oxidoreductase chain C	KEGG_ENZYME:1.6.5.3
+wDi22.scaf1	307387	308337	+	fig|82301.12.peg.690	Malate dehydrogenase	KEGG_ENZYME:1.1.1.37
+wDi22.scaf1	308363	309148	-	fig|82301.12.peg.691	Putative deoxyribonuclease YcfH	NA
+wDi22.scaf1	309164	309649	-	fig|82301.12.peg.692	Adenosine (5')-pentaphospho-(5'')-adenosine pyrophosphohydrolase	KEGG_ENZYME:3.6.1.-
+wDi22.scaf1	310202	310531	+	fig|82301.12.peg.693	Iojap protein	NA
+wDi22.scaf1	310824	311897	+	fig|82301.12.peg.694	Tyrosyl-tRNA synthetase	KEGG_ENZYME:6.1.1.1
+wDi22.scaf1	313485	314648	-	fig|82301.12.peg.695	Aspartokinase	KEGG_ENZYME:2.7.2.4
+wDi22.scaf1	315566	316858	-	fig|82301.12.peg.696	Dihydrofolate synthase / Folylpolyglutamate synthase	KEGG_ENZYME:6.3.2.12,KEGG_ENZYME:6.3.2.17
+wDi22.scaf1	316864	317454	-	fig|82301.12.peg.697	ABC-type transport system involved in resistance to organic solvents2C auxiliary component	NA
+wDi22.scaf1	318282	318959	+	fig|82301.12.peg.698	Periplasmic thiol:disulfide interchange protein DsbA	NA
+wDi22.scaf1	318998	319276	-	fig|82301.12.peg.699	FIG01207630: hypothetical protein	NA
+wDi22.scaf1	319514	320161	+	fig|82301.12.peg.700	O-methyltransferase family protein	NA
+wDi22.scaf1	320289	320816	-	fig|82301.12.peg.701	Glutathione S-transferase family protein	NA
+wDi22.scaf1	321117	322643	+	fig|82301.12.peg.702	DNA polymerase III subunits gamma and tau	KEGG_ENZYME:2.7.7.7
+wDi22.scaf1	322647	322979	+	fig|82301.12.peg.703	FIG000557: hypothetical protein co-occurring with RecR	NA
+wDi22.scaf1	323259	323981	+	fig|82301.12.peg.704	surface antigen Wsp	NA
+wDi22.scaf1	324247	325152	+	fig|82301.12.peg.705	RNA polymerase sigma factor RpoH	NA
+wDi22.scaf1	325145	325642	+	fig|82301.12.peg.706	FIG01208493: hypothetical protein	NA
+wDi22.scaf1	325659	326942	-	fig|82301.12.peg.707	Histidyl-tRNA synthetase	KEGG_ENZYME:6.1.1.21
+wDi22.scaf1	326897	327481	-	fig|82301.12.peg.708	NifU protein	NA
+wDi22.scaf1	327650	329038	-	fig|82301.12.peg.709	Amidophosphoribosyltransferase	KEGG_ENZYME:2.4.2.14
+wDi22.scaf1	329351	329506	+	fig|82301.12.peg.710	hypothetical protein	NA
+wDi22.scaf1	329576	329701	+	fig|82301.12.peg.711	hypothetical protein	NA
+wDi22.scaf1	329932	330072	+	fig|82301.12.peg.712	hypothetical protein	NA
+wDi22.scaf1	330924	333620	-	fig|82301.12.peg.713	RecB family exonuclease	NA
+wDi22.scaf1	333706	336747	+	fig|82301.12.peg.714	Phosphoribosylformylglycinamidine synthase2C PurS subunit / Phosphoribosylformylglycinamidine synthase2C synthetase subunit	KEGG_ENZYME:6.3.5.3,KEGG_ENZYME:6.3.5.3
+wDi22.scaf1	337266	337421	-	fig|82301.12.peg.715	hypothetical protein	NA
+wDi22.scaf1	337833	338045	+	fig|82301.12.peg.716	hypothetical protein	NA
+wDi22.scaf1	338513	338671	+	fig|82301.12.peg.717	hypothetical protein	NA
+wDi22.scaf1	338868	339002	+	fig|82301.12.peg.718	hypothetical protein	NA
+wDi22.scaf1	339274	339426	-	fig|82301.12.peg.719	hypothetical protein	NA
+wDi22.scaf1	339448	339561	-	fig|82301.12.peg.720	hypothetical protein	NA
+wDi22.scaf1	339929	340093	-	fig|82301.12.peg.721	hypothetical protein	NA
+wDi22.scaf1	341631	342905	-	fig|82301.12.peg.722	Ser/Thr protein phosphatase family protein2C putative	NA
+wDi22.scaf1	343215	344297	+	fig|82301.12.peg.723	32C4-dihydroxy-2-butanone 4-phosphate synthase / GTP cyclohydrolase II	KEGG_ENZYME:3.5.4.25
+wDi22.scaf1	344361	345044	+	fig|82301.12.peg.724	Inner membrane protein forms channel for type IV secretion of T-DNA complex2C VirB8	NA
+wDi22.scaf1	345031	345837	+	fig|82301.12.peg.725	Forms the bulk of type IV secretion complex that spans outer membrane and periplasm (VirB9)	NA
+wDi22.scaf1	345854	347335	+	fig|82301.12.peg.726	Inner membrane protein forms channel for type IV secretion of T-DNA complex (VirB10)	NA
+wDi22.scaf1	347337	348329	+	fig|82301.12.peg.727	ATPase required for both assembly of type IV secretion complex and secretion of T-DNA complex2C VirB11	NA
+wDi22.scaf1	348358	350397	+	fig|82301.12.peg.728	Coupling protein VirD42C ATPase required for T-DNA transfer	NA
+wDi22.scaf1	350509	351387	+	fig|82301.12.peg.729	surface antigen Wsp paralog	NA
+wDi22.scaf1	351617	352942	+	fig|82301.12.peg.730	sodium/alanine symporter family protein	NA
+wDi22.scaf1	353754	353882	+	fig|82301.12.peg.731	hypothetical protein	NA
+wDi22.scaf1	354115	354249	+	fig|82301.12.peg.732	hypothetical protein	NA
+wDi22.scaf1	354317	354436	+	fig|82301.12.peg.733	hypothetical protein	NA
+wDi22.scaf1	354476	355072	-	fig|82301.12.peg.734	Septum formation protein Maf	NA
+wDi22.scaf1	355050	355313	-	fig|82301.12.peg.735	Translation initiation factor 1	NA
+wDi22.scaf1	355435	355911	-	fig|82301.12.peg.736	Transcription termination protein NusB	NA
+wDi22.scaf1	355911	356339	-	fig|82301.12.peg.737	62C7-dimethyl-8-ribityllumazine synthase	KEGG_ENZYME:2.5.1.78
+wDi22.scaf1	356317	358035	-	fig|82301.12.peg.738	Inner membrane protein translocase component YidC2C long form	NA
+wDi22.scaf1	358496	359377	-	fig|82301.12.peg.739	Protein-export membrane protein SecF (TC 3.A.5.1.1)	NA
+wDi22.scaf1	360279	362261	-	fig|82301.12.peg.740	Cytochrome c heme lyase subunit CcmF	NA
+wDi22.scaf1	363369	363482	+	fig|82301.12.peg.741	hypothetical protein	NA
+wDi22.scaf1	363487	364323	+	fig|82301.12.peg.742	Protein-N(5)-glutamine methyltransferase PrmC2C methylates polypeptide chain release factors RF1 and RF2	NA
+wDi22.scaf1	364456	364581	-	fig|82301.12.peg.743	hypothetical protein	NA
+wDi22.scaf1	364784	366784	-	fig|82301.12.peg.744	Transketolase	KEGG_ENZYME:2.2.1.1
+wDi22.scaf1	366921	367535	+	fig|82301.12.peg.745	SSU ribosomal protein S4p (S9e)	NA
+wDi22.scaf1	367657	367851	+	fig|82301.12.peg.746	Believed to be involved in assembly of Fe-S clusters	NA
+wDi22.scaf1	367913	368038	-	fig|82301.12.peg.747	hypothetical protein	NA
+wDi22.scaf1	368736	369077	+	fig|82301.12.peg.748	Conserved domain protein	NA
+wDi22.scaf1	369229	369429	+	fig|82301.12.peg.749	LSU ribosomal protein L28p	NA
+wDi22.scaf1	369422	370294	+	fig|82301.12.peg.750	Lipoate synthase	NA
+wDi22.scaf1	370495	373056	+	fig|82301.12.peg.751	ClpB protein	NA
+wDi22.scaf1	373081	377814	+	fig|82301.12.peg.752	NAD-specific glutamate dehydrogenase2C large form	KEGG_ENZYME:1.4.1.2
+wDi22.scaf1	377819	378115	+	fig|82301.12.peg.753	FIG01207920: hypothetical protein	NA
+wDi22.scaf1	378117	379463	+	fig|82301.12.peg.754	Pole remodelling regulatory diguanylate cyclase	NA
+wDi22.scaf1	379852	379995	-	fig|82301.12.peg.755	hypothetical protein	NA
+wDi22.scaf1	380345	381730	+	fig|82301.12.peg.756	Dihydrolipoamide dehydrogenase	KEGG_ENZYME:1.8.1.4
+wDi22.scaf1	382166	383203	+	fig|82301.12.peg.757	UDP-N-acetylglucosamine--N-acetylmuramyl-(pentapeptide) pyrophosphoryl-undecaprenol N-acetylglucosamine transferase	KEGG_ENZYME:2.4.1.227
+wDi22.scaf1	383188	384126	-	fig|82301.12.peg.758	Glutathione synthetase	KEGG_ENZYME:6.3.2.3
+wDi22.scaf1	384177	384662	-	fig|82301.12.peg.759	possible periplasmic protein	NA
+wDi22.scaf1	384682	384825	+	fig|82301.12.peg.760	hypothetical protein	NA
+wDi22.scaf1	385288	386631	+	fig|82301.12.peg.761	Cell division trigger factor	KEGG_ENZYME:5.2.1.8
+wDi22.scaf1	386642	387241	+	fig|82301.12.peg.762	ATP-dependent Clp protease proteolytic subunit	KEGG_ENZYME:3.4.21.92
+wDi22.scaf1	387253	388530	+	fig|82301.12.peg.763	ATP-dependent Clp protease ATP-binding subunit ClpX	NA
+wDi22.scaf1	388546	391023	+	fig|82301.12.peg.764	ATP-dependent protease La Type I	KEGG_ENZYME:3.4.21.53
+wDi22.scaf1	391203	391337	-	fig|82301.12.peg.765	hypothetical protein	NA
+wDi22.scaf1	391453	391569	-	fig|82301.12.peg.766	hypothetical protein	NA
+wDi22.scaf1	391555	392628	+	fig|82301.12.peg.767	Putative permease often clustered with de novo purine synthesis	NA
+wDi22.scaf1	392744	393397	+	fig|82301.12.peg.768	Chromosomal replication initiator protein DnaA	NA
+wDi22.scaf1	393550	393720	+	fig|82301.12.peg.769	hypothetical protein	NA
+wDi22.scaf1	393710	394696	+	fig|82301.12.peg.770	Tyrosine recombinase XerD	NA
+wDi22.scaf1	394765	395493	+	fig|82301.12.peg.771	1-acyl-sn-glycerol-3-phosphate acyltransferase	KEGG_ENZYME:2.3.1.51
+wDi22.scaf1	395528	395797	+	fig|82301.12.peg.772	SSU ribosomal protein S20p	NA
+wDi22.scaf1	395880	397130	+	fig|82301.12.peg.773	Citrate synthase (si)	KEGG_ENZYME:2.3.3.1
+wDi22.scaf1	397213	397584	-	fig|82301.12.peg.774	Cytochrome oxidase biogenesis protein Sco1/SenC/PrrC2C putative copper metallochaperone	NA
+wDi22.scaf1	397874	398569	-	fig|82301.12.peg.775	DNA polymerase III epsilon subunit	KEGG_ENZYME:2.7.7.7
+wDi22.scaf1	398588	399253	-	fig|82301.12.peg.776	Transporter	NA
+wDi22.scaf1	399418	399921	+	fig|82301.12.peg.777	Protein export cytoplasm chaperone protein (SecB2C maintains protein to be exported in unfolded state)	NA
+wDi22.scaf1	400117	400317	+	fig|82301.12.peg.778	SSU ribosomal protein S21p	NA
+wDi22.scaf1	400351	401511	+	fig|82301.12.peg.779	Succinyl-CoA ligase [ADP-forming] beta chain	KEGG_ENZYME:6.2.1.5
+wDi22.scaf1	401515	402393	+	fig|82301.12.peg.780	Succinyl-CoA ligase [ADP-forming] alpha chain	KEGG_ENZYME:6.2.1.5
+wDi22.scaf1	402401	403195	-	fig|82301.12.peg.781	Diaminopimelate epimerase	KEGG_ENZYME:5.1.1.7
+wDi22.scaf1	404283	404810	-	fig|82301.12.peg.782	Oxygen-insensitive NAD(P)H nitroreductase / Dihydropteridine reductase	KEGG_ENZYME:1.-.-.-,KEGG_ENZYME:1.5.1.34
+wDi22.scaf1	405030	405275	+	fig|82301.12.peg.783	hypothetical protein	NA
+wDi22.scaf1	405257	405373	+	fig|82301.12.peg.784	hypothetical protein	NA
+wDi22.scaf1	405393	405524	+	fig|82301.12.peg.785	hypothetical protein	NA
+wDi22.scaf1	406201	406314	+	fig|82301.12.peg.786	hypothetical protein	NA
+wDi22.scaf1	406889	407188	-	fig|82301.12.peg.787	oxidoreductase2C putative	NA
+wDi22.scaf1	407348	407992	+	fig|82301.12.peg.788	FIG00638051: hypothetical protein	NA
+wDi22.scaf1	407998	408816	+	fig|82301.12.peg.789	Nucleoside-diphosphate-sugar epimerases	NA
+wDi22.scaf1	408871	408990	+	fig|82301.12.peg.790	hypothetical protein	NA
+wDi22.scaf1	409279	412614	+	fig|82301.12.peg.791	DNA polymerase III alpha subunit	KEGG_ENZYME:2.7.7.7
+wDi22.scaf1	412666	413442	+	fig|82301.12.peg.792	SSU ribosomal protein S6p	NA
+wDi22.scaf1	413442	413717	+	fig|82301.12.peg.793	SSU ribosomal protein S18p	NA
+wDi22.scaf1	413725	414282	+	fig|82301.12.peg.794	LSU ribosomal protein L9p	NA
+wDi22.scaf1	414389	415690	+	fig|82301.12.peg.795	Adenylosuccinate lyase	KEGG_ENZYME:4.3.2.2
+wDi22.scaf1	417213	417422	+	fig|82301.12.peg.796	hypothetical protein	NA
+wDi22.scaf1	418604	418849	-	fig|82301.12.peg.797	Conserved domain protein	NA
+wDi22.scaf1	418904	419104	-	fig|82301.12.peg.798	LSU ribosomal protein L33p	NA
+wDi22.scaf1	419257	421032	+	fig|82301.12.peg.799	Ribonuclease E	KEGG_ENZYME:3.1.26.12
+wDi22.scaf1	421127	423046	+	fig|82301.12.peg.800	Chaperone protein DnaK	NA
+wDi22.scaf1	423448	424872	+	fig|82301.12.peg.801	Aspartyl-tRNA(Asn) amidotransferase subunit B @ Glutamyl-tRNA(Gln) amidotransferase subunit B	KEGG_ENZYME:6.3.5.6,KEGG_ENZYME:6.3.5.7
+wDi22.scaf1	425922	426224	+	fig|82301.12.peg.802	LSU ribosomal protein L21p	NA
+wDi22.scaf1	426235	426504	+	fig|82301.12.peg.803	LSU ribosomal protein L27p	NA
+wDi22.scaf1	427195	427359	-	fig|82301.12.peg.804	hypothetical protein	NA
+wDi22.scaf1	427737	427853	+	fig|82301.12.peg.805	hypothetical protein	NA
+wDi22.scaf1	430687	431514	+	fig|82301.12.peg.806	Cytochrome c oxidase polypeptide III	KEGG_ENZYME:1.9.3.1
+wDi22.scaf1	431615	431785	+	fig|82301.12.peg.807	hypothetical protein	NA
+wDi22.scaf1	431789	431902	+	fig|82301.12.peg.808	Crossover junction endodeoxyribonuclease RuvC	KEGG_ENZYME:3.1.22.4
+wDi22.scaf1	431933	432217	+	fig|82301.12.peg.809	BolA-like protein2C putative	NA
+wDi22.scaf1	432242	433423	+	fig|82301.12.peg.810	Cystathionine beta-lyase	KEGG_ENZYME:4.4.1.8
+wDi22.scaf1	433440	434846	+	fig|82301.12.peg.811	UDP-N-acetylmuramoylalanyl-D-glutamate--22C6-diaminopimelate ligase	KEGG_ENZYME:6.3.2.13
+wDi22.scaf1	435030	436280	+	fig|82301.12.peg.812	L-Proline/Glycine betaine transporter ProP	NA
+wDi22.scaf1	436699	436842	+	fig|82301.12.peg.813	hypothetical protein	NA
+wDi22.scaf1	437027	437443	-	fig|82301.12.peg.814	tRNA-specific adenosine-34 deaminase	KEGG_ENZYME:3.5.4.-
+wDi22.scaf1	437454	439091	-	fig|82301.12.peg.815	CTP synthase	KEGG_ENZYME:6.3.4.2
+wDi22.scaf1	439091	439282	-	fig|82301.12.peg.816	preprotein translocase2C SecG subunit	NA
+wDi22.scaf1	440222	443536	-	fig|82301.12.peg.817	FIG061771: ATP-dependent nuclease subunit A	NA
+wDi22.scaf1	443620	444486	+	fig|82301.12.peg.818	4-diphosphocytidyl-2-C-methyl-D-erythritol kinase	KEGG_ENZYME:2.7.1.148
+wDi22.scaf1	444528	444854	+	fig|82301.12.peg.819	hypothetical protein	NA
+wDi22.scaf1	444856	445665	+	fig|82301.12.peg.820	zinc ABC transporter2C permease protein	NA
+wDi22.scaf1	445836	446840	+	fig|82301.12.peg.821	conserved hypothetical protein	NA
+wDi22.scaf1	447137	447931	+	fig|82301.12.peg.822	Dihydrodipicolinate reductase	KEGG_ENZYME:1.3.1.26
+wDi22.scaf1	447928	448686	+	fig|82301.12.peg.823	Phosphate transport ATP-binding protein PstB (TC 3.A.1.7.1)	NA
+wDi22.scaf1	448691	449863	-	fig|82301.12.peg.824	1-deoxy-D-xylulose 5-phosphate reductoisomerase	KEGG_ENZYME:1.1.1.267
+wDi22.scaf1	449936	450445	-	fig|82301.12.peg.825	FIG01208719: hypothetical protein	NA
+wDi22.scaf1	450540	450830	-	fig|82301.12.peg.826	Protoporphyrinogen IX oxidase2C novel form2C HemJ	KEGG_ENZYME:1.3.-.-
+wDi22.scaf1	451027	452010	+	fig|82301.12.peg.827	Pyruvate dehydrogenase E1 component alpha subunit	KEGG_ENZYME:1.2.4.1
+wDi22.scaf1	452320	453246	-	fig|82301.12.peg.828	Ribosomal large subunit pseudouridine synthase C	KEGG_ENZYME:4.2.1.70
+wDi22.scaf1	453494	454789	+	fig|82301.12.peg.829	Methionine transporter MetT	NA
+wDi22.scaf1	454835	456517	-	fig|82301.12.peg.830	Arginyl-tRNA synthetase	KEGG_ENZYME:6.1.1.19
+wDi22.scaf1	457186	458454	-	fig|82301.12.peg.831	ABC transporter2C ATP-binding/permease protein	NA
+wDi22.scaf1	458423	458842	+	fig|82301.12.peg.832	hypothetical protein	NA
+wDi22.scaf1	459822	459938	+	fig|82301.12.peg.833	hypothetical protein	NA
+wDi22.scaf1	460062	460760	-	fig|82301.12.peg.834	Ubiquinone/menaquinone biosynthesis methyltransferase UbiE	KEGG_ENZYME:2.1.1.-
+wDi22.scaf1	461062	461217	+	fig|82301.12.peg.835	hypothetical protein	NA
+wDi22.scaf1	461674	462234	+	fig|82301.12.peg.836	ATP synthase delta chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	462231	463772	+	fig|82301.12.peg.837	ATP synthase alpha chain	KEGG_ENZYME:3.6.3.14
+wDi22.scaf1	463782	464276	+	fig|82301.12.peg.838	Transcription elongation factor GreA	NA
+wDi22.scaf1	464304	464933	+	fig|82301.12.peg.839	32C4-dihydroxy-2-butanone 4-phosphate synthase	KEGG_ENZYME:4.1.99.12
+wDi22.scaf1	465006	466286	+	fig|82301.12.peg.840	Zinc metalloprotease	KEGG_ENZYME:3.4.24.-
+wDi22.scaf1	466314	466661	-	fig|82301.12.peg.841	FIG01289484: hypothetical protein	NA
+wDi22.scaf1	466763	467497	-	fig|82301.12.peg.842	3-oxoacyl-[acyl-carrier protein] reductase	KEGG_ENZYME:1.1.1.100
+wDi22.scaf1	467805	469247	+	fig|82301.12.peg.843	Secretion protein2C HlyD family	NA
+wDi22.scaf1	469446	469679	-	fig|82301.12.peg.844	hypothetical protein	NA
+wDi22.scaf1	469963	470727	+	fig|82301.12.peg.845	Cytochrome c oxidase polypeptide II	KEGG_ENZYME:1.9.3.1
+wDi22.scaf1	470743	472293	+	fig|82301.12.peg.846	Cytochrome c oxidase polypeptide I	KEGG_ENZYME:1.9.3.1
+wDi22.scaf1	472295	473182	+	fig|82301.12.peg.847	Heme O synthase2C protoheme IX farnesyltransferase COX10-CtaB	KEGG_ENZYME:2.5.1.-
+wDi22.scaf1	473145	473279	+	fig|82301.12.peg.848	hypothetical protein	NA
+wDi22.scaf1	473382	473819	+	fig|82301.12.peg.849	Ribonuclease HI	KEGG_ENZYME:3.1.26.4
+wDi22.scaf1	473974	476877	+	fig|82301.12.peg.850	conserved hypothetical protein	NA
+wDi22.scaf1	476896	477660	-	fig|82301.12.peg.851	Twin-arginine translocation protein TatC	NA
+wDi22.scaf1	477657	478643	-	fig|82301.12.peg.852	NAD-dependent glyceraldehyde-3-phosphate dehydrogenase	KEGG_ENZYME:1.2.1.12
+wDi22.scaf1	478621	478758	+	fig|82301.12.peg.853	hypothetical protein	NA
+wDi22.scaf1	478929	480629	-	fig|82301.12.peg.854	GTP-binding protein TypA/BipA	NA
+wDi22.scaf1	480932	481063	-	fig|82301.12.peg.855	hypothetical protein	NA
+wDi22.scaf1	481087	482103	-	fig|82301.12.peg.856	Peptide chain release factor 2%3B programmed frameshift-containing	NA
+wDi22.scaf1	482346	483716	+	fig|82301.12.peg.857	Mg/Co/Ni transporter MgtE / CBS domain	NA
+wDi22.scaf1	483713	484711	-	fig|82301.12.peg.858	Pyruvate dehydrogenase E1 component beta subunit	KEGG_ENZYME:1.2.4.1
+wDi22.scaf1	484760	484936	-	fig|82301.12.peg.859	hypothetical protein	NA
+wDi22.scaf1	485059	485196	-	fig|82301.12.peg.860	hypothetical protein	NA
+wDi22.scaf1	485907	487016	-	fig|82301.12.peg.861	Chaperone protein DnaJ	NA
+wDi22.scaf1	487356	487583	+	fig|82301.12.peg.862	FIG01289484: hypothetical protein	NA
+wDi22.scaf1	488190	488378	-	fig|82301.12.peg.863	hypothetical protein	NA
+wDi22.scaf1	488503	488622	-	fig|82301.12.peg.864	hypothetical protein	NA
+wDi22.scaf1	489176	491656	-	fig|82301.12.peg.865	Sensor histidine kinase/response regulator	KEGG_ENZYME:2.7.3.-
+wDi22.scaf1	491764	492588	+	fig|82301.12.peg.866	Coproporphyrinogen III oxidase2C aerobic	KEGG_ENZYME:1.3.3.3
+wDi22.scaf1	493495	494172	-	fig|82301.12.peg.867	Orotidine 5'-phosphate decarboxylase	KEGG_ENZYME:4.1.1.23
+wDi22.scaf1	494279	494395	-	fig|82301.12.peg.868	hypothetical protein	NA
+wDi22.scaf1	495649	498189	-	fig|82301.12.peg.869	Valyl-tRNA synthetase	KEGG_ENZYME:6.1.1.9
+wDi22.scaf1	498577	498714	+	fig|82301.12.peg.870	hypothetical protein	NA
+wDi22.scaf1	499195	500289	+	fig|82301.12.peg.871	D-alanyl-D-alanine carboxypeptidase	KEGG_ENZYME:3.4.16.4
+wDi22.scaf1	 32388	 32460	+	fig|82301.12.rna.1	tRNA-Val-GAC	NA
+wDi22.scaf1	 52809	 52881	-	fig|82301.12.rna.2	tRNA-Lys-TTT	NA
+wDi22.scaf1	 53049	 53121	+	fig|82301.12.rna.3	tRNA-Ala-TGC	NA
+wDi22.scaf1	 88873	 88960	-	fig|82301.12.rna.4	tRNA-Ser-TGA	NA
+wDi22.scaf1	 95369	 95441	+	fig|82301.12.rna.5	tRNA-Val-TAC	NA
+wDi22.scaf1	506312	506394	-	fig|82301.12.rna.6	tRNA-Leu-CAA	NA
+wDi22.scaf1	520377	520448	-	fig|82301.12.rna.7	tRNA-Gln-TTG	NA
+wDi22.scaf1	534160	534244	-	fig|82301.12.rna.8	tRNA-Leu-CAG	NA
+wDi22.scaf1	616178	616250	-	fig|82301.12.rna.9	tRNA-Phe-GAA	NA
+wDi22.scaf1	621935	622008	+	fig|82301.12.rna.10	tRNA-Asp-GTC	NA
+wDi22.scaf1	636335	637792	-	fig|82301.12.rna.11	Small Subunit Ribosomal RNA%3B ssuRNA%3B SSU rRNA	NA
+wDi22.scaf1	658087	658158	-	fig|82301.12.rna.12	tRNA-Gly-TCC	NA
+wDi22.scaf1	658163	658245	-	fig|82301.12.rna.13	tRNA-Tyr-GTA	NA
+wDi22.scaf1	687363	687453	-	fig|82301.12.rna.14	tRNA-Ser-GCT	NA
+wDi22.scaf1	693745	693816	+	fig|82301.12.rna.15	tRNA-Asn-GTT	NA
+wDi22.scaf1	710071	710144	-	fig|82301.12.rna.16	tRNA-Thr-TGT	NA
+wDi22.scaf1	728345	728418	-	fig|82301.12.rna.17	tRNA-Arg-CCT	NA
+wDi22.scaf1	742595	742812	-	fig|82301.12.rna.18	Large Subunit Ribosomal RNA%3B lsuRNA%3B LSU rRNA	NA
+wDi22.scaf1	743065	744908	-	fig|82301.12.rna.19|fig|82301.12.rna.20	Large Subunit Ribosomal RNA%3B lsuRNA%3B LSU rRNA	NA
+wDi22.scaf1	745192	745608	-	fig|82301.12.rna.21	Large Subunit Ribosomal RNA%3B lsuRNA%3B LSU rRNA	NA
+wDi22.scaf1	760255	760339	-	fig|82301.12.rna.22	tRNA-Ser-GGA	NA
+wDi22.scaf1	866170	866241	+	fig|82301.12.rna.23	tRNA-Cys-GCA	NA
+wDi22.scaf1	868828	868899	-	fig|82301.12.rna.24	tRNA-Glu-TTC	NA
+wDi22.scaf1	148934	149006	-	fig|82301.12.rna.25	tRNA-Gly-GCC	NA
+wDi22.scaf1	150258	150331	+	fig|82301.12.rna.26	tRNA-Met-CAT	NA
+wDi22.scaf1	154137	154210	-	fig|82301.12.rna.27	tRNA-Pro-TGG	NA
+wDi22.scaf1	177023	177095	-	fig|82301.12.rna.28	tRNA-Thr-GGT	NA
+wDi22.scaf1	179329	179402	-	fig|82301.12.rna.29	tRNA-Met-CAT	NA
+wDi22.scaf1	194144	194216	-	fig|82301.12.rna.30	tRNA-His-GTG	NA
+wDi22.scaf1	225704	225776	-	fig|82301.12.rna.31	tRNA-Trp-CCA	NA
+wDi22.scaf1	241262	241335	+	fig|82301.12.rna.32	tRNA-Arg-CCG	NA
+wDi22.scaf1	301905	301978	+	fig|82301.12.rna.33	tRNA-Arg-TCT	NA
+wDi22.scaf1	343096	343180	+	fig|82301.12.rna.34	tRNA-Pseudo-GAG	NA
+wDi22.scaf1	367548	367631	+	fig|82301.12.rna.35	tRNA-Leu-TAA	NA
+wDi22.scaf1	385056	385137	+	fig|82301.12.rna.36	tRNA-Leu-TAG	NA
+wDi22.scaf1	415681	415753	+	fig|82301.12.rna.37	tRNA-Met-CAT	NA
+wDi22.scaf1	426514	426587	+	fig|82301.12.rna.38	tRNA-Ile-GAT	NA
+wDi22.scaf1	487110	487184	-	fig|82301.12.rna.39	tRNA-Arg-ACG	NA
